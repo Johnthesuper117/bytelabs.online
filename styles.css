@@ -1,0 +1,35 @@
+body {
+  background-color: rgb(125, 125, 125);
+}
+
+h1 {
+  color: rgb(50, 150, 255);
+}
+
+p {
+  color: rgb(50, 150, 255);
+}
+
+a:link {
+  color: rgb(0, 70, 200);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgb(0, 70, 200);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(30, 70, 200);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: rgb(0, 255, 255);
+  background-color: transparent;
+  text-decoration: underline;
+}
