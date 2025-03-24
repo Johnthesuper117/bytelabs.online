@@ -22,10 +22,16 @@ body {
 
 h1 {
   color: rgb(0, 255, 255);
+  border-radius: 30px;
+  border-color: red;
+  background-image:;
 }
 
 p {
   color: rgb(0, 255, 255);
+  border-radius: 30px;
+  border-color: red;
+  background-image:;
 }
 
 a:link {
