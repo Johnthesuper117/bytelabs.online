@@ -22,6 +22,7 @@ body {
 
 h1 {
   color: rgb(0, 255, 255);
+  border-width: 2px;
   border-radius: 30px;
   border-color: red;
   background-image:;
@@ -29,6 +30,7 @@ h1 {
 
 p {
   color: rgb(0, 255, 255);
+  border-width: 2px;
   border-radius: 30px;
   border-color: red;
   background-image:;
