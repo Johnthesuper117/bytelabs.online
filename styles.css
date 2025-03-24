@@ -11,19 +11,19 @@ p {
 }
 
 a:link {
-  color: rgb(0, 30, 200);
+  color: rgb(0, 50, 200);
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: rgb(0, 30, 200);
+  color: rgb(0, 50, 200);
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(0, 100, 200);
+  color: rgb(0, 100, 225);
   background-color: transparent;
   text-decoration: underline;
 }
