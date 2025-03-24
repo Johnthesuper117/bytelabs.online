@@ -5,7 +5,7 @@
   <body>
     <button id="ASong" onClick="playPause()">
   <audio
-    src="file_example_MP3_700KB.mp3"
+    src="soundTest.mp3"
     autoplay
     loop
   ></audio>
@@ -13,7 +13,7 @@
 </button>
 
 <script>
-  var aud = document.getElementById("ASong").children[0];
+  var aud = document.getElementById("soundTest").children[0];
   var isPlaying = false;
   aud.pause();
 
@@ -26,9 +26,9 @@
     isPlaying = !isPlaying;
   }
 </script>
-    <button id="ASong" onClick="playPause()">
+    <button id="soundTest" onClick="playPause()">
   <audio
-    src=""
+    src="soundTest.mp3"
     autoplay
     loop
   ></audio>
@@ -36,7 +36,7 @@
 </button>
 
 <script>
-  var aud = document.getElementById("ASong").children[0];
+  var aud = document.getElementById("soundTest").children[0];
   var isPlaying = false;
   aud.pause();
 
