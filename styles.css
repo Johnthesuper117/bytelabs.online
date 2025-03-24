@@ -3,27 +3,27 @@ body {
 }
 
 h1 {
-  color: rgb(50, 150, 255);
+  color: rgb(25, 125, 255);
 }
 
 p {
-  color: rgb(50, 150, 255);
+  color: rgb(25, 125, 255);
 }
 
 a:link {
-  color: rgb(0, 70, 200);
+  color: rgb(0, 30, 200);
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: rgb(0, 70, 200);
+  color: rgb(0, 30, 200);
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(30, 70, 200);
+  color: rgb(0, 100, 200);
   background-color: transparent;
   text-decoration: underline;
 }
