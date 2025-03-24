@@ -16,14 +16,14 @@ h1 {
   color: rgb(0, 255, 255);
   border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
-  background-image:;
+  background-color:radial-gradient(rgb(0, 162, 252), rgb(0, 236, 255));
 }
 
 p {
   color: rgb(0, 255, 255);
   border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
-  background-image:;
+  background-color:radial-gradient(rgb(0, 162, 252), rgb(0, 236, 255));
 }
 
 a:link {
