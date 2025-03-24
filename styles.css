@@ -1,21 +1,13 @@
-/* 
-{
-.color1 {rgb(0, 0, 0);}
-.color2 {rgb(1, 38, 67);}
-.color3 {rgb(7, 96, 153);}
-.color4 {rgb(0, 162, 252);}
-.color5 {rgb(0, 236, 255);}
-}
-
 :root {
-  color-scheme: light dark;
+  --color-background1: rgb(0, 0, 0);
+  --color-background2: rgb(1, 38, 67);
+  --color-text1: rgb(7, 96, 153);
+  --color-text2: rgb(0, 162, 252);
+  --color-text3: rgb(0, 236, 255);
+  --color-text4: rgb(0, 236, 255);
+
 }
 
-.element {
-  color: light-dark(black, white);
-  background-color: light-dark(white, black);
-}
-*/
 body {
   background-color: rgb(100, 100, 100);
 }
