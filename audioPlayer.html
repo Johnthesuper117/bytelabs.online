@@ -26,28 +26,5 @@
     isPlaying = !isPlaying;
   }
 </script>
-    <button id="soundTest" onClick="playPause()">
-  <audio
-    src="soundTest.mp3"
-    autoplay
-    loop
-  ></audio>
-  Song
-</button>
-
-<script>
-  var aud = document.getElementById("soundTest").children[0];
-  var isPlaying = false;
-  aud.pause();
-
-  function playPause() {
-    if (isPlaying) {
-      aud.pause();
-    } else {
-      aud.play();
-    }
-    isPlaying = !isPlaying;
-  }
-</script>
   </body>
 </html>
