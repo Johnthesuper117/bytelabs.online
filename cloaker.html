@@ -1,0 +1,35 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <br>
+    Don't forget to add "https://" to the beginning
+    <br>
+    <br>
+    <br>
+    <label for="urlInput">Enter URL:</label>
+    <input type="text" id="urlInput">
+    <br>
+    <br>
+    <button onclick="openWebsite()">Open Website</button>
+    <br>
+    <br>
+    Note that not all links will work, since some block embedded iframes.
+    <script>
+        function openWebsite() {
+            var win = window.open()
+            var url = document.getElementById("urlInput").value
+            var iframe = win.document.createElement('iframe')
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.border = "none";
+            iframe.src = url
+            win.document.body.appendChild(iframe)
+        }
+    </script>
+</body>
+
+
