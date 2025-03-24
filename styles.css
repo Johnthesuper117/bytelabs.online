@@ -1,4 +1,4 @@
-
+/* 
 {
 .color1 {rgb(0, 0, 0);}
 .color2 {rgb(1, 38, 67);}
@@ -15,24 +15,22 @@
   color: light-dark(black, white);
   background-color: light-dark(white, black);
 }
-
+*/
 body {
   background-color: rgb(100, 100, 100);
 }
 
 h1 {
   color: rgb(0, 255, 255);
-  border-width: 2px;
+  border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
-  border-color: red;
   background-image:;
 }
 
 p {
   color: rgb(0, 255, 255);
-  border-width: 2px;
+  border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
-  border-color: red;
   background-image:;
 }
 
