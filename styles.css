@@ -13,6 +13,7 @@ body {
 }
 
 h1 {
+  display:inline;
   color: rgb(0, 255, 255);
   border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
@@ -20,6 +21,7 @@ h1 {
 }
 
 p {
+  display:inline;
   color: rgb(0, 255, 255);
   border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
