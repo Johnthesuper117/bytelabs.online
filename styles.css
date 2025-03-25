@@ -1,6 +1,5 @@
 :root {
   --color-background1: rgb(0, 0, 0);
-  --color-background2: rgb(1, 38, 67);
   --color-text1: rgb(0, 255, 0);
   --color-text2: rgb(0, 255, 252);
   --color-text3: rgb(0, 255, 255);
@@ -8,7 +7,7 @@
 }
 
 body {
-  background-color: rgb(100, 100, 100);
+  background-color: --color-background1;
 }
 
 h1 {
