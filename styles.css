@@ -7,11 +7,11 @@
 }
 
 body {
-  background-color: --color-background1;
+  background-color: var(--color-background1);
 }
 
 h1 {
-  color: --color-text1;
+  color: var(--color-text1);
   /*
   border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
@@ -20,7 +20,7 @@ h1 {
 }
 
 p {
-  color: --color-text1;
+  color: var(--color-text1);
   /*
   border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
@@ -29,25 +29,25 @@ p {
 }
 
 a:link {
-  color: --color-text2;
+  color: var(--color-text2);
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: --color-text2;
+  color: var(--color-text2);
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
-  color: --color-text3;
+  color: var(--color-text3);
   background-color: transparent;
   text-decoration: underline;
 }
 
 a:active {
-  color: --color-text1;
+  color: var(--color-text1);
   background-color: transparent;
   text-decoration: underline;
 }
