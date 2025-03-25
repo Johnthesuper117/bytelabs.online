@@ -48,7 +48,7 @@ a:active {
 
 table {
   border-collapse: collapse;
-  border: 2px solid rgb(140 140 140);
+  border: 2px solid rgb(0 255 0);
   font-family: sans-serif;
   font-size: 0.8rem;
   letter-spacing: 1px;
@@ -67,7 +67,7 @@ tfoot {
 
 th,
 td {
-  border: 1px solid rgb(0 0 0);
+  border: 1px solid rgb(0 255 0);
   padding: 8px 10px;
 }
 
