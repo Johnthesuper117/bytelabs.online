@@ -1,10 +1,9 @@
 :root {
   --color-background1: rgb(0, 0, 0);
   --color-background2: rgb(1, 38, 67);
-  --color-text1: rgb(7, 96, 153);
-  --color-text2: rgb(0, 162, 252);
-  --color-text3: rgb(0, 236, 255);
-  --color-text4: rgb(0, 236, 255);
+  --color-text1: rgb(0, 255, 0);
+  --color-text2: rgb(0, 255, 252);
+  --color-text3: rgb(0, 255, 255);
 
 }
 
