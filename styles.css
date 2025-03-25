@@ -8,18 +8,6 @@
 
 body {
   background-color: var(--color-background1);
-}
-
-h1 {
-  color: var(--color-text1);
-  /*
-  border: 2px solid rgb(0, 255, 255);
-  border-radius: 30px;
-  background-color:radial-gradient(rgb(0, 162, 252), rgb(0, 236, 255));
-  */
-}
-
-p {
   color: var(--color-text1);
   /*
   border: 2px solid rgb(0, 255, 255);
