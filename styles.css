@@ -13,7 +13,7 @@ body {
 }
 
 h1 {
-  color: rgb(0, 255, 255);
+  color: --color-text1;
   /*
   border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
@@ -22,7 +22,7 @@ h1 {
 }
 
 p {
-  color: rgb(0, 255, 255);
+  color: --color-text1;
   /*
   border: 2px solid rgb(0, 255, 255);
   border-radius: 30px;
@@ -31,25 +31,25 @@ p {
 }
 
 a:link {
-  color: rgb(0, 50, 200);
+  color: --color-text2;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: rgb(0, 50, 200);
+  color: --color-text2;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(0, 100, 225);
+  color: --color-text3;
   background-color: transparent;
   text-decoration: underline;
 }
 
 a:active {
-  color: rgb(0, 255, 255);
+  color: --color-text1;
   background-color: transparent;
   text-decoration: underline;
 }
