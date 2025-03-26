@@ -53,7 +53,6 @@ sidenav {
   top: 0;
   left: 0;
   background-color: var(--color-background1);
-  border: 1px solid rgb(0 255 0);
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -62,6 +61,7 @@ sidenav {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 16px;
+  border: 1px solid rgb(0 255 0);
   color: var(--color-text1);
   display: block;
 }
