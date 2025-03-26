@@ -48,11 +48,12 @@ a:active {
 sidenav {
   height: 100%;
   width: 100px;
-  position: fixed;
+  position: static;
   z-index: 1;
   top: 0;
   left: 0;
   background-color: var(--color-background1);
+  border: 1px solid rgb(0 255 0);
   overflow-x: hidden;
   padding-top: 20px;
 }
