@@ -13,9 +13,7 @@ body {
   line-height: 1.5;
   border-radius: 5px;
   border: 1px solid rgb(0, 255, 0);
-  margin-left: 100px; /* Same as the width of the sidenav */
-  font-size: 16px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
+  padding: 10px;
 
   /*
   border: 2px solid rgb(0, 255, 255);
@@ -78,6 +76,11 @@ sidenav {
   .sidenav a {font-size: 18px;}
 }
 
+.main {
+   margin-left: 100px; /* Same as the width of the sidenav */
+   font-size: 16px; /* Increased text to enable scrolling */
+   padding: 0px 10px;
+ }
 
 table {
   border-collapse: collapse;
