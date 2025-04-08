@@ -1,6 +1,7 @@
 html {
   font-family: Tokyo;
-  font-size: 20px;
+  font-size: 16px;
+  background-image: url("images/japanBG.WebP");
 }
 
 head {}
