@@ -1,14 +1,14 @@
-head {
+html {
   font-family: Tokyo;
+  font-size: 24px;
 }
 
-body {
-  font-family: Tokyo;
-}
+head {}
 
-p {
-  font-family: Tokyo;
-}
+body {}
+
+p {}
+
 @font-face {
   font-family: "Tokyo";
   src: url("font/NightinTokyo.ttf");
