@@ -66,19 +66,20 @@ ul {
   overflow: auto;
 }
 
-li a {
+
+.nav {
   display: block;
   color: var(--color-background1);
   padding: 8px 16px;
   text-decoration: none;
 }
 
-li a.active {
+li a.active.nav {
   background-color: var(--color-background1);
   color: var(--color-text1);
 }
 
-li a:hover:not(.active) {
+li a:hover:not(.active).nav {
   background-color: var(--color-background1);
   color: var(--color-text1);
 }
