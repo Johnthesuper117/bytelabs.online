@@ -1,11 +1,15 @@
 head {
-  font-family: Papyrus, fantasy
+  font-family: Tokyo;
 }
 
 body {
-  font-family: Papyrus, fantasy
+  font-family: Tokyo;
 }
 
 p {
-  font-family: Papyrus, fantasy
+  font-family: Tokyo;
+}
+@font-face {
+  font-family: "Tokyo";
+  src: url("font/NightinTokyo.ttf");
 }
