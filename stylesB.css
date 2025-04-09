@@ -2,6 +2,7 @@ html {
   font-family: Tokyo;
   font-size: 16px;
   background-image: url("images/japanBG1.png");
+  background-size: 100%
 }
 
 head {}
