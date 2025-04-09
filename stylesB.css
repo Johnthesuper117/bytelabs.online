@@ -1,7 +1,11 @@
+:root{
+  --text-color: teal;
+}
+
 html {
   font-family: Tokyo;
   font-size: 16px;
-  color: rgb(255, 0, 0);
+  color: var(--text-color);
   background-image: url("images/sakuraBG2.png");
   background-size: 100%;
   background-attachment: fixed;
@@ -60,3 +64,4 @@ iteration-count | direction | fill-mode | play-state | name */
   font-family: "TokyoShadow";
   src: url("font/NightinTokyoShadow.ttf");
 }
+
