@@ -1,11 +1,12 @@
 :root{
-  --text-color: rgb(50, 200, 50);
+  --text-color: rgb(0, 100, 0);
 }
 
 html {
   font-family: Tokyo;
   font-size: 16px;
   color: var(--text-color);
+  font-weight: bold;
   background-image: url("images/sakuraBG2.png");
   background-size: 100%;
   background-attachment: fixed;
