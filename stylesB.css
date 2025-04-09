@@ -7,7 +7,10 @@ html {
   background-repeat: no-repeat;
 }
 
-head {}
+head {
+  font-family: TokyoBold;
+  font-size: 18px;
+}
 
 body {}
 
@@ -16,4 +19,12 @@ p {}
 @font-face {
   font-family: "Tokyo";
   src: url("font/NightinTokyo.ttf");
+}
+@font-face {
+  font-family: "TokyoBold";
+  src: url("font/NightinTokyoBold.ttf");
+}
+@font-face {
+  font-family: "TokyoShadow";
+  src: url("font/NightinTokyoShadow.ttf");
 }
