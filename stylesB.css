@@ -1,7 +1,6 @@
 html {
   font-family: Tokyo;
   font-size: 16px;
-  color: rgb(255, 0, 0);
   background-image: url("images/sakuraBG2.png");
   background-size: 100%;
   background-attachment: fixed;
@@ -11,9 +10,13 @@ html {
 head {
   font-family: TokyoBold;
   font-size: 18px;
+  color: rgb(255, 0, 0);
+
 }
 
-body {}
+body {
+  color: rgb(255, 0, 0);
+}
 
 p {}
 
