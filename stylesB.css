@@ -16,6 +16,24 @@ body {}
 
 p {}
 
+@keyframes sakura {
+  0% {
+    top: 0;
+    right: 0;
+  }
+  30% {
+    top: 50px;
+  }
+  68%,
+  72% {
+    right: 50px;
+  }
+  100% {
+    top: 100px;
+    right: 100%;
+  }
+}
+
 @font-face {
   font-family: "Tokyo";
   src: url("font/NightinTokyo.ttf");
