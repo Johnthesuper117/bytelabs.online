@@ -19,12 +19,14 @@ p {}
 .sakura {
   /* @keyframes duration | easing-function | delay |
 iteration-count | direction | fill-mode | play-state | name */
-  animation: 3s ease-in 1s 2 reverse both play sakura;
+  transform: rotate(45deg);
+  object-position: right top;
+  /*animation: 3s ease-in 1s 2 reverse both play sakura;*/
 }
 
 
 
-@keyframes sakura {
+/*@keyframes sakura {
   0% {
     top: 0;
     right: 0;
@@ -40,7 +42,7 @@ iteration-count | direction | fill-mode | play-state | name */
     top: 100px;
     right: 100%;
   }
-}
+}*/
 
 @font-face {
   font-family: "Tokyo";
