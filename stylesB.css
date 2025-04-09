@@ -16,6 +16,14 @@ body {}
 
 p {}
 
+.sakura {
+  /* @keyframes duration | easing-function | delay |
+iteration-count | direction | fill-mode | play-state | name */
+  animation: 3s ease-in 1s 2 reverse both play sakura;
+}
+
+
+
 @keyframes sakura {
   0% {
     top: 0;
