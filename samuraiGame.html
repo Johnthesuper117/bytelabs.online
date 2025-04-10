@@ -13,6 +13,25 @@
             display: block;
             background-color: #222;
         }
+
+        /* Animations for attacks, parries, and dodges */
+        @keyframes attack {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes parry {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes dodge {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
@@ -30,11 +49,22 @@
             y: canvas.height / 2,
             size: 50,
             speed: 5,
-            health: 100
+            health: 100,
+            isAttacking: false,
+            isParrying: false,
+            isDodging: false
         };
         let enemies = [];
-        let score = 0;
         const enemySpeed = 2;
+        let audio = {};
+
+        // Load sound effects
+        function loadSounds() {
+            audio.attack = new Audio('attack.mp3'); // Replace with actual sound file paths
+            audio.parry = new Audio('parry.mp3');
+            audio.dodge = new Audio('dodge.mp3');
+            audio.enemyAttack = new Audio('enemy-attack.mp3');
+        }
 
         // Controls
         const keys = { w: false, a: false, s: false, d: false };
@@ -44,6 +74,9 @@
             if (e.key === 'a') keys.a = true;
             if (e.key === 's') keys.s = true;
             if (e.key === 'd') keys.d = true;
+            if (e.key === ' ') player.isAttacking = true;
+            if (e.key === 'Shift') player.isParrying = true;
+            if (e.key === 'e') player.isDodging = true;
         });
 
         window.addEventListener('keyup', (e) => {
@@ -51,6 +84,9 @@
             if (e.key === 'a') keys.a = false;
             if (e.key === 's') keys.s = false;
             if (e.key === 'd') keys.d = false;
+            if (e.key === ' ') player.isAttacking = false;
+            if (e.key === 'Shift') player.isParrying = false;
+            if (e.key === 'e') player.isDodging = false;
         });
 
         function spawnEnemy() {
@@ -92,6 +128,23 @@
             player.x = Math.max(0, Math.min(canvas.width - player.size, player.x));
             player.y = Math.max(0, Math.min(canvas.height - player.size, player.y));
 
+            // Trigger animations and sounds for player
+            if (player.isAttacking) {
+                audio.attack.play();
+                ctx.fillStyle = 'yellow';
+                ctx.fillRect(player.x, player.y, player.size, player.size);
+            }
+            if (player.isParrying) {
+                audio.parry.play();
+                ctx.fillStyle = 'cyan';
+                ctx.fillRect(player.x, player.y, player.size, player.size);
+            }
+            if (player.isDodging) {
+                audio.dodge.play();
+                ctx.fillStyle = 'purple';
+                ctx.fillRect(player.x, player.y, player.size, player.size);
+            }
+
             // Enemy behavior
             enemies.forEach((enemy) => {
                 if (enemy.alive) {
@@ -106,10 +159,8 @@
                     } else {
                         // Enemy is close enough to attack
                         enemy.attacking = true;
-                        if (enemy.attackTimer === 0) {
-                            player.health -= 10; // Damage player
-                            enemy.attackTimer = 50; // Cooldown for attack
-                        }
+                        audio.enemyAttack.play();
+                        enemy.attackTimer = 50;
                     }
 
                     // Handle attack cooldown
@@ -125,9 +176,6 @@
             if (Math.random() < 0.01) {
                 spawnEnemy();
             }
-
-            // Remove dead enemies
-            enemies = enemies.filter((enemy) => enemy.alive && player.health > 0);
 
             // Draw everything
             draw();
@@ -145,25 +193,14 @@
                 ctx.fillStyle = enemy.attacking ? 'yellow' : 'red'; // Yellow during attack
                 ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
             });
-
-            // Draw score and health
-            ctx.fillStyle = 'white';
-            ctx.font = '20px Arial';
-            ctx.fillText(`Score: ${score}`, 10, 30);
-            ctx.fillText(`Health: ${player.health}`, 10, 60);
         }
 
         function gameLoop() {
-            if (player.health > 0) {
-                update();
-                requestAnimationFrame(gameLoop);
-            } else {
-                ctx.fillStyle = 'red';
-                ctx.font = '50px Arial';
-                ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
-            }
+            update();
+            requestAnimationFrame(gameLoop);
         }
 
+        loadSounds();
         gameLoop();
     </script>
 </body>
