@@ -26,13 +26,15 @@
 
         // Game variables
         let player = {
-            x: canvas.width / 2, y: canvas.height / 2, size: 50, speed: 5,
-            isDodging: false, dodgeCooldown: 0, parryCooldown: 0
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            size: 50,
+            speed: 5,
+            health: 100
         };
         let enemies = [];
         let score = 0;
-        let isAttacking = false;
-        let isParrying = false;
+        const enemySpeed = 2;
 
         // Controls
         const keys = { w: false, a: false, s: false, d: false };
@@ -42,9 +44,6 @@
             if (e.key === 'a') keys.a = true;
             if (e.key === 's') keys.s = true;
             if (e.key === 'd') keys.d = true;
-            if (e.key === ' ') isAttacking = true;
-            if (e.key === 'Shift' && player.parryCooldown <= 0) isParrying = true;
-            if (e.key === 'e' && player.dodgeCooldown <= 0) player.isDodging = true;
         });
 
         window.addEventListener('keyup', (e) => {
@@ -52,11 +51,36 @@
             if (e.key === 'a') keys.a = false;
             if (e.key === 's') keys.s = false;
             if (e.key === 'd') keys.d = false;
-            if (e.key === ' ') isAttacking = false;
-            if (e.key === 'Shift') isParrying = false;
         });
 
-        // Game loop
+        function spawnEnemy() {
+            const spawnSide = Math.random();
+            let x, y;
+
+            if (spawnSide < 0.25) { // Spawn on the top
+                x = Math.random() * canvas.width;
+                y = 0;
+            } else if (spawnSide < 0.5) { // Spawn on the bottom
+                x = Math.random() * canvas.width;
+                y = canvas.height;
+            } else if (spawnSide < 0.75) { // Spawn on the left
+                x = 0;
+                y = Math.random() * canvas.height;
+            } else { // Spawn on the right
+                x = canvas.width;
+                y = Math.random() * canvas.height;
+            }
+
+            enemies.push({
+                x: x,
+                y: y,
+                size: 30,
+                alive: true,
+                attacking: false,
+                attackTimer: 0
+            });
+        }
+
         function update() {
             // Player movement
             if (keys.w) player.y -= player.speed;
@@ -68,63 +92,42 @@
             player.x = Math.max(0, Math.min(canvas.width - player.size, player.x));
             player.y = Math.max(0, Math.min(canvas.height - player.size, player.y));
 
-            // Dodge mechanic
-            if (player.isDodging) {
-                player.speed = 20;
-                player.dodgeCooldown = 100; // Cooldown duration
-                setTimeout(() => player.isDodging = false, 200); // Dodge duration
-            } else {
-                player.speed = 5;
-                if (player.dodgeCooldown > 0) player.dodgeCooldown--;
-            }
+            // Enemy behavior
+            enemies.forEach((enemy) => {
+                if (enemy.alive) {
+                    // Move towards the player
+                    const dx = player.x - enemy.x;
+                    const dy = player.y - enemy.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
 
-            // Parry mechanic
-            if (isParrying) {
-                player.parryCooldown = 200; // Cooldown duration
-                enemies.forEach((enemy) => {
-                    if (
-                        player.x < enemy.x + enemy.size &&
-                        player.x + player.size > enemy.x &&
-                        player.y < enemy.y + enemy.size &&
-                        player.y + player.size > enemy.y
-                    ) {
-                        enemy.alive = false; // Stun enemy
-                        score += 20; // Bonus points for parry
+                    if (distance > player.size) {
+                        enemy.x += (dx / distance) * enemySpeed;
+                        enemy.y += (dy / distance) * enemySpeed;
+                    } else {
+                        // Enemy is close enough to attack
+                        enemy.attacking = true;
+                        if (enemy.attackTimer === 0) {
+                            player.health -= 10; // Damage player
+                            enemy.attackTimer = 50; // Cooldown for attack
+                        }
                     }
-                });
-                isParrying = false; // Parry lasts briefly
-            } else {
-                if (player.parryCooldown > 0) player.parryCooldown--;
-            }
 
-            // Spawn enemies
-            if (Math.random() < 0.02) {
-                enemies.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: 30,
-                    alive: true,
-                });
-            }
-
-            // Check for attacks
-            if (isAttacking) {
-                enemies.forEach((enemy) => {
-                    if (
-                        enemy.alive &&
-                        player.x < enemy.x + enemy.size &&
-                        player.x + player.size > enemy.x &&
-                        player.y < enemy.y + enemy.size &&
-                        player.y + player.size > enemy.y
-                    ) {
-                        enemy.alive = false;
-                        score += 10;
+                    // Handle attack cooldown
+                    if (enemy.attackTimer > 0) {
+                        enemy.attackTimer--;
+                    } else {
+                        enemy.attacking = false;
                     }
-                });
+                }
+            });
+
+            // Spawn new enemies periodically
+            if (Math.random() < 0.01) {
+                spawnEnemy();
             }
 
             // Remove dead enemies
-            enemies = enemies.filter((enemy) => enemy.alive);
+            enemies = enemies.filter((enemy) => enemy.alive && player.health > 0);
 
             // Draw everything
             draw();
@@ -134,24 +137,31 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Draw player
-            ctx.fillStyle = player.isDodging ? 'cyan' : 'blue'; // Change color while dodging
+            ctx.fillStyle = 'blue';
             ctx.fillRect(player.x, player.y, player.size, player.size);
 
             // Draw enemies
-            ctx.fillStyle = 'red';
             enemies.forEach((enemy) => {
+                ctx.fillStyle = enemy.attacking ? 'yellow' : 'red'; // Yellow during attack
                 ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
             });
 
-            // Draw score
+            // Draw score and health
             ctx.fillStyle = 'white';
             ctx.font = '20px Arial';
             ctx.fillText(`Score: ${score}`, 10, 30);
+            ctx.fillText(`Health: ${player.health}`, 10, 60);
         }
 
         function gameLoop() {
-            update();
-            requestAnimationFrame(gameLoop);
+            if (player.health > 0) {
+                update();
+                requestAnimationFrame(gameLoop);
+            } else {
+                ctx.fillStyle = 'red';
+                ctx.font = '50px Arial';
+                ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
+            }
         }
 
         gameLoop();
