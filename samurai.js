@@ -15,6 +15,9 @@ class Player {
         this.isDodging = false;
         this.dodgeTimer = 0;
         this.health = 100;
+        this.isAttacking = false;
+        this.isParrying = false;
+        this.actionTimer = 0;
     }
 
     draw() {
@@ -29,6 +32,15 @@ class Player {
     }
 
     update(keys) {
+        if (this.actionTimer > 0) {
+            this.actionTimer--;
+            if (this.actionTimer === 0) {
+                this.isAttacking = false;
+                this.isParrying = false;
+                this.color = 'blue';
+            }
+        }
+
         if (keys['w']) this.y -= this.speed;
         if (keys['s']) this.y += this.speed;
         if (keys['a']) this.x -= this.speed;
@@ -48,9 +60,39 @@ class Player {
         this.y = Math.max(0, Math.min(canvas.height - this.height, this.y));
     }
 
+    attack(enemies) {
+        this.isAttacking = true;
+        this.actionTimer = 30; // 0.5 seconds at 60 FPS
+        this.color = 'royalblue';
+
+        enemies.forEach((enemy, index) => {
+            if (
+                this.x < enemy.x + enemy.width &&
+                this.x + this.width > enemy.x &&
+                this.y < enemy.y + enemy.height &&
+                this.y + this.height > enemy.y
+            ) {
+                if (enemy.isParrying) {
+                    console.log('Enemy parried the attack!');
+                } else if (enemy.isDodging) {
+                    console.log('Enemy dodged the attack!');
+                } else {
+                    enemies.splice(index, 1);
+                    console.log('Enemy defeated!');
+                }
+            }
+        });
+    }
+
+    parry() {
+        this.isParrying = true;
+        this.actionTimer = 30; // 0.5 seconds at 60 FPS
+        this.color = 'indigo';
+    }
+
     dodge() {
         this.isDodging = true;
-        this.dodgeTimer = 30; // Roughly 0.5 seconds at 60 FPS
+        this.dodgeTimer = 30; // 0.5 seconds at 60 FPS
         this.speed = 10;
         this.color = 'cyan';
     }
@@ -68,6 +110,9 @@ class Enemy {
         this.attackCooldown = 0;
         this.isDodging = false;
         this.dodgeTimer = 0;
+        this.isAttacking = false;
+        this.isParrying = false;
+        this.actionTimer = 0;
     }
 
     draw() {
@@ -82,6 +127,16 @@ class Enemy {
     }
 
     update(player) {
+        if (this.actionTimer > 0) {
+            this.actionTimer--;
+            if (this.actionTimer === 0) {
+                this.isAttacking = false;
+                this.isParrying = false;
+                this.isDodging = false;
+                this.color = 'red';
+            }
+        }
+
         if (this.isDodging) {
             this.dodgeTimer -= 1;
             if (this.dodgeTimer <= 0) {
@@ -116,16 +171,26 @@ class Enemy {
     }
 
     attack(player) {
-        if (!player.isDodging) {
-            player.health -= 10; // Player loses health if not dodging
+        this.isAttacking = true;
+        this.actionTimer = 30; // 0.5 seconds at 60 FPS
+        this.color = 'darkred';
+
+        if (!player.isDodging && !player.isParrying) {
+            player.health -= 10; // Player loses health if not dodging or parrying
             console.log('Player hit! Health:', player.health);
         }
     }
 
     dodge() {
         this.isDodging = true;
-        this.dodgeTimer = 30; // Roughly 0.5 seconds at 60 FPS
+        this.actionTimer = 30; // 0.5 seconds at 60 FPS
+        this.color = 'yellow';
         this.speed = 5;
+    }
+
+    parry() {
+        this.isParrying = true;
+        this.actionTimer = 30; // 0.5 seconds at 60 FPS
         this.color = 'orange';
     }
 }
@@ -138,7 +203,10 @@ const keys = {};
 window.addEventListener('keydown', (e) => {
     keys[e.key] = true;
     if (e.key === ' ') {
-        attack();
+        player.attack(enemies);
+    }
+    if (e.key === 'f') {
+        player.parry();
     }
     if (e.key === 'q' && !player.isDodging) {
         player.dodge();
@@ -148,35 +216,10 @@ window.addEventListener('keyup', (e) => {
     keys[e.key] = false;
 });
 
-function attack() {
-    enemies.forEach((enemy, index) => {
-        if (
-            player.x < enemy.x + enemy.width &&
-            player.x + player.width > enemy.x &&
-            player.y < enemy.y + enemy.height &&
-            player.y + player.height > enemy.y
-        ) {
-            if (Math.random() < 0.5) {
-                enemy.dodge(); // Enemy attempts to dodge
-            } else {
-                enemies.splice(index, 1);
-                score += 10;
-                console.log('Enemy defeated! Score:', score);
-            }
-        }
-    });
-}
-
 function spawnEnemy() {
     const x = Math.random() * canvas.width;
     const y = Math.random() * canvas.height;
     enemies.push(new Enemy(x, y));
-}
-
-function drawScore() {
-    ctx.fillStyle = 'black';
-    ctx.font = '20px Arial';
-    ctx.fillText(`Score: ${score}`, 10, 20);
 }
 
 function gameLoop() {
@@ -189,8 +232,6 @@ function gameLoop() {
         enemy.update(player);
         enemy.draw();
     });
-
-    drawScore();
 
     requestAnimationFrame(gameLoop);
 }
