@@ -25,10 +25,14 @@
         canvas.height = window.innerHeight;
 
         // Game variables
-        let player = { x: canvas.width / 2, y: canvas.height / 2, size: 50, speed: 5 };
+        let player = {
+            x: canvas.width / 2, y: canvas.height / 2, size: 50, speed: 5,
+            isDodging: false, dodgeCooldown: 0, parryCooldown: 0
+        };
         let enemies = [];
         let score = 0;
         let isAttacking = false;
+        let isParrying = false;
 
         // Controls
         const keys = { w: false, a: false, s: false, d: false };
@@ -39,6 +43,8 @@
             if (e.key === 's') keys.s = true;
             if (e.key === 'd') keys.d = true;
             if (e.key === ' ') isAttacking = true;
+            if (e.key === 'Shift' && player.parryCooldown <= 0) isParrying = true;
+            if (e.key === 'e' && player.dodgeCooldown <= 0) player.isDodging = true;
         });
 
         window.addEventListener('keyup', (e) => {
@@ -47,6 +53,7 @@
             if (e.key === 's') keys.s = false;
             if (e.key === 'd') keys.d = false;
             if (e.key === ' ') isAttacking = false;
+            if (e.key === 'Shift') isParrying = false;
         });
 
         // Game loop
@@ -60,6 +67,35 @@
             // Keep player inside canvas
             player.x = Math.max(0, Math.min(canvas.width - player.size, player.x));
             player.y = Math.max(0, Math.min(canvas.height - player.size, player.y));
+
+            // Dodge mechanic
+            if (player.isDodging) {
+                player.speed = 20;
+                player.dodgeCooldown = 100; // Cooldown duration
+                setTimeout(() => player.isDodging = false, 200); // Dodge duration
+            } else {
+                player.speed = 5;
+                if (player.dodgeCooldown > 0) player.dodgeCooldown--;
+            }
+
+            // Parry mechanic
+            if (isParrying) {
+                player.parryCooldown = 200; // Cooldown duration
+                enemies.forEach((enemy) => {
+                    if (
+                        player.x < enemy.x + enemy.size &&
+                        player.x + player.size > enemy.x &&
+                        player.y < enemy.y + enemy.size &&
+                        player.y + player.size > enemy.y
+                    ) {
+                        enemy.alive = false; // Stun enemy
+                        score += 20; // Bonus points for parry
+                    }
+                });
+                isParrying = false; // Parry lasts briefly
+            } else {
+                if (player.parryCooldown > 0) player.parryCooldown--;
+            }
 
             // Spawn enemies
             if (Math.random() < 0.02) {
@@ -98,7 +134,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Draw player
-            ctx.fillStyle = 'blue';
+            ctx.fillStyle = player.isDodging ? 'cyan' : 'blue'; // Change color while dodging
             ctx.fillRect(player.x, player.y, player.size, player.size);
 
             // Draw enemies
