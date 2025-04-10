@@ -14,11 +14,18 @@ class Player {
         this.speed = 5;
         this.isDodging = false;
         this.dodgeTimer = 0;
+        this.health = 100;
     }
 
     draw() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        // Draw health bar
+        ctx.fillStyle = 'red';
+        ctx.fillRect(this.x, this.y - 10, this.width, 5);
+        ctx.fillStyle = 'green';
+        ctx.fillRect(this.x, this.y - 10, (this.health / 100) * this.width, 5);
     }
 
     update(keys) {
@@ -57,19 +64,69 @@ class Enemy {
         this.height = 40;
         this.color = 'red';
         this.speed = 2;
+        this.health = 50;
+        this.attackCooldown = 0;
+        this.isDodging = false;
+        this.dodgeTimer = 0;
     }
 
     draw() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        // Draw health bar
+        ctx.fillStyle = 'red';
+        ctx.fillRect(this.x, this.y - 10, this.width, 5);
+        ctx.fillStyle = 'green';
+        ctx.fillRect(this.x, this.y - 10, (this.health / 50) * this.width, 5);
     }
 
     update(player) {
-        // Move towards the player
-        if (this.x < player.x) this.x += this.speed;
-        if (this.x > player.x) this.x -= this.speed;
-        if (this.y < player.y) this.y += this.speed;
-        if (this.y > player.y) this.y -= this.speed;
+        if (this.isDodging) {
+            this.dodgeTimer -= 1;
+            if (this.dodgeTimer <= 0) {
+                this.isDodging = false;
+                this.speed = 2;
+                this.color = 'red';
+            }
+        } else {
+            // Move towards the player
+            if (this.x < player.x) this.x += this.speed;
+            if (this.x > player.x) this.x -= this.speed;
+            if (this.y < player.y) this.y += this.speed;
+            if (this.y > player.y) this.y -= this.speed;
+
+            // Attempt to attack if close to the player
+            if (this.attackCooldown <= 0 && this.isInRange(player)) {
+                this.attack(player);
+                this.attackCooldown = 60; // Cooldown for 1 second
+            } else {
+                this.attackCooldown -= 1;
+            }
+        }
+    }
+
+    isInRange(player) {
+        return (
+            this.x < player.x + player.width &&
+            this.x + this.width > player.x &&
+            this.y < player.y + player.height &&
+            this.y + this.height > player.y
+        );
+    }
+
+    attack(player) {
+        if (!player.isDodging) {
+            player.health -= 10; // Player loses health if not dodging
+            console.log('Player hit! Health:', player.health);
+        }
+    }
+
+    dodge() {
+        this.isDodging = true;
+        this.dodgeTimer = 30; // Roughly 0.5 seconds at 60 FPS
+        this.speed = 5;
+        this.color = 'orange';
     }
 }
 
@@ -99,8 +156,13 @@ function attack() {
             player.y < enemy.y + enemy.height &&
             player.y + player.height > enemy.y
         ) {
-            enemies.splice(index, 1);
-            score += 10;
+            if (Math.random() < 0.5) {
+                enemy.dodge(); // Enemy attempts to dodge
+            } else {
+                enemies.splice(index, 1);
+                score += 10;
+                console.log('Enemy defeated! Score:', score);
+            }
         }
     });
 }
