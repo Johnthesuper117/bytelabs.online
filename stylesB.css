@@ -31,8 +31,27 @@ p {
   
 }
 
-.a {
+a:link {
   color: orange;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: orange;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: orange;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: orange;
+  background-color: transparent;
   text-decoration: underline;
 }
 
