@@ -1,5 +1,5 @@
 :root{
-  --text-color: rgb(0, 100, 0);
+  --text-color: rgb(0, 0, 0);
 }
 
 html {
@@ -7,10 +7,10 @@ html {
   font-size: 16px;
   color: var(--text-color);
   font-weight: bold;
-  background-image: url("images/sakuraBG2.png");
+  /*background-image: url("images/sakuraBG2.png");
   background-size: 100%;
   background-attachment: fixed;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
 }
 
 head {
