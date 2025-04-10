@@ -35,7 +35,6 @@ class Player {
     }
 
     draw() {
-        alert(`Drawing player at (${this.x}, ${this.y})`);
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
@@ -96,7 +95,6 @@ class Enemy {
     }
 
     draw() {
-        alert(`Drawing enemy at (${this.x}, ${this.y})`);
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
@@ -137,7 +135,6 @@ function gameLoop() {
     if (!gameRunning) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    alert("Game loop running...");
 
     player.update(keys);
     player.draw();
