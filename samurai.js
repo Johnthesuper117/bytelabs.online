@@ -37,13 +37,17 @@ function drawEnemies() {
 
 function handleAttack() {
   if (samurai.isAttacking) {
-    ctx.fillStyle = 'orange';
-    ctx.fillRect(samurai.x + samurai.width, samurai.y, 20, samurai.height);
+    // Define the katana shape
+    ctx.fillStyle = 'silver'; // Blade color
+    ctx.fillRect(samurai.x + samurai.width, samurai.y + samurai.height / 4, 40, samurai.height / 2); // Blade
+
+    ctx.fillStyle = 'brown'; // Handle color
+    ctx.fillRect(samurai.x + samurai.width - 10, samurai.y + samurai.height / 2 - 5, 10, 10); // Handle
 
     // Check for collisions with enemies
     enemies.forEach((enemy, index) => {
       if (
-        samurai.x + samurai.width + 20 > enemy.x &&
+        samurai.x + samurai.width + 40 > enemy.x &&
         samurai.y < enemy.y + enemy.height &&
         samurai.y + samurai.height > enemy.y
       ) {
