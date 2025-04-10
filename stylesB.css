@@ -32,9 +32,8 @@ p {
 }
 
 .a {
-  color
-  underline
-  yaper
+  color: orange;
+  text-decoration: underline;
 }
 
 @font-face {
