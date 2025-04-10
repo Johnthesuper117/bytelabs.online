@@ -1,5 +1,8 @@
+alert("Canvas element found");
 const canvas = document.getElementById('gameCanvas');
+alert("Canvas context retrieved");
 const ctx = canvas.getContext('2d');
+alert("Script executed successfully");
 
 // Resize canvas to fit the screen
 function resizeCanvas() {
@@ -8,6 +11,7 @@ function resizeCanvas() {
 }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
+alert("Window resized");
 
 class Player {
     constructor() {
