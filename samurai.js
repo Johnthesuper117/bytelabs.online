@@ -1,105 +1,140 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Game settings
-const samurai = {
-  x: 50,
-  y: 300,
-  width: 50,
-  height: 50,
-  color: 'red',
-  speed: 5,
-  isAttacking: false
-};
+canvas.width = 800;
+canvas.height = 600;
 
-const enemies = [];
-const enemySpeed = 2;
-const spawnInterval = 2000; // Spawn a new enemy every 2 seconds
-let lastSpawnTime = 0;
-
-function drawSamurai() {
-  ctx.fillStyle = samurai.color;
-  ctx.fillRect(samurai.x, samurai.y, samurai.width, samurai.height);
-}
-
-function drawEnemies() {
-  enemies.forEach((enemy, index) => {
-    ctx.fillStyle = 'black';
-    ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
-    enemy.x -= enemySpeed;
-
-    // Remove enemies that go off the canvas
-    if (enemy.x + enemy.width < 0) {
-      enemies.splice(index, 1);
+class Player {
+    constructor() {
+        this.x = canvas.width / 2;
+        this.y = canvas.height / 2;
+        this.width = 50;
+        this.height = 50;
+        this.color = 'blue';
+        this.speed = 5;
+        this.isDodging = false;
+        this.dodgeTimer = 0;
     }
-  });
+
+    draw() {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+
+    update(keys) {
+        if (keys['w']) this.y -= this.speed;
+        if (keys['s']) this.y += this.speed;
+        if (keys['a']) this.x -= this.speed;
+        if (keys['d']) this.x += this.speed;
+
+        if (this.isDodging) {
+            this.dodgeTimer -= 1;
+            if (this.dodgeTimer <= 0) {
+                this.isDodging = false;
+                this.speed = 5;
+                this.color = 'blue';
+            }
+        }
+
+        // Keep player within bounds
+        this.x = Math.max(0, Math.min(canvas.width - this.width, this.x));
+        this.y = Math.max(0, Math.min(canvas.height - this.height, this.y));
+    }
+
+    dodge() {
+        this.isDodging = true;
+        this.dodgeTimer = 30; // Roughly 0.5 seconds at 60 FPS
+        this.speed = 10;
+        this.color = 'cyan';
+    }
 }
 
-function handleAttack() {
-  if (samurai.isAttacking) {
-    // Define the katana shape
-    ctx.fillStyle = 'silver'; // Blade color
-    ctx.fillRect(samurai.x + samurai.width, samurai.y + samurai.height / 4, 40, samurai.height / 2); // Blade
+class Enemy {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.width = 40;
+        this.height = 40;
+        this.color = 'red';
+        this.speed = 2;
+    }
 
-    ctx.fillStyle = 'brown'; // Handle color
-    ctx.fillRect(samurai.x + samurai.width - 10, samurai.y + samurai.height / 2 - 5, 10, 10); // Handle
+    draw() {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
 
-    // Check for collisions with enemies
+    update(player) {
+        // Move towards the player
+        if (this.x < player.x) this.x += this.speed;
+        if (this.x > player.x) this.x -= this.speed;
+        if (this.y < player.y) this.y += this.speed;
+        if (this.y > player.y) this.y -= this.speed;
+    }
+}
+
+const player = new Player();
+const enemies = [];
+let score = 0;
+
+const keys = {};
+window.addEventListener('keydown', (e) => {
+    keys[e.key] = true;
+    if (e.key === ' ') {
+        attack();
+    }
+    if (e.key === 'q' && !player.isDodging) {
+        player.dodge();
+    }
+});
+window.addEventListener('keyup', (e) => {
+    keys[e.key] = false;
+});
+
+function attack() {
     enemies.forEach((enemy, index) => {
-      if (
-        samurai.x + samurai.width + 40 > enemy.x &&
-        samurai.y < enemy.y + enemy.height &&
-        samurai.y + samurai.height > enemy.y
-      ) {
-        enemies.splice(index, 1); // Remove the enemy
-      }
+        if (
+            player.x < enemy.x + enemy.width &&
+            player.x + player.width > enemy.x &&
+            player.y < enemy.y + enemy.height &&
+            player.y + player.height > enemy.y
+        ) {
+            enemies.splice(index, 1);
+            score += 10;
+        }
     });
-  }
 }
 
-function spawnEnemy(timestamp) {
-  if (timestamp - lastSpawnTime > spawnInterval) {
-    enemies.push({
-      x: canvas.width,
-      y: Math.random() * (canvas.height - 50),
-      width: 50,
-      height: 50
+function spawnEnemy() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    enemies.push(new Enemy(x, y));
+}
+
+function drawScore() {
+    ctx.fillStyle = 'black';
+    ctx.font = '20px Arial';
+    ctx.fillText(`Score: ${score}`, 10, 20);
+}
+
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    player.update(keys);
+    player.draw();
+
+    enemies.forEach((enemy) => {
+        enemy.update(player);
+        enemy.draw();
     });
-    lastSpawnTime = timestamp;
-  }
+
+    drawScore();
+
+    requestAnimationFrame(gameLoop);
 }
 
-function update(timestamp) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+// Spawn enemies every second
+setInterval(spawnEnemy, 1000);
 
-  updateSamuraiMovement(); // Continuously update movement
-  drawSamurai();
-  drawEnemies();
-  handleAttack();
-  spawnEnemy(timestamp);
-
-  requestAnimationFrame(update);
-}
-
-function updateSamuraiMovement() {
-  if (keys['w'] && samurai.y > 0) samurai.y = Math.max(0, samurai.y - samurai.speed); // Move up
-  if (keys['s'] && samurai.y < canvas.height - samurai.height)
-    samurai.y = Math.min(canvas.height - samurai.height, samurai.y + samurai.speed); // Move down
-  if (keys['a'] && samurai.x > 0) samurai.x = Math.max(0, samurai.x - samurai.speed); // Move left
-  if (keys['d'] && samurai.x < canvas.width - samurai.width)
-    samurai.x = Math.min(canvas.width - samurai.width, samurai.x + samurai.speed); // Move right
-}
-
-// Event listeners for key press and release
-document.addEventListener('keydown', (e) => {
-  keys[e.key.toLowerCase()] = true; // Track pressed keys
-  if (e.key === ' ') samurai.isAttacking = true; // Spacebar for attack
-});
-
-document.addEventListener('keyup', (e) => {
-  keys[e.key.toLowerCase()] = false; // Release keys
-  if (e.key === ' ') samurai.isAttacking = false; // Stop attack
-});
-
-// Start the game
-requestAnimationFrame(update);
+// Start the game loop
+gameLoop();
