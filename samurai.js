@@ -168,7 +168,7 @@ class Enemy {
     draw() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
-
+        alert("Enemy spawned!");
         // Draw health bar
         ctx.fillStyle = 'red';
         ctx.fillRect(this.x, this.y - 10, this.width, 5);
