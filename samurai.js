@@ -17,6 +17,8 @@ class Player {
         this.health = 100;
         this.isAttacking = false;
         this.isParrying = false;
+        this.isStunned = false;
+        this.stunTimer = 0;
         this.actionTimer = 0;
     }
 
@@ -32,6 +34,15 @@ class Player {
     }
 
     update(keys) {
+        if (this.isStunned) {
+            this.stunTimer--;
+            if (this.stunTimer <= 0) {
+                this.isStunned = false;
+                this.color = 'blue';
+            }
+            return; // Skip movement when stunned
+        }
+
         if (this.actionTimer > 0) {
             this.actionTimer--;
             if (this.actionTimer === 0) {
@@ -61,11 +72,13 @@ class Player {
     }
 
     attack(enemies) {
+        if (this.isStunned) return; // Can't attack if stunned
+
         this.isAttacking = true;
         this.actionTimer = 30; // 0.5 seconds at 60 FPS
         this.color = 'royalblue';
 
-        enemies.forEach((enemy, index) => {
+        enemies.forEach((enemy) => {
             if (
                 this.x < enemy.x + enemy.width &&
                 this.x + this.width > enemy.x &&
@@ -74,27 +87,38 @@ class Player {
             ) {
                 if (enemy.isParrying) {
                     console.log('Enemy parried the attack!');
+                    this.stun();
                 } else if (enemy.isDodging) {
                     console.log('Enemy dodged the attack!');
                 } else {
-                    enemies.splice(index, 1);
-                    console.log('Enemy defeated!');
+                    enemy.stun();
                 }
             }
         });
     }
 
     parry() {
+        if (this.isStunned) return; // Can't parry if stunned
+
         this.isParrying = true;
         this.actionTimer = 30; // 0.5 seconds at 60 FPS
         this.color = 'indigo';
     }
 
     dodge() {
+        if (this.isStunned) return; // Can't dodge if stunned
+
         this.isDodging = true;
         this.dodgeTimer = 30; // 0.5 seconds at 60 FPS
         this.speed = 10;
         this.color = 'cyan';
+    }
+
+    stun() {
+        this.isStunned = true;
+        this.stunTimer = 60; // Stunned for 1 second
+        this.color = 'cyan';
+        console.log('Player stunned!');
     }
 }
 
@@ -112,6 +136,8 @@ class Enemy {
         this.dodgeTimer = 0;
         this.isAttacking = false;
         this.isParrying = false;
+        this.isStunned = false;
+        this.stunTimer = 0;
         this.actionTimer = 0;
     }
 
@@ -127,6 +153,15 @@ class Enemy {
     }
 
     update(player) {
+        if (this.isStunned) {
+            this.stunTimer--;
+            if (this.stunTimer <= 0) {
+                this.isStunned = false;
+                this.color = 'red';
+            }
+            return; // Skip updating while stunned
+        }
+
         if (this.actionTimer > 0) {
             this.actionTimer--;
             if (this.actionTimer === 0) {
@@ -175,10 +210,17 @@ class Enemy {
         this.actionTimer = 30; // 0.5 seconds at 60 FPS
         this.color = 'darkred';
 
-        if (!player.isDodging && !player.isParrying) {
-            player.health -= 10; // Player loses health if not dodging or parrying
-            console.log('Player hit! Health:', player.health);
+        if (!player.isDodging && player.isParrying) {
+            this.stun(); // Enemy gets stunned if the player parries
+        } else if (!player.isDodging && !player.isParrying) {
+            player.stun(); // Player gets stunned if attacked
         }
+    }
+
+    parry() {
+        this.isParrying = true;
+        this.actionTimer = 30; // 0.5 seconds at 60 FPS
+        this.color = 'orange';
     }
 
     dodge() {
@@ -188,10 +230,11 @@ class Enemy {
         this.speed = 5;
     }
 
-    parry() {
-        this.isParrying = true;
-        this.actionTimer = 30; // 0.5 seconds at 60 FPS
+    stun() {
+        this.isStunned = true;
+        this.stunTimer = 60; // Stunned for 1 second
         this.color = 'orange';
+        console.log('Enemy stunned!');
     }
 }
 
