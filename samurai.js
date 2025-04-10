@@ -78,7 +78,7 @@ class Player {
         this.actionTimer = 30; // 0.5 seconds at 60 FPS
         this.color = 'royalblue';
 
-        enemies.forEach((enemy) => {
+        enemies.forEach((enemy, index) => {
             if (
                 this.x < enemy.x + enemy.width &&
                 this.x + this.width > enemy.x &&
@@ -91,7 +91,9 @@ class Player {
                 } else if (enemy.isDodging) {
                     console.log('Enemy dodged the attack!');
                 } else {
-                    enemy.stun();
+                    enemies.splice(index, 1);
+                    score += 10; // Add points for defeating an enemy
+                    console.log('Enemy defeated! Score:', score);
                 }
             }
         });
@@ -213,7 +215,11 @@ class Enemy {
         if (!player.isDodging && player.isParrying) {
             this.stun(); // Enemy gets stunned if the player parries
         } else if (!player.isDodging && !player.isParrying) {
-            player.stun(); // Player gets stunned if attacked
+            player.health -= 10; // Player loses health if not dodging or parrying
+            console.log('Player hit! Health:', player.health);
+            if (player.health <= 0) {
+                endGame(); // End the game if player's health is 0 or less
+            }
         }
     }
 
@@ -241,18 +247,21 @@ class Enemy {
 const player = new Player();
 const enemies = [];
 let score = 0;
+let gameRunning = true;
 
 const keys = {};
 window.addEventListener('keydown', (e) => {
     keys[e.key] = true;
-    if (e.key === ' ') {
-        player.attack(enemies);
-    }
-    if (e.key === 'f') {
-        player.parry();
-    }
-    if (e.key === 'q' && !player.isDodging) {
-        player.dodge();
+    if (gameRunning) {
+        if (e.key === ' ') {
+            player.attack(enemies);
+        }
+        if (e.key === 'f') {
+            player.parry();
+        }
+        if (e.key === 'q' && !player.isDodging) {
+            player.dodge();
+        }
     }
 });
 window.addEventListener('keyup', (e) => {
@@ -265,7 +274,24 @@ function spawnEnemy() {
     enemies.push(new Enemy(x, y));
 }
 
+function drawScore() {
+    ctx.fillStyle = 'black';
+    ctx.font = '20px Arial';
+    ctx.fillText(`Score: ${score}`, 10, 20);
+}
+
+function endGame() {
+    gameRunning = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'black';
+    ctx.font = '40px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(`Game Over! Final Score: ${score}`, canvas.width / 2, canvas.height / 2);
+}
+
 function gameLoop() {
+    if (!gameRunning) return;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     player.update(keys);
@@ -276,11 +302,15 @@ function gameLoop() {
         enemy.draw();
     });
 
+    drawScore();
+
     requestAnimationFrame(gameLoop);
 }
 
 // Spawn enemies every second
-setInterval(spawnEnemy, 1000);
+setInterval(() => {
+    if (gameRunning) spawnEnemy();
+}, 1000);
 
 // Start the game loop
 gameLoop();
