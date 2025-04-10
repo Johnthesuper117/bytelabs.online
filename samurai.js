@@ -77,13 +77,6 @@ function update(timestamp) {
   requestAnimationFrame(update);
 }
 
-function moveSamurai(direction) {
-  if (direction === 'up' && samurai.y > 0) samurai.y -= samurai.speed;
-  if (direction === 'down' && samurai.y < canvas.height - samurai.height) samurai.y += samurai.speed;
-  if (direction === 'left' && samurai.x > 0) samurai.x -= samurai.speed;
-  if (direction === 'right' && samurai.x < canvas.width - samurai.width) samurai.x += samurai.speed;
-}
-
 function updateSamuraiMovement() {
   if (keys['w'] && samurai.y > 0) samurai.y = Math.max(0, samurai.y - samurai.speed); // Move up
   if (keys['s'] && samurai.y < canvas.height - samurai.height)
