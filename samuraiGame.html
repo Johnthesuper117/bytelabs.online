@@ -1,31 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samurai Game</title>
-  <p>
-    Controls:
-    <ul>
-      <li>W to move up</li>
-      <li>S to move down</li>
-      <li>A to move left</li>
-      <li>D to move right</li>
-      <li>SPACE to attack</li>
-    </ul>
-  </p>
-  <style>
-    canvas {
-      display: block;
-      margin: 0 auto;
-      background-color: #f0f0f0;
-      border: 2px solid #000;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samurai Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            background-color: #222;
+        }
+    </style>
 </head>
 <body>
-  <h1>Samurai Game</h1>
-  <canvas id="gameCanvas" width="800" height="400"></canvas>
-  <script src="samurai.js"></script>
+    <script>
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        document.body.appendChild(canvas);
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Game variables
+        let player = { x: canvas.width / 2, y: canvas.height / 2, size: 50, speed: 5 };
+        let enemies = [];
+        let score = 0;
+        let isAttacking = false;
+
+        // Controls
+        const keys = { w: false, a: false, s: false, d: false };
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'w') keys.w = true;
+            if (e.key === 'a') keys.a = true;
+            if (e.key === 's') keys.s = true;
+            if (e.key === 'd') keys.d = true;
+            if (e.key === ' ') isAttacking = true;
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'w') keys.w = false;
+            if (e.key === 'a') keys.a = false;
+            if (e.key === 's') keys.s = false;
+            if (e.key === 'd') keys.d = false;
+            if (e.key === ' ') isAttacking = false;
+        });
+
+        // Game loop
+        function update() {
+            // Player movement
+            if (keys.w) player.y -= player.speed;
+            if (keys.s) player.y += player.speed;
+            if (keys.a) player.x -= player.speed;
+            if (keys.d) player.x += player.speed;
+
+            // Keep player inside canvas
+            player.x = Math.max(0, Math.min(canvas.width - player.size, player.x));
+            player.y = Math.max(0, Math.min(canvas.height - player.size, player.y));
+
+            // Spawn enemies
+            if (Math.random() < 0.02) {
+                enemies.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: 30,
+                    alive: true,
+                });
+            }
+
+            // Check for attacks
+            if (isAttacking) {
+                enemies.forEach((enemy) => {
+                    if (
+                        enemy.alive &&
+                        player.x < enemy.x + enemy.size &&
+                        player.x + player.size > enemy.x &&
+                        player.y < enemy.y + enemy.size &&
+                        player.y + player.size > enemy.y
+                    ) {
+                        enemy.alive = false;
+                        score += 10;
+                    }
+                });
+            }
+
+            // Remove dead enemies
+            enemies = enemies.filter((enemy) => enemy.alive);
+
+            // Draw everything
+            draw();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw player
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(player.x, player.y, player.size, player.size);
+
+            // Draw enemies
+            ctx.fillStyle = 'red';
+            enemies.forEach((enemy) => {
+                ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
+            });
+
+            // Draw score
+            ctx.fillStyle = 'white';
+            ctx.font = '20px Arial';
+            ctx.fillText(`Score: ${score}`, 10, 30);
+        }
+
+        function gameLoop() {
+            update();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
 </body>
 </html>
