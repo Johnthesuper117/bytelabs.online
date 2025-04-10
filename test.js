@@ -85,10 +85,10 @@ function moveSamurai(direction) {
 
 // Event listeners for controls
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowUp') moveSamurai('up');
-  if (e.key === 'ArrowDown') moveSamurai('down');
-  if (e.key === 'ArrowLeft') moveSamurai('left');
-  if (e.key === 'ArrowRight') moveSamurai('right');
+  if (e.key === 'W') moveSamurai('up');
+  if (e.key === 'S') moveSamurai('down');
+  if (e.key === 'A') moveSamurai('left');
+  if (e.key === 'D') moveSamurai('right');
   if (e.key === ' ') samurai.isAttacking = true;
 });
 
