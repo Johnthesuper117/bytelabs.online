@@ -11,7 +11,7 @@ class Player {
         this.width = 50;
         this.height = 50;
         this.color = 'blue';
-        this.speed = 5;
+        this.speed = 4;
         this.isDodging = false;
         this.dodgeTimer = 0;
         this.health = 100;
@@ -131,7 +131,7 @@ class Enemy {
         this.width = 40;
         this.height = 40;
         this.color = 'red';
-        this.speed = 2;
+        this.speed = 1;
         this.health = 50;
         this.attackCooldown = 0;
         this.isDodging = false;
