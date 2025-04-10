@@ -1,8 +1,17 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = 1000;
-canvas.height = 800;
+// Function to resize the canvas to fit the entire screen
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// Initial canvas size
+resizeCanvas();
+
+// Update canvas size on window resize
+window.addEventListener('resize', resizeCanvas);
 
 class Player {
     constructor() {
