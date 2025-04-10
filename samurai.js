@@ -68,6 +68,7 @@ function spawnEnemy(timestamp) {
 function update(timestamp) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  updateSamuraiMovement(); // Continuously update movement
   drawSamurai();
   drawEnemies();
   handleAttack();
@@ -83,17 +84,24 @@ function moveSamurai(direction) {
   if (direction === 'right' && samurai.x < canvas.width - samurai.width) samurai.x += samurai.speed;
 }
 
-// Event listeners for controls
+function updateSamuraiMovement() {
+  if (keys['w'] && samurai.y > 0) samurai.y = Math.max(0, samurai.y - samurai.speed); // Move up
+  if (keys['s'] && samurai.y < canvas.height - samurai.height)
+    samurai.y = Math.min(canvas.height - samurai.height, samurai.y + samurai.speed); // Move down
+  if (keys['a'] && samurai.x > 0) samurai.x = Math.max(0, samurai.x - samurai.speed); // Move left
+  if (keys['d'] && samurai.x < canvas.width - samurai.width)
+    samurai.x = Math.min(canvas.width - samurai.width, samurai.x + samurai.speed); // Move right
+}
+
+// Event listeners for key press and release
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowUp') moveSamurai('up');
-  if (e.key === 'ArrowDown') moveSamurai('down');
-  if (e.key === 'ArrowLeft') moveSamurai('left');
-  if (e.key === 'ArrowRight') moveSamurai('right');
-  if (e.key === ' ') samurai.isAttacking = true;
+  keys[e.key.toLowerCase()] = true; // Track pressed keys
+  if (e.key === ' ') samurai.isAttacking = true; // Spacebar for attack
 });
 
 document.addEventListener('keyup', (e) => {
-  if (e.key === ' ') samurai.isAttacking = false;
+  keys[e.key.toLowerCase()] = false; // Release keys
+  if (e.key === ' ') samurai.isAttacking = false; // Stop attack
 });
 
 // Start the game
