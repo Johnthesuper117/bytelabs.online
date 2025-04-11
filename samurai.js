@@ -125,18 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (keys['a']) this.x -= this.speed;
             if (keys['d']) this.x += this.speed;
 
-            if (keys['j']) { // Attack key
-                this.isAttacking = true;
-                this.actionTimer = 20;
-                this.color = 'red';
-            }
-
-            if (keys['k']) { // Parry key
-                this.isParrying = true;
-                this.actionTimer = 20;
-                this.color = 'yellow';
-            }
-
             if (this.isDodging) {
                 this.dodgeTimer -= 1;
                 if (this.dodgeTimer <= 0) {
@@ -384,13 +372,13 @@ class Enemy {
     window.addEventListener('keydown', (e) => {
         keys[e.key] = true;
         if (gameRunning) {
-            if (e.key === ' ') {
+            if (e.key === 'j') {
                 player.attack(enemies);
             }
-            if (e.key === 'f') {
+            if (e.key === 'k') {
                 player.parry();
             }
-            if (e.key === 'q' && !player.isDodging) {
+            if (e.key === 'l' && !player.isDodging) {
                 player.dodge();
             }
         }
@@ -436,6 +424,5 @@ class Enemy {
     }, 1000);
 
     // Start the game loop
-    gameLoop("Better Sword");
-    alert("After Loop?");
+    gameLoop("Better Sword + Movement");
 });
