@@ -435,6 +435,7 @@ class Enemy {
     }, 1000);
 
     // Start the game loop
+    alert("Test better sword");
     gameLoop();
     alert("After Loop?");
 });
