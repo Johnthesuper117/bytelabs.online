@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Game running flag
-        let gameRunning = true;
+    let gameRunning = true;
 
     function endGame(reason) {
         gameRunning = false;
