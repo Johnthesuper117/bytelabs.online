@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         draw() {
+            // Draw player rectangle
             ctx.fillStyle = this.color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
 
@@ -62,8 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fillRect(this.x, this.y - 10, this.width, 5);
             ctx.fillStyle = 'green';
             ctx.fillRect(this.x, this.y - 10, (this.health / 100) * this.width, 5);
-        }
 
+            // Draw sword during attack or parry
+            if (this.isAttacking || this.isParrying) {
+                ctx.fillStyle = this.isAttacking ? 'silver' : 'gold'; // Sword is silver for attack, gold for parry
+                ctx.fillRect(this.x + this.width, this.y + this.height / 4, 20, 5); // Sword position
+            }
+        }
+        
         update(keys) {
             if (this.isStunned) {
                 this.stunTimer--;
@@ -87,6 +94,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (keys['s']) this.y += this.speed;
             if (keys['a']) this.x -= this.speed;
             if (keys['d']) this.x += this.speed;
+
+            if (keys['j']) { // Attack key
+                this.isAttacking = true;
+                this.actionTimer = 20;
+                this.color = 'red';
+            }
+
+            if (keys['k']) { // Parry key
+                this.isParrying = true;
+                this.actionTimer = 20;
+                this.color = 'yellow';
+            }
 
             if (this.isDodging) {
                 this.dodgeTimer -= 1;
@@ -181,15 +200,22 @@ class Enemy {
     }
 
     draw() {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-        
-        // Draw health bar
-        ctx.fillStyle = 'red';
-        ctx.fillRect(this.x, this.y - 10, this.width, 5);
-        ctx.fillStyle = 'green';
-        ctx.fillRect(this.x, this.y - 10, (this.health / 50) * this.width, 5);
-    }
+            // Draw enemy rectangle
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+
+            // Draw health bar
+            ctx.fillStyle = 'red';
+            ctx.fillRect(this.x, this.y - 10, this.width, 5);
+            ctx.fillStyle = 'green';
+            ctx.fillRect(this.x, this.y - 10, (this.health / 100) * this.width, 5);
+
+            // Draw sword during attack or parry
+            if (this.isAttacking || this.isParrying) {
+                ctx.fillStyle = this.isAttacking ? 'silver' : 'gold'; // Sword is silver for attack, gold for parry
+                ctx.fillRect(this.x + this.width, this.y + this.height / 4, 20, 5); // Sword position
+            }
+        }
 
     update(player) {
         if (this.isStunned) {
