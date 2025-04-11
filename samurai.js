@@ -412,7 +412,8 @@ class Enemy {
         ctx.fillText(`Score: ${score}`, 10, 20);
     }
 
-    function gameLoop() {
+    function gameLoop(version) {
+        alert(version);
         if (!gameRunning) return;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -435,7 +436,6 @@ class Enemy {
     }, 1000);
 
     // Start the game loop
-    alert("Test better sword");
-    gameLoop();
+    gameLoop("Better Sword");
     alert("After Loop?");
 });
