@@ -23,8 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
     alert("Window resized");
 
     // Game running flag
-    let gameRunning = true;
+        let gameRunning = true;
 
+    function endGame(reason) {
+        gameRunning = false;
+        alert(`Game Over! ${reason}`);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.font = '50px Arial';
+        ctx.fillStyle = 'white';
+        ctx.textAlign = 'center';
+        ctx.fillText(`Game Over! ${reason}`, canvas.width / 2, canvas.height / 2);
+    }
+    
     class Player {
         constructor() {
             this.x = canvas.width / 2;
@@ -90,6 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Keep player within bounds
             this.x = Math.max(0, Math.min(canvas.width - this.width, this.x));
             this.y = Math.max(0, Math.min(canvas.height - this.height, this.y));
+            
+            // Check if player health is 0
+            if (this.health <= 0) {
+                endGame("You lost all your health!");
+            }
         }
 
         attack(enemies) {
