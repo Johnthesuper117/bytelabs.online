@@ -22,6 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', resizeCanvas);
     alert("Window resized");
 
+    // Track mouse movement
+    canvas.addEventListener('mousemove', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = event.clientX - rect.left;
+        mouseY = event.clientY - rect.top;
+    });
+
     // Game running flag
         let gameRunning = true;
 
@@ -30,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`Game Over! ${reason}`);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.font = '50px Arial';
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = 'black';
         ctx.textAlign = 'center';
         ctx.fillText(`Game Over! ${reason}`, canvas.width / 2, canvas.height / 2);
     }
@@ -64,11 +71,34 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fillStyle = 'green';
             ctx.fillRect(this.x, this.y - 10, (this.health / 100) * this.width, 5);
 
-            // Draw sword during attack or parry
-            if (this.isAttacking || this.isParrying) {
-                ctx.fillStyle = this.isAttacking ? 'silver' : 'gold'; // Sword is silver for attack, gold for parry
-                ctx.fillRect(this.x + this.width, this.y + this.height / 4, 20, 5); // Sword position
-            }
+            // Draw sword
+            this.drawSword();
+        }
+
+        drawSword() {
+            const centerX = this.x + this.width / 2;
+            const centerY = this.y + this.height / 2;
+
+            // Calculate angle to cursor
+            const dx = mouseX - centerX;
+            const dy = mouseY - centerY;
+            const angle = Math.atan2(dy, dx);
+
+            // Sword properties
+            const swordLength = 100; // Increased sword length
+            const swordWidth = 10;
+
+            // Calculate sword endpoint
+            const swordX = centerX + Math.cos(angle) * swordLength;
+            const swordY = centerY + Math.sin(angle) * swordLength;
+
+            // Draw sword
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(angle);
+            ctx.fillStyle = 'silver';
+            ctx.fillRect(0, -swordWidth / 2, swordLength, swordWidth);
+            ctx.restore();
         }
         
         update(keys) {
@@ -210,12 +240,32 @@ class Enemy {
             ctx.fillStyle = 'green';
             ctx.fillRect(this.x, this.y - 10, (this.health / 100) * this.width, 5);
 
-            // Draw sword during attack or parry
-            if (this.isAttacking || this.isParrying) {
-                ctx.fillStyle = this.isAttacking ? 'silver' : 'gold'; // Sword is silver for attack, gold for parry
-                ctx.fillRect(this.x + this.width, this.y + this.height / 4, 20, 5); // Sword position
-            }
+            // Draw sword facing the player
+            this.drawSword(player);
         }
+
+        drawSword(player) {
+            const centerX = this.x + this.width / 2;
+            const centerY = this.y + this.height / 2;
+
+            // Calculate angle to the player
+            const dx = player.x + player.width / 2 - centerX;
+            const dy = player.y + player.height / 2 - centerY;
+            const angle = Math.atan2(dy, dx);
+
+            // Sword properties
+            const swordLength = 80; // Length of the enemy's sword
+            const swordWidth = 8;
+
+            // Draw sword
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(angle);
+            ctx.fillStyle = 'silver';
+            ctx.fillRect(0, -swordWidth / 2, swordLength, swordWidth);
+            ctx.restore();
+        }
+
 
     update(player) {
         if (this.isStunned) {
