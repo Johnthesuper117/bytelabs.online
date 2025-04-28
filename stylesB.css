@@ -9,7 +9,7 @@ html {
   color: var(--text-color);
   font-weight: bold;
   background-color: var(--bg-color);
-  margin: 5px;
+  margin: 10px;
   /*background-image: url("images/sakuraBG2.png");
   background-size: 100%;
   background-attachment: fixed;
