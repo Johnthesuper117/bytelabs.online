@@ -23,7 +23,6 @@ body {
   overflow: hidden;
 }
 
-
 .main {
   margin-left: 10%; /* Same as the width of the sidenav */
   font-size: 16px; /* Increased text to enable scrolling */
@@ -54,10 +53,6 @@ a:active {
   text-decoration: underline;
 }
 
-body {
-  margin: 0;
-}
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -85,30 +80,5 @@ table {
 caption {
   caption-side: bottom;
   padding: 10px;
-  font-weight: bold;
-}
-
-thead,
-tfoot {
-}
-
-th,
-td {
-  border: 1px solid rgb(0 255 0);
-  padding: 8px 10px;
-}
-
-td:last-of-type {
-  text-align: center;
-}
-
-tbody > tr:nth-of-type(even) {
-}
-
-tfoot th {
-  text-align: right;
-}
-
-tfoot td {
   font-weight: bold;
 }
