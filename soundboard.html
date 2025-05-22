@@ -114,25 +114,25 @@
     
     function playMultiSound(src0, src1, src2, src3, src4, src5, src6, src7, src8, src9) {
       const audio0 = new Audio(src0);
-      audio0.play();
       const audio1 = new Audio(src1);
-      audio1.play();
       const audio2 = new Audio(src2);
-      audio2.play();
       const audio3 = new Audio(src3);
-      audio3.play();
       const audio4 = new Audio(src4);
-      audio4.play();
       const audio5 = new Audio(src5);
-      audio5.play();
       const audio6 = new Audio(src6);
-      audio6.play();
       const audio7 = new Audio(src7);
-      audio7.play();
       const audio8 = new Audio(src8);
-      audio8.play();
       const audio9 = new Audio(src9);
-      audio9.play();
+      audio0.play();
+      setInterval(audio1.play(), audio0.duration());
+      setInterval(audio2.play(), audio1.duration());
+      setInterval(audio3.play(), audio2.duration());
+      setInterval(audio.play(), audio3.duration());
+      setInterval(audio.play(), audio4.duration());
+      setInterval(audio.play(), audio5.duration());
+      setInterval(audio.play(), audio6.duration());
+      setInterval(audio.play(), audio7.duration());
+      setInterval(audio.play(), audio8.duration());
     }
   </script>
 </body>
