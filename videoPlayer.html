@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Player</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+    }
+
+    .button {
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .button:hover {
+      background-color: #005ea2;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Video Player</h1>
+
+  <video controls width="250">
+    <source src="sounds/who-asked.mp4" type="video/mp4" />
+  </video>
+  
+  <!-- Buttons with sound triggers -->
+  <!--<button class="button" onclick="playSound('sounds/.mp3')"></button>
+  <button class="button" onclick="playSound('sounds/.mp3')"></button>
+  <button class="button" onclick="playSound('sounds/.mp3')"></button>
+  <button class="button" onclick="playSound('sounds/.mp3')"></button>
+  <button class="button" onclick="playSound('sounds/.mp3')"></button>
+  <button class="button" onclick="playSound('sounds/.mp3')"></button>
+  <button class="button" onclick="playSound('sounds/.mp3')"></button>
+  <button class="button" onclick="playSound('sounds/.mp3')"></button>
+  <button class="button" onclick="playSound('sounds/.mp3')"></button>-->
+
+  <script>
+    function playVideo(src) {
+      const audio = new Audio(src);
+      audio.play();
+    }
+    
+  </script>
+</body>
+</html>
