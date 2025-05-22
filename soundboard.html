@@ -123,16 +123,10 @@
       const audio7 = new Audio(src7);
       const audio8 = new Audio(src8);
       const audio9 = new Audio(src9);
-      audio0.play();
-      setInterval(audio1.play(), audio0.duration());
-      setInterval(audio2.play(), audio1.duration());
-      setInterval(audio3.play(), audio2.duration());
-      setInterval(audio4.play(), audio3.duration());
-      setInterval(audio5.play(), audio4.duration());
-      setInterval(audio6.play(), audio5.duration());
-      setInterval(audio7.play(), audio6.duration());
-      setInterval(audio8.play(), audio7.duration());
-      setInterval(audio9.play(), audio8.duration());
+      const audioTrack = [audio0, audio1, audio2, audio3, audio4, audio5, audio6, audio7, audio8, audio9]
+      audioTrack.forEach((track) => {
+        track.play();
+      });
     }
   </script>
 </body>
