@@ -95,8 +95,8 @@
   <button class="button" onclick="playSound('sounds/keyboard.mp3')">Keyboard</button>
   <button class="button" onclick="playSound('sounds/nani.mp3')">NANI</button>
   <button class="button" onclick="playSound('sounds/mario-no-one-asked-for-your-opinion.mp3')">No one asked for your opinion</button>
+  <button class="button" onclick="playMultiSound('sounds/assault.mp3', 'sounds/defense.mp3', 'sounds/extermination.mp3', 'sounds/juggernaut.mp3', 'sounds/hail_to_the_king.mp3.mp3', 'sounds/halo-untouchable.mp3', 'sounds/reinforcements.mp3', 'sounds/five_mins_remaining.mp3', 'sounds/gameover.mp3', 'sounds/yoink-halo.mp3.mp3')">Halo Announcer</button>
   <!--<button class="button" onclick="playSound('sounds/.mp3')"></button>
-  <button class="button" onclick="playSound('sounds/.mp3')"></button>
   <button class="button" onclick="playSound('sounds/.mp3')"></button>
   <button class="button" onclick="playSound('sounds/.mp3')"></button>
   <button class="button" onclick="playSound('sounds/.mp3')"></button>
@@ -109,6 +109,29 @@
   <script>
     function playSound(src) {
       const audio = new Audio(src);
+      audio.play();
+    }
+    
+    function playMultiSound(src0, src1, src2, src3, src4, src5, src6, src7, src8, src9) {
+      const audio = new Audio(src0);
+      audio.play();
+      const audio = new Audio(src1);
+      audio.play();
+      const audio = new Audio(src2);
+      audio.play();
+      const audio = new Audio(src3);
+      audio.play();
+      const audio = new Audio(src4);
+      audio.play();
+      const audio = new Audio(src5);
+      audio.play();
+      const audio = new Audio(src6);
+      audio.play();
+      const audio = new Audio(src7);
+      audio.play();
+      const audio = new Audio(src8);
+      audio.play();
+      const audio = new Audio(src9);
       audio.play();
     }
   </script>
