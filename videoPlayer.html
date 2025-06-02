@@ -22,14 +22,15 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
-    input[type="file"] {
-      margin-bottom: 20px;
+    input[type="file"], select, button {
+      margin: 10px;
     }
     video {
       max-width: 100%;
       width: 600px;
       height: auto;
       border-radius: 8px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -38,12 +39,25 @@
     <h2>Upload and Play Video</h2>
     <input type="file" id="videoInput" accept="video/*">
     <br>
+    <label for="playbackRate">Playback Speaed:</label>
+    <select id="playbackRate">
+      <option value="0.5">0.5x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.5">1.5x</option>
+      <option value="2">2x</option>
+    </select>
+    <br>
+    <button onclick="videoPlayer.pause()">Pause</button>
+    <button onclick="videoPlayer.play()">Play</button>
+    <button onclick="videoPlayer.currentTime = 0">Restart</button>
+    <br>
     <video id="videoPlayer" controls></video>
   </div>
 
   <script>
     const videoInput = document.getElementById('videoInput');
     const videoPlayer = document.getElementById('videoPlayer');
+    const playbackRateSelector = document.getElementById('playbackRate');
 
     videoInput.addEventListener('change', function () {
       const file = this.files[0];
@@ -53,6 +67,10 @@
         videoPlayer.load();
         videoPlayer.play();
       }
+    });
+
+    playbackRateSelector.addEventListener('change', function () {
+      videoPlayer.playbackRate = parseFloat(this.value);
     });
   </script>
 </body>
