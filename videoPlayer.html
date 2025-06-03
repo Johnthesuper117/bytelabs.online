@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Video Uploader and Player</title>
+  <title>Advanced Video Audio Effects Player</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -22,8 +22,9 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
-    input[type="file"], select, button {
+    input[type="file"], select, button, label {
       margin: 10px;
+      display: inline-block;
     }
     video {
       max-width: 100%;
@@ -36,10 +37,10 @@
 </head>
 <body>
   <div class="container">
-    <h2>Upload and Play Video</h2>
+    <h2>Upload and Play Video with Advanced Audio Effects</h2>
     <input type="file" id="videoInput" accept="video/*">
     <br>
-    <label for="playbackRate">Playback Speaed:</label>
+    <label for="playbackRate">Playback Speed:</label>
     <select id="playbackRate">
       <option value="0.5">0.5x</option>
       <option value="1" selected>1x</option>
@@ -47,17 +48,93 @@
       <option value="2">2x</option>
     </select>
     <br>
+    <label><input type="checkbox" id="reverbToggle"> Reverb</label>
+    <label><input type="checkbox" id="echoToggle"> Echo</label>
+    <label><input type="checkbox" id="bassBoostToggle"> Bass Boost</label>
+    <label><input type="checkbox" id="distortionToggle"> Distortion</label>
+    <br>
     <button onclick="videoPlayer.pause()">Pause</button>
     <button onclick="videoPlayer.play()">Play</button>
     <button onclick="videoPlayer.currentTime = 0">Restart</button>
     <br>
-    <video id="videoPlayer" controls></video>
+    <video id="videoPlayer" controls crossorigin="anonymous"></video>
   </div>
 
   <script>
     const videoInput = document.getElementById('videoInput');
     const videoPlayer = document.getElementById('videoPlayer');
     const playbackRateSelector = document.getElementById('playbackRate');
+    const reverbToggle = document.getElementById('reverbToggle');
+    const echoToggle = document.getElementById('echoToggle');
+    const bassBoostToggle = document.getElementById('bassBoostToggle');
+    const distortionToggle = document.getElementById('distortionToggle');
+
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const sourceNode = audioContext.createMediaElementSource(videoPlayer);
+
+    const gainNode = audioContext.createGain();
+    const convolver = audioContext.createConvolver();
+    const delayNode = audioContext.createDelay();
+    const bassFilter = audioContext.createBiquadFilter();
+    bassFilter.type = "lowshelf";
+    bassFilter.frequency.value = 200;
+    bassFilter.gain.value = 15;
+
+    const distortion = audioContext.createWaveShaper();
+    function makeDistortionCurve(amount) {
+      const k = typeof amount === 'number' ? amount : 50;
+      const n_samples = 44100;
+      const curve = new Float32Array(n_samples);
+      const deg = Math.PI / 180;
+      for (let i = 0; i < n_samples; ++i) {
+        const x = (i * 2) / n_samples - 1;
+        curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
+      }
+      return curve;
+    }
+    distortion.curve = makeDistortionCurve(400);
+    distortion.oversample = '4x';
+
+    // Load impulse response for reverb
+    fetch('https://cdn.jsdelivr.net/gh/mdn/webaudio-examples/audio-buffer/concert-crowd.ogg')
+      .then(response => response.arrayBuffer())
+      .then(data => audioContext.decodeAudioData(data))
+      .then(buffer => {
+        convolver.buffer = buffer;
+      });
+
+    function updateAudioGraph() {
+      // Disconnect all first
+      sourceNode.disconnect();
+      convolver.disconnect();
+      delayNode.disconnect();
+      bassFilter.disconnect();
+      distortion.disconnect();
+      gainNode.disconnect();
+
+      let currentNode = sourceNode;
+
+      if (reverbToggle.checked) {
+        currentNode.connect(convolver);
+        currentNode = convolver;
+      }
+      if (echoToggle.checked) {
+        delayNode.delayTime.value = 0.3;
+        currentNode.connect(delayNode);
+        currentNode = delayNode;
+      }
+      if (bassBoostToggle.checked) {
+        currentNode.connect(bassFilter);
+        currentNode = bassFilter;
+      }
+      if (distortionToggle.checked) {
+        currentNode.connect(distortion);
+        currentNode = distortion;
+      }
+
+      currentNode.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+    }
 
     videoInput.addEventListener('change', function () {
       const file = this.files[0];
@@ -66,7 +143,12 @@
         videoPlayer.src = videoURL;
         videoPlayer.load();
         videoPlayer.play();
+        updateAudioGraph();
       }
+    });
+
+    [reverbToggle, echoToggle, bassBoostToggle, distortionToggle].forEach(control => {
+      control.addEventListener('change', updateAudioGraph);
     });
 
     playbackRateSelector.addEventListener('change', function () {
