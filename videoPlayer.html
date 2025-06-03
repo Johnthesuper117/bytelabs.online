@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advanced Video Audio Effects Player</title>
+  <title>Video Player with Audio Effect Sliders</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -21,23 +21,32 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       text-align: center;
+      width: 80%;
+      max-width: 800px;
     }
-    input[type="file"], select, button, label {
+    input[type="file"], select, button, label, input[type="range"] {
       margin: 10px;
-      display: inline-block;
     }
     video {
-      max-width: 100%;
-      width: 600px;
-      height: auto;
+      width: 100%;
       border-radius: 8px;
       margin-top: 20px;
+    }
+    .slider-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Upload and Play Video with Advanced Audio Effects</h2>
+    <h2>Upload and Play Video with Adjustable Audio Effects</h2>
     <input type="file" id="videoInput" accept="video/*">
     <br>
     <label for="playbackRate">Playback Speed:</label>
@@ -47,11 +56,24 @@
       <option value="1.5">1.5x</option>
       <option value="2">2x</option>
     </select>
-    <br>
-    <label><input type="checkbox" id="reverbToggle"> Reverb</label>
-    <label><input type="checkbox" id="echoToggle"> Echo</label>
-    <label><input type="checkbox" id="bassBoostToggle"> Bass Boost</label>
-    <label><input type="checkbox" id="distortionToggle"> Distortion</label>
+    <div class="slider-container">
+      <div class="slider-label">
+        <label for="reverbGain">Reverb</label>
+        <input type="range" id="reverbGain" min="0" max="1" step="0.01" value="0">
+      </div>
+      <div class="slider-label">
+        <label for="echoDelay">Echo</label>
+        <input type="range" id="echoDelay" min="0" max="1" step="0.01" value="0">
+      </div>
+      <div class="slider-label">
+        <label for="bassBoost">Bass Boost</label>
+        <input type="range" id="bassBoost" min="0" max="30" step="1" value="0">
+      </div>
+      <div class="slider-label">
+        <label for="distortionAmount">Distortion</label>
+        <input type="range" id="distortionAmount" min="0" max="1000" step="1" value="0">
+      </div>
+    </div>
     <br>
     <button onclick="videoPlayer.pause()">Pause</button>
     <button onclick="videoPlayer.play()">Play</button>
@@ -64,25 +86,39 @@
     const videoInput = document.getElementById('videoInput');
     const videoPlayer = document.getElementById('videoPlayer');
     const playbackRateSelector = document.getElementById('playbackRate');
-    const reverbToggle = document.getElementById('reverbToggle');
-    const echoToggle = document.getElementById('echoToggle');
-    const bassBoostToggle = document.getElementById('bassBoostToggle');
-    const distortionToggle = document.getElementById('distortionToggle');
+
+    const reverbGainSlider = document.getElementById('reverbGain');
+    const echoDelaySlider = document.getElementById('echoDelay');
+    const bassBoostSlider = document.getElementById('bassBoost');
+    const distortionAmountSlider = document.getElementById('distortionAmount');
 
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const sourceNode = audioContext.createMediaElementSource(videoPlayer);
 
     const gainNode = audioContext.createGain();
+
+    // Reverb
     const convolver = audioContext.createConvolver();
+    const reverbGain = audioContext.createGain();
+    fetch('https://cdn.jsdelivr.net/gh/mdn/webaudio-examples/audio-buffer/concert-crowd.ogg')
+      .then(response => response.arrayBuffer())
+      .then(data => audioContext.decodeAudioData(data))
+      .then(buffer => {
+        convolver.buffer = buffer;
+      });
+
+    // Echo
     const delayNode = audioContext.createDelay();
+
+    // Bass Boost
     const bassFilter = audioContext.createBiquadFilter();
     bassFilter.type = "lowshelf";
     bassFilter.frequency.value = 200;
-    bassFilter.gain.value = 15;
 
+    // Distortion
     const distortion = audioContext.createWaveShaper();
     function makeDistortionCurve(amount) {
-      const k = typeof amount === 'number' ? amount : 50;
+      const k = typeof amount === 'number' ? amount : 0;
       const n_samples = 44100;
       const curve = new Float32Array(n_samples);
       const deg = Math.PI / 180;
@@ -92,49 +128,32 @@
       }
       return curve;
     }
-    distortion.curve = makeDistortionCurve(400);
-    distortion.oversample = '4x';
 
-    // Load impulse response for reverb
-    fetch('https://cdn.jsdelivr.net/gh/mdn/webaudio-examples/audio-buffer/concert-crowd.ogg')
-      .then(response => response.arrayBuffer())
-      .then(data => audioContext.decodeAudioData(data))
-      .then(buffer => {
-        convolver.buffer = buffer;
-      });
+    function updateEffects() {
+      reverbGain.gain.value = parseFloat(reverbGainSlider.value);
+      delayNode.delayTime.value = parseFloat(echoDelaySlider.value);
+      bassFilter.gain.value = parseFloat(bassBoostSlider.value);
+      distortion.curve = makeDistortionCurve(parseFloat(distortionAmountSlider.value));
+    }
 
-    function updateAudioGraph() {
-      // Disconnect all first
+    function connectAudioGraph() {
       sourceNode.disconnect();
-      convolver.disconnect();
-      delayNode.disconnect();
-      bassFilter.disconnect();
-      distortion.disconnect();
       gainNode.disconnect();
 
-      let currentNode = sourceNode;
-
-      if (reverbToggle.checked) {
-        currentNode.connect(convolver);
-        currentNode = convolver;
-      }
-      if (echoToggle.checked) {
-        delayNode.delayTime.value = 0.3;
-        currentNode.connect(delayNode);
-        currentNode = delayNode;
-      }
-      if (bassBoostToggle.checked) {
-        currentNode.connect(bassFilter);
-        currentNode = bassFilter;
-      }
-      if (distortionToggle.checked) {
-        currentNode.connect(distortion);
-        currentNode = distortion;
-      }
-
-      currentNode.connect(gainNode);
+      sourceNode.connect(distortion);
+      distortion.connect(bassFilter);
+      bassFilter.connect(delayNode);
+      delayNode.connect(reverbGain);
+      reverbGain.connect(convolver);
+      convolver.connect(gainNode);
       gainNode.connect(audioContext.destination);
     }
+
+    [reverbGainSlider, echoDelaySlider, bassBoostSlider, distortionAmountSlider].forEach(slider => {
+      slider.addEventListener('input', () => {
+        updateEffects();
+      });
+    });
 
     videoInput.addEventListener('change', function () {
       const file = this.files[0];
@@ -143,12 +162,9 @@
         videoPlayer.src = videoURL;
         videoPlayer.load();
         videoPlayer.play();
-        updateAudioGraph();
+        connectAudioGraph();
+        updateEffects();
       }
-    });
-
-    [reverbToggle, echoToggle, bassBoostToggle, distortionToggle].forEach(control => {
-      control.addEventListener('change', updateAudioGraph);
     });
 
     playbackRateSelector.addEventListener('change', function () {
