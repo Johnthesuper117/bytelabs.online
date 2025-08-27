@@ -70,7 +70,7 @@ ul {
 }
 .button {
   background-color: var(--color-text2);
-  color: var(--color-text1);
+  color: var(--color-background1);
   border: none;
   padding: 15px 30px;
   margin: 10px;
@@ -82,4 +82,5 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
 
