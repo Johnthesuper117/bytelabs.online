@@ -20,7 +20,6 @@ body {
   font-weight: 300;
   font-style: normal;
   height: 100vh;
-  overflow: hidden;
 }
 
 .main {
@@ -82,5 +81,6 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
 
 
