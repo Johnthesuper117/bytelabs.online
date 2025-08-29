@@ -15,7 +15,7 @@ body, html {
   padding: 0;
   text-shadow: 0 0 5px rgb(from #66ff66 calc(r + 40) calc(g + 40) b);  
   height: 100%;
-  font-size: 1.5rem;
+  font-size: 16px;
   font-weight: 300;
   font-style: normal;
 }
@@ -32,13 +32,6 @@ body, html {
 }
 
 p {
-  font-family: "VT323", monospace;
-  background-color: transparent;
-  color: #66ff66;
-  text-shadow: 0 0 5px rgb(from #66ff66 calc(r + 40) calc(g + 40) b);  
-  height: 100%;
-  font-weight: 300;
-  font-style: normal;
   margin-left: 10%; /* Same as the width of the sidenav */
   font-size: 16px; /* Increased text to enable scrolling */
   padding: 0px 10px;
@@ -97,6 +90,7 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
 
 
 
