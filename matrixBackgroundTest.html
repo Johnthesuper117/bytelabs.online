@@ -22,42 +22,38 @@
 </head>
 <body>
   <canvas id="matrixCanvas"></canvas>
-
   <script>
     // CONFIGURABLE VARIABLES
     const matrixSpeed = 50; // Lower is faster (ms per frame)
-    const matrixColor = "#00FF00"; // Matrix green; change as needed
-    const matrixCharacters = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+    const matrixColor = "#00FF00"; // Matrix green
+    const matrixCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメ";
 
     // SETUP
     const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
+    const fontSize = 18;
+    let columns, drops;
 
-    function resizeCanvas() {
+    function resizeMatrix() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      columns = Math.floor(canvas.width / fontSize);
+      drops = Array(columns).fill(1);
     }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    // MATRIX EFFECT VARIABLES
-    const fontSize = 18;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
+    window.addEventListener('resize', resizeMatrix);
+    resizeMatrix();
 
     function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillStyle = "rgba(0,0,0,0.15)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = matrixColor;
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
-        // Pick a random character
         const text = matrixCharacters.charAt(Math.floor(Math.random() * matrixCharacters.length));
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        // Send drop back to the top randomly after it has crossed the screen
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
