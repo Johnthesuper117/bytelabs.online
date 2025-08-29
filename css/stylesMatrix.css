@@ -1,0 +1,8 @@
+    body {
+        margin: 0;
+        overflow: hidden; /* Prevent scrollbars if canvas fills viewport */
+    }
+    #matrixCanvas {
+        display: block;
+        background-color: black; /* Or a dark color for the background */
+    }
