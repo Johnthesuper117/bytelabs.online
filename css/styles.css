@@ -9,7 +9,6 @@
 
 body {
   background-color: #000;
-  background: radial-gradient(#177317, #000);
   box-shadow: inset 0 0 30rem #000000;
   color: #66ff66;
   padding: 1rem;
@@ -82,3 +81,4 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
