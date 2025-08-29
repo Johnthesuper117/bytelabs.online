@@ -1,39 +1,71 @@
-<canvas id="matrixCanvas"></canvas>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Matrix Background</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+    }
+    #matrixCanvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
 
-<script>
-  const canvas = document.getElementById('matrixCanvas');
-  const ctx = canvas.getContext('2d');
-  
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  
-  const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const fontSize = 20;
-  const columns = canvas.width / fontSize;
-  const drops = [];
-  
-  for (let i = 0; i < columns; i++) {
-      drops[i] = 1; // Start at the top
-  }
-  
-  function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Fading effect
+  <script>
+    // CONFIGURABLE VARIABLES
+    const matrixSpeed = 50; // Lower is faster (ms per frame)
+    const matrixColor = "#00FF00"; // Matrix green; change as needed
+    const matrixCharacters = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+
+    // SETUP
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // MATRIX EFFECT VARIABLES
+    const fontSize = 18;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-      ctx.fillStyle = '#0F0'; // Green text
-      ctx.font = `${fontSize}px monospace`;
-  
+
+      ctx.fillStyle = matrixColor;
+      ctx.font = fontSize + "px monospace";
+
       for (let i = 0; i < drops.length; i++) {
-          const text = characters.charAt(Math.floor(Math.random() * characters.length));
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-  
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-              drops[i] = 0; // Reset to top
-          }
-          drops[i]++;
+        // Pick a random character
+        const text = matrixCharacters.charAt(Math.floor(Math.random() * matrixCharacters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Send drop back to the top randomly after it has crossed the screen
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
       }
-      requestAnimationFrame(draw);
-  }
-  
-  draw();
+    }
+
+    setInterval(drawMatrix, matrixSpeed);
   </script>
+</body>
+</html>
