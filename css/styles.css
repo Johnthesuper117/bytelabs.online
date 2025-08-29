@@ -6,20 +6,21 @@
   --green: #66ff66;
 
 }
+
 html {
   font-family: "VT323", monospace;
   background-color: transparent;
   margin: 0;
+  color: #66ff66;
+  padding: 0;
   text-shadow: 0 0 5px rgb(from #66ff66 calc(r + 40) calc(g + 40) b);  
 }
 
 body {
-  color: #66ff66;
-  padding: 1rem;
   font-size: 1.5rem;
   font-weight: 300;
   font-style: normal;
-  height: 100vh
+  height: 100100%;
   }
 
 #matrixCanvas {
@@ -92,8 +93,6 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
-
-
 
 
 
