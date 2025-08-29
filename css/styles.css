@@ -7,7 +7,7 @@
 
 }
 
-body, html {
+p, body, html {
   font-family: "VT323", monospace;
   background-color: transparent;
   margin: 0;
@@ -90,6 +90,7 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
 
 
 
