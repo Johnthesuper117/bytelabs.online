@@ -1,35 +1,41 @@
-const canvas = document.getElementById('matrixCanvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById('Matrix');
+const context = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const fontSize = 20;
-const columns = canvas.width / fontSize;
-const drops = [];
+const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const nums = '0123456789';
 
-for (let i = 0; i < columns; i++) {
-    drops[i] = 1; // Start at the top
+const alphabet = katakana + latin + nums;
+
+const fontSize = 16;
+const columns = canvas.width/fontSize;
+
+const rainDrops = [];
+
+for( let x = 0; x < columns; x++ ) {
+    rainDrops[x] = 1;
 }
 
-function draw() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Fading effect
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+const draw = () => {
+    context.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#0F0'; // Green text
-    ctx.font = `${fontSize}px VT323`;
+    context.fillStyle = '#0F0';
+    context.font = fontSize + 'px monospace';
 
-    for (let i = 0; i < drops.length; i++) {
-        const text = characters.charAt(Math.floor(Math.random() * characters.length));
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    for(let i = 0; i < rainDrops.length; i++)
+    {
+        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0; // Reset to top
+        if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+            rainDrops[i] = 0;
         }
-        drops[i]++;
+        rainDrops[i]++;
     }
-    requestAnimationFrame(draw);
-}
+};
 
-draw();
+setInterval(draw, 30);
