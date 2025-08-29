@@ -18,7 +18,12 @@ body {
   font-family: "VT323", monospace;
   font-weight: 300;
   font-style: normal;
-  height: 100vh;
+  height: 100vh
+}
+
+#matrixCanvas {
+        display: block;
+        background-color: black; /* Or a dark color for the background */
 }
 
 .main {
@@ -81,4 +86,5 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
 
