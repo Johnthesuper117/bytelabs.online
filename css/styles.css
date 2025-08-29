@@ -8,7 +8,7 @@
 }
 html {
   font-family: "VT323", monospace;
-  background-color: #000;
+  background-color: transparent;
   margin: 0;
   text-shadow: 0 0 5px rgb(from #66ff66 calc(r + 40) calc(g + 40) b);
   
@@ -23,10 +23,11 @@ body {
   }
 
 #matrixCanvas {
-        display: block;
-        background-color: black; /* Or a dark color for the background */
-        z-index: -1; /* Behind page content */
-  
+  display: block;
+  background-color: black; /* Or a dark color for the background */
+  z-index: -1; /* Behind page content */
+  height: 100%;
+  width: 100%;
 }
 
 .main {
@@ -88,6 +89,7 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
 
 
 
