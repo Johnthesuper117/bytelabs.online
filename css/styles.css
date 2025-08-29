@@ -19,7 +19,8 @@ body {
   font-weight: 300;
   font-style: normal;
   height: 100vh
-}
+  z-index: -1; /* Behind page content */
+  }
 
 #matrixCanvas {
         display: block;
@@ -86,5 +87,6 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
 
 
