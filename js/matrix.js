@@ -1,8 +1,14 @@
 const canvas = document.getElementById('Matrix');
 const context = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// Resize on load and when window size changes
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 
 const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
 const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -39,3 +45,4 @@ const draw = () => {
 };
 
 setInterval(draw, 30);
+
