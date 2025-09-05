@@ -52,12 +52,11 @@ body {
   z-index: 0; /* Behind page content */
 }
 
-
 ul {
   list-style: none;
   display: block;
   background: rgba(0,0,0,0.5);
-  padding: 0px;
+  padding: 12px 18px;
 }
 
 li.nav a {
@@ -68,6 +67,28 @@ li.nav a {
 
 li.nav a.active {
   text-decoration: underline;
+}
+
+li.dropdown:hover > .dropdown-menu,
+li.dropdown:focus-within > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background: rgba(0,0,0,0.9);
+  min-width: 160px;
+  z-index: 3;
+  border-radius: 0 4px 4px 0;
+}
+
+.dropdown-menu li a {
+  padding: 10px 18px;
+  color: #0F0;
+  display: block;
 }
 
 a:link {
