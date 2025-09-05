@@ -21,7 +21,7 @@ body, html {
   z-index: 1;
 }
 
-#matrixCanvas {
+#Matrix {
   position: relative;
   pointer-events: none;      /* allow clicks to pass through */
   top: 0;
@@ -95,4 +95,5 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
 
