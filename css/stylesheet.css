@@ -102,7 +102,7 @@ body {
 }
 
 /* Show dropdown menu on hover */
-li.nav dropdown:hover > .dropdown-menu {
+li.dropdown:hover > .dropdown-menu {
   display: block;
 }
 
