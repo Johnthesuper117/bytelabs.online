@@ -9,7 +9,7 @@
 
 body, html {
   font-family: "VT323", monospace;
-  background-color: black;
+  background-color: transparent;
   margin: 0;
   color: #66ff66;
   padding: 0;
@@ -19,10 +19,11 @@ body, html {
   font-weight: 300;
   font-style: normal;
   z-index: 1;
+  position: relative;
 }
 
 #Matrix {
-  position: relative;
+  position: fixed;
   pointer-events: none;      /* allow clicks to pass through */
   top: 0;
   left: 0;
@@ -95,5 +96,3 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
-
-
