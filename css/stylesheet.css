@@ -37,6 +37,7 @@ body {
 
 .content {
   position: relative;
+  margin-left: 240px;
   z-index: 1; /* This is critical! */
 }
 
