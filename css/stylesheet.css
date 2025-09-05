@@ -85,7 +85,10 @@ body {
   text-decoration: underline;
 }
 
-li.dropdown:hover > .dropdown-menu,
+/* Show dropdown menu on hover */
+li.dropdown:hover > .dropdown-menu {
+  display: block;
+}
 li.dropdown:focus-within > .dropdown-menu {
   display: block;
 }
