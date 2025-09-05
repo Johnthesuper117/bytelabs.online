@@ -85,14 +85,7 @@ body {
   text-decoration: underline;
 }
 
-/* Show dropdown menu on hover */
-li.dropdown:hover > .dropdown-menu {
-  display: block;
-}
-li.dropdown:focus-within > .dropdown-menu {
-  display: block;
-}
-
+/* Dropdown menu - hide by default */
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -102,6 +95,13 @@ li.dropdown:focus-within > .dropdown-menu {
   min-width: 160px;
   z-index: 3;
   border-radius: 0 4px 4px 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* Show dropdown menu on hover */
+li.dropdown:hover > .dropdown-menu {
+  display: block;
 }
 
 .dropdown-menu li a {
@@ -109,6 +109,7 @@ li.dropdown:focus-within > .dropdown-menu {
   color: #0F0;
   display: block;
 }
+
 a:link {
   color: var(--color-text2);
   background-color: transparent;
