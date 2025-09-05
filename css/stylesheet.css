@@ -65,6 +65,7 @@ body {
 }
 
 .sidebar-nav ul {
+  list-style: none;
   display: block;
   padding: 0;
   margin: 0;
@@ -80,6 +81,7 @@ body {
   color: #0F0;
   padding: 12px 18px;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .sidebar-nav a.active {
@@ -97,11 +99,10 @@ body {
   z-index: 3;
   border-radius: 0 4px 4px 0;
   padding: 0;
-  margin: 0;
 }
 
 /* Show dropdown menu on hover */
-li.dropdown:hover > .dropdown-menu {
+li.nav dropdown:hover > .dropdown-menu {
   display: block;
 }
 
@@ -109,6 +110,12 @@ li.dropdown:hover > .dropdown-menu {
   padding: 10px 18px;
   color: #0F0;
   display: block;
+  text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+  color: #fff;
+  background: #222;
 }
 
 a:link {
