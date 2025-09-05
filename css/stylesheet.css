@@ -52,20 +52,36 @@ body {
   z-index: 0; /* Behind page content */
 }
 
-ul {
-  list-style: none;
-  display: block;
-  background: rgba(0,0,0,0.5);
-  padding: 12px 18px;
+.sidebar-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  z-index: 2;
+  padding-top: 20px;
 }
 
-li.nav a {
+.sidebar-nav ul {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li.nav {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.sidebar-nav a {
+  display: block;
   color: #0F0;
-  text-decoration: none;
+  padding: 12px 18px;
   font-weight: bold;
 }
 
-li.nav a.active {
+.sidebar-nav a.active {
   text-decoration: underline;
 }
 
@@ -90,7 +106,6 @@ li.dropdown:focus-within > .dropdown-menu {
   color: #0F0;
   display: block;
 }
-
 a:link {
   color: var(--color-text2);
   background-color: transparent;
