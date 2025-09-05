@@ -34,7 +34,7 @@ body, html {
   z-index: 0; /* Behind page content */
 }
 
-p {
+p, h1{
   margin-left: 10%; /* Same as the width of the sidenav */
   font-size: 16px; /* Increased text to enable scrolling */
   padding: 0px 10px;
@@ -81,6 +81,7 @@ ul {
   padding: 8px 16px;
   text-decoration: none;
 }
+
 .button {
   background-color: var(--color-text2);
   color: var(--color-background1);
@@ -96,3 +97,4 @@ ul {
 .button:hover {
   background-color: var(--color-text3);
 }
+
