@@ -6,7 +6,7 @@
 }
 
 html {
-  font-family: VT323;
+  font-family: VT323, monospace;
   text-shadow: 0 0 5px rgb(from #66ff66 calc(r + 40) calc(g + 40) b);  
   font-size: 16px;
   font-weight: 300;
@@ -19,8 +19,8 @@ html {
 
 h1, ul, p{
   background: rgba(0,0,0,0.5);
-  color: #0F0;
-  padding: 10px;
+  color: var(--color-text1);
+  padding: 8px;
   border-radius: 6px;
   box-shadow: 0 0 10px #000;
   margin: 20px auto;
@@ -65,7 +65,7 @@ body {
 
 .sidebar-nav a {
   display: block;
-  padding: 0px 0px;
+  padding: 0;
   color: var(--color-text1);
   text-decoration: none;
 }
