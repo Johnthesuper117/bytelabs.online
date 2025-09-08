@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dropdown Example</title>
+  <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      background: white;
+      border: 1px solid #ccc;
+      min-width: 160px;
+      z-index: 1;
+    }
+    .dropdown-menu.show {
+      display: block;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 16px;
+      color: #333;
+      text-decoration: none;
+    }
+    .dropdown-menu a:hover {
+      background: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="dropdown">
+    <a href="#" class="dropdown-toggle">Menu</a>
+    <div class="dropdown-menu">
+      <a href="#item1">Item 1</a>
+      <a href="#item2">Item 2</a>
+      <a href="#item3">Item 3</a>
+    </div>
+  </div>
+  <script>
+    // Toggle dropdown on click
+    document.querySelector('.dropdown-toggle').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('.dropdown-menu').classList.toggle('show');
+    });
+
+    // Optional: Hide dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      const dropdown = document.querySelector('.dropdown');
+      if (!dropdown.contains(e.target)) {
+        document.querySelector('.dropdown-menu').classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
