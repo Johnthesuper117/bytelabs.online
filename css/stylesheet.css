@@ -7,7 +7,7 @@
 }
 
 html {
-  font-family: "VT323", monospace;
+  font-family: VT323;
   text-shadow: 0 0 5px rgb(from #66ff66 calc(r + 40) calc(g + 40) b);  
   font-size: 16px;
   font-weight: 300;
@@ -152,3 +152,7 @@ a:active {
 .button:hover {
   background-color: var(--color-text3);
 }
+
+@font-face {
+  font-family: "VT323";
+  src: url("font/VT323.ttf");
