@@ -12,32 +12,55 @@
   <canvas id="Matrix"></canvas>
   <div class="content">
     <h1>Welcome to Byte Labs!</h1>
-    <nav class="sidebar-nav">
-      <ul>
-        <li class="nav"><a class="active" href="index.html">Home</a></li>
-        <li class="dropdown">
-          <a href="games.html">Games</a>
-          <ul class="dropdown-menu">
-            <li><a href=".html">Bushido - The Way of the Samurai</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="programs.html">Programs</a>
-          <ul class="dropdown-menu">
-            <li><a href="bookmarklets.html">Bookmarklets</a></li>
-            <li><a href="soundboard.html">Soundboard</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="school.html">School Projects</a>
-          <ul class="dropdown-menu">
-            <li><a href="abrahamLincoln.html">Abraham Lincoln</a></li>
-            <li><a href="bushidoCode.html">Bushido Code</a></li>
-          </ul>
-        </li>
-        <li class="nav"><a href="profile.html">About Me</a></li>
-      </ul>
-    </nav>
+  <nav class="sidebar-nav">
+    <ul>
+      <li class="nav"><a class="active" href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Games</a>
+        <ul class="dropdown-menu">
+          <li><a href=".html">Bushido - The Way of the Samurai</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Programs</a>
+        <ul class="dropdown-menu">
+          <li><a href="bookmarklets.html">Bookmarklets</a></li>
+          <li><a href="soundboard.html">Soundboard</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">School Projects</a>
+        <ul class="dropdown-menu">
+          <li><a href="abrahamLincoln.html">Abraham Lincoln</a></li>
+          <li><a href="bushidoCode.html">Bushido Code</a></li>
+        </ul>
+      </li>
+      <li class="nav"><a href="profile.html">About Me</a></li>
+    </ul>
+  </nav>
+  <script>
+    // Handle dropdown toggle
+    document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Close other dropdowns
+        document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+          if (menu !== toggle.nextElementSibling) menu.classList.remove('show');
+        });
+        // Toggle current dropdown
+        toggle.nextElementSibling.classList.toggle('show');
+      });
+    });
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      document.querySelectorAll('.dropdown').forEach(function(dropdown) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.querySelector('.dropdown-menu').classList.remove('show');
+        }
+      });
+    });
+  </script>
     <p>
       Hello, this is a one-man website that I use to learn and practice my coding skills, as well as post video game that I have made and/or other programs. 
     </p>
