@@ -86,7 +86,6 @@ body {
   left: 0;
   top: 100%;
   background: rgba(0,0,0,0.5);
-  border: 1px solid #ccc;
   min-width: 200px;
   z-index: 100;
   box-shadow: 0 4px 8px rgba(0,0,0,0.06);
@@ -104,12 +103,12 @@ body {
 }
 
 .dropdown-menu li a:hover {
-  background: #rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.5);
 }
 
 /* Optional: style for nav items */
 .sidebar-nav li.nav a {
-  background: #rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.5);
 }
 
 a:link {
