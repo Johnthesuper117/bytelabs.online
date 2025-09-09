@@ -36,7 +36,7 @@ body {
 
 .content {
   position: relative;
-  margin-left: 100px;
+  margin-left: 200px;
   z-index: 1; /* This is critical! */
 }
 
@@ -57,7 +57,7 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-width: 300px;
+  max-width: 200px;
 }
 
 .sidebar-nav li {
