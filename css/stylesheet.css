@@ -23,7 +23,7 @@ h1, ul, p{
   padding: 8px;
   border-radius: 6px;
   box-shadow: 0 0 10px #000;
-  margin: 5px;
+  margin: 2.5px;
   max-width: 700px;
 }
 
@@ -36,7 +36,7 @@ body {
 
 .content {
   position: relative;
-  margin-left: 200px;
+  margin-left: 50px;
   z-index: 1; /* This is critical! */
 }
 
