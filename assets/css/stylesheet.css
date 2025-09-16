@@ -18,7 +18,7 @@ html {
   z-index: 1;
 }
 
-h1, ul, p{
+h1, ul, p, iframe{
   background: rgba(0,0,0,0.5);
   color: var(--color-text1);
   padding: 5px;
