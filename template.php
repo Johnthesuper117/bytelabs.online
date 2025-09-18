@@ -1,0 +1,26 @@
+<!--
+This page is the template for my website
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <script defer src="./assets/js/dynamicTitle.js"></script>
+  <link rel="stylesheet" href="./assets/css/stylesheet.css">
+  <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+</head>
+<body>
+  <canvas id="Matrix"></canvas>
+  <h1>Header</h1>
+  <?php include "./navbar.html"; ?>
+  <div class="content">
+    <p>
+      Content
+    </p>
+  </div>
+  <script src="./assets/js/matrix.js"></script>
+</body>
+</html>
