@@ -15,11 +15,14 @@ This page is the template for my website
 <body>
   <canvas id="Matrix"></canvas>
   <h1>Header</h1>
+  <div id="nav-container">
+    
+  </div>
   <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('content-container');
+            const container = document.getElementById('nav-container');
             const iframe = document.createElement('iframe');
-            iframe.src = 'child.html'; // Replace with the path to your child HTML page
+            iframe.src = './navbar.html'; // Replace with the path to your child HTML page
             iframe.style.width = '100%';
             iframe.style.height = '400px';
             iframe.style.border = '1px solid black';
