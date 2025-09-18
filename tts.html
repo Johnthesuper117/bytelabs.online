@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text to Speech with Download</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Text to Speech (TtS)</title>
+    <link rel="stylesheet" href="./assets/css/stylesheet.css">
 </head>
 <body>
     <div class="container">
-        <h1>Text to Speech</h1>
+        <h1>Text to Speech (TtS)</h1>
         <textarea id="textInput" placeholder="Enter text here..."></textarea>
         <div class="controls">
             <select id="voiceSelect"></select>
@@ -17,6 +17,7 @@
         </div>
     </div>
     <script>
+      //src="./assets/js/tts.js"
       const textInput = document.getElementById('textInput');
       const voiceSelect = document.getElementById('voiceSelect');
       const speakBtn = document.getElementById('speakBtn');
@@ -60,8 +61,8 @@
               // The Web Speech API itself does not directly provide a way to download the spoken audio as a file.
               // A common approach involves using a MediaRecorder API to capture the audio from a hidden audio element
               // or a library that bridges the SpeechSynthesis API with audio recording capabilities.
-      
-              alert("Downloading audio is not directly supported by the Web Speech API in the browser. This feature would require server-side processing or advanced client-side audio manipulation libraries.");
+
+              alert("Not yet implemented");
           }
       });
     </script>
