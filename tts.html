@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech with Download</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Text to Speech</h1>
+        <textarea id="textInput" placeholder="Enter text here..."></textarea>
+        <div class="controls">
+            <select id="voiceSelect"></select>
+            <button id="speakBtn">Speak</button>
+            <button id="downloadBtn">Download Audio</button>
+        </div>
+    </div>
+    <script>
+      const textInput = document.getElementById('textInput');
+      const voiceSelect = document.getElementById('voiceSelect');
+      const speakBtn = document.getElementById('speakBtn');
+      const downloadBtn = document.getElementById('downloadBtn');
+      
+      let voices = [];
+      const synth = window.speechSynthesis;
+      
+      function populateVoiceList() {
+          voices = synth.getVoices();
+          voiceSelect.innerHTML = ''; // Clear previous options
+          voices.forEach((voice, i) => {
+              const option = document.createElement('option');
+              option.textContent = `${voice.name} (${voice.lang})`;
+              option.setAttribute('data-lang', voice.lang);
+              option.setAttribute('data-name', voice.name);
+              voiceSelect.appendChild(option);
+          });
+      }
+      
+      // Populate voices when they are loaded or when the page loads
+      if (synth.onvoiceschanged !== undefined) {
+          synth.onvoiceschanged = populateVoiceList;
+      } else {
+          populateVoiceList(); // Fallback for browsers that don't fire onvoiceschanged
+      }
+      
+      speakBtn.addEventListener('click', () => {
+          if (textInput.value !== '') {
+              const utterance = new SpeechSynthesisUtterance(textInput.value);
+              const selectedVoiceName = voiceSelect.selectedOptions[0].getAttribute('data-name');
+              utterance.voice = voices.find(voice => voice.name === selectedVoiceName);
+              synth.speak(utterance);
+          }
+      });
+      
+      downloadBtn.addEventListener('click', () => {
+          if (textInput.value !== '') {
+              // This part requires a server-side component or a more complex client-side solution
+              // to record the audio output from SpeechSynthesisUtterance and then convert it to a downloadable format.
+              // The Web Speech API itself does not directly provide a way to download the spoken audio as a file.
+              // A common approach involves using a MediaRecorder API to capture the audio from a hidden audio element
+              // or a library that bridges the SpeechSynthesis API with audio recording capabilities.
+      
+              alert("Downloading audio is not directly supported by the Web Speech API in the browser. This feature would require server-side processing or advanced client-side audio manipulation libraries.");
+          }
+      });
+    </script>
+</body>
+</html>
