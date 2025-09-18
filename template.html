@@ -15,28 +15,8 @@ This page is the template for my website
 <body>
   <canvas id="Matrix"></canvas>
   <h1>Header</h1>
-  <div id="nav-container">
-    
-  </div>
-  <script>
-        async function loadDynamicContent(targetElementId, sourcePageUrl) {
-        try {
-            const response = await fetch(sourcePageUrl);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const htmlContent = await response.text();
-            document.getElementById(targetElementId).insertAdjacentHTML('beforeend', htmlContent);
-        } catch (error) {
-            console.error('Error loading dynamic content:', error);
-        }
-    }
-
-    // Call the function to load content when the page loads or based on an event
-    document.addEventListener('DOMContentLoaded', () => {
-        loadDynamicContent('nav-container', './navbar.html');
-    });
-  </script>
+  <div id="nav-container"></div>
+  <script src="./assets/js/navbar.js"></script>
   <div class="content">
     <p>
       Content
