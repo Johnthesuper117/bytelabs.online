@@ -19,15 +19,23 @@ This page is the template for my website
     
   </div>
   <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('nav-container');
-            const iframe = document.createElement('iframe');
-            iframe.src = './navbar.html'; // Replace with the path to your child HTML page
-            iframe.style.width = '100%';
-            iframe.style.height = '400px';
-            iframe.style.border = '1px solid black';
-            container.appendChild(iframe);
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+      const targetDiv = document.getElementById('nav-container');
+    
+      fetch('./navbar.html') // Replace with the path to your HTML snippet file
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok ' + response.statusText);
+              }
+              return response.text();
+          })
+          .then(html => {
+              targetDiv.innerHTML = html;
+          })
+          .catch(error => {
+              console.error('There was a problem fetching the HTML:', error);
+          });
+    });
   </script>
   <div class="content">
     <p>
