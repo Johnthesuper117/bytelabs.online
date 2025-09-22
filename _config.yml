@@ -1,20 +1,24 @@
 layout: sidebar
-style: light
+style: dark
 
 plugins:
   - jekyll-octicons
   - jekyll-github-metadata
   - jemoji
 
-permalink: /:year/:month/:day/:title/
+permalink: none
 
 defaults:
   -
     scope:
       path: "" # an empty string here means all files in the project
-      type: "posts"
+      type: "page"
     values:
-      layout: "post"
+      layout: "default"
+      title: "default"
+
+include:
+ - _pages
 
 projects:
   sort_by: pushed
