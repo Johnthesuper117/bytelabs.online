@@ -8,4 +8,4 @@ gem 'jekyll-octicons'
 gem 'jemoji'
 gem 'jekyll-theme-hacker', '~> 0.2.0'
 
-gem 'github-pages'
+gem 'github-pages', group: :jekyll_plugins
