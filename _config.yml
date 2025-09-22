@@ -4,6 +4,9 @@ plugins:
   - jekyll-octicons
   - jekyll-github-metadata
   - jemoji
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 permalink: none
 
