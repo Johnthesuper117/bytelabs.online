@@ -9,7 +9,6 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
-  - faraday-retry
 
 permalink: none
 
