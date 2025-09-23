@@ -1,13 +1,15 @@
 style: dark
+remote_theme: pages-themes/hacker@v0.2.0
 
 plugins:
+  - jekyll
   - jekyll-octicons
   - jekyll-github-metadata
   - jemoji
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
-  - jekyll
+  - jekyll-remote-theme
   - jekyll-theme-hacker
 
 permalink: none
