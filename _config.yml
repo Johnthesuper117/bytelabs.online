@@ -18,7 +18,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-include-cache
-  - gemfile
 
 permalink: none
 
