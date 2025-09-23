@@ -9,4 +9,4 @@ gem 'jekyll-octicons'
 gem 'jemoji'
 gem 'jekyll-remote-theme'
 gem 'jekyll-theme-hacker', '~> 0.2.0'
-gem `faraday-retry`
+gem 'faraday-retry'
