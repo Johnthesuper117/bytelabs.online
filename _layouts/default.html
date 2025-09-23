@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Title</title>
+  <title>{{ page.title }}</title>
   <script defer src="./assets/js/dynamicTitle.js"></script>
   <link rel="stylesheet" href="./assets/css/stylesheet.css">
   <link rel="icon" type="image/png" href="./assets/images/favicon.png">
@@ -13,13 +13,13 @@
 </head>
 <body>
   <canvas id="Matrix"></canvas>
-  <h1>Header</h1>
+  <h1>{{ page.title }}</h1>
   {% include navbar.html %}
   <!--<div id="nav-container"></div>
   <script src="./assets/js/navbar.js"></script>-->
   <div class="content">
     <p>
-      {{Content}}
+      {{ content }}
     </p>
   </div>
   <script src="./assets/js/matrix.js"></script>
