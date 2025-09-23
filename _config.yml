@@ -11,6 +11,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-remote-theme
   - jekyll-theme-hacker
+  - faraday-retry
 
 permalink: none
 
