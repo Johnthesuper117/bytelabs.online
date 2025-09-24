@@ -213,7 +213,7 @@ DEPENDENCIES
   jekyll-seo-tag (~> 2.8)
   jekyll-sitemap
   jemoji
-  webrick (~> 1.9)
+  webrick (~> 1.7)
 
 BUNDLED WITH
    2.7.2
