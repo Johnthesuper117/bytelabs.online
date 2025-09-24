@@ -2,7 +2,7 @@
   link: https://caiorss.github.io/bookmarklet-maker/
 
 - text: blur
-  link: javascript: (function () { document.body.style.filter = 'blur(5px)'; })();
+  link: javascript:(function () { document.body.style.filter = 'blur(5px)'; })();
 
 - text: Edit Page
   link: javascript:console.log(document.body.contentEditable=&quot;true&quot;==document.body.contentEditable?%22false%22:%22true%22);
