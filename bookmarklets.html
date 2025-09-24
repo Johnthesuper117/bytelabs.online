@@ -3,12 +3,12 @@ layout: default
 title: Bookmarklets
 ---    
 
+Drag and drop the bookmarklets below to your bookmarks bar, then click them like bookmarks to activate them! Keep in mind that they are not permanent, so refreshing the page will undo their effect, and make sure JavaScript is enabled in your browser or they won't work at all. 
+
 <ul>
-{% for member in site.data.bookmarklets %}
+{% for bookmarklet in site.data.bookmarklets %}
   <li>
-    <a href="{{ bookmarklets.link }}">
-      {{ bookmarklets.text }}
-    </a>
+    <a href="{{ bookmarklet.link }}">{{ bookmarklet.text }}</a>
   </li>
 {% endfor %}
 </ul>
