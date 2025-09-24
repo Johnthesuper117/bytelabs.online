@@ -10,3 +10,6 @@ gem 'jekyll-github-metadata'
 gem 'jekyll-sitemap'
 gem 'jekyll-octicons'
 gem 'jemoji'
+gem 'faraday', '~> 2.7', '>= 2.7.11'
+gem "faraday-retry", "~> 2.3"
+gem 'webrick', '~> 1.9'
