@@ -18,6 +18,9 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-include-cache
+  - faraday
+  - faraday-retry
+  - webrick
 
 permalink: none
 
