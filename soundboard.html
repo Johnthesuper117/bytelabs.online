@@ -3,13 +3,10 @@ layout: default
 title: Soundboard
 ---
 <p>
-  <ul>
+  
   {% for sound in site.data.soundboard %}
-    <li>
-      <button class="button" onclick="playSound('{{ sound.file }}')">{{ sound.name }}</button>
-    </li>
+    <button class="button" onclick="playSound('{{ sound.file }}')">{{ sound.name }}</button>
   {% endfor %}
-  </ul>
 
   <script src="./assets/js/playsound.js"></script>
 
