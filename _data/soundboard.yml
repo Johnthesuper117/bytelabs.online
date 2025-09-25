@@ -186,3 +186,6 @@
   file: ./assets/sounds/eliteWort.mp3
 - name: Ah, That'll Put The Fear In Them
   file: ./assets/sounds/ahThatllPutTheFearInThem.mp3
+- name: Ha Ha Ha, Get In Line
+  file: ./assets/sounds/hahahaGetInLine.mp3
+  
