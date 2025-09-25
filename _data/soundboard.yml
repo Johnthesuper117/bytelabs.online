@@ -188,4 +188,23 @@
   file: ./assets/sounds/ahThatllPutTheFearInThem.mp3
 - name: Ha Ha Ha, Get In Line
   file: ./assets/sounds/hahahaGetInLine.mp3
-  
+- name: One More Word Oracle
+  file: ./assets/sounds/oneMoreWordOracle.mp3
+- name: Please Stop Being Human
+  file: ./assets/sounds/pleaseStopBeingHuman.mp3
+- name: Emotional Damage
+  file: ./assets/sounds/emotionalDamage.mp3
+- name: I Am A Genius
+  file: ./assets/sounds/iAmAGenius.mp3
+- name: Johnson Boo! Ha!
+  file: ./assets/sounds/johnsonBooHa.mp3
+- name: What is it Good For?
+  file: ./assets/sounds/whatIsItGoodForAbsolutelyNothing.mp3
+- name: What is the Password?
+  file: ./assets/sounds/whatIsThePassword.mp3
+- name: Come on Now, is That a Weapon or a fla-*dies*
+  file: ./assets/sounds/comeOnNowIsThatAWeaponOrA.mp3
+- name: Marine Laugh
+  file: ./assets/sounds/marineLaugh.mp3
+- name: Marine Grenade
+  file: ./assets/sounds/marineGrenade.mp3
