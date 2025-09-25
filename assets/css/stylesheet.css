@@ -24,7 +24,7 @@ h1, ul, p, iframe{
   padding: 5px;
   box-shadow: 0 0 10px #000;
   margin-left: 0px;
-  max-width: 700px;
+  max-width: 900px;
   z-index: 1;
   position: relative;
 }
@@ -78,7 +78,7 @@ body {
 
 .sidebar-nav a.active {
   font-weight: bold;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.75);
 }
 
 /* Dropdown styles */
@@ -91,10 +91,10 @@ body {
   position: absolute;
   left: 0;
   top: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.75);
   min-width: 200px;
   z-index: 100;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
 .dropdown-menu.show {
@@ -105,16 +105,16 @@ body {
   padding: 10px 16px;
   color: var(--color-text1);
   text-decoration: none;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.75);
 }
 
 .dropdown-menu li a:hover {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.75);
 }
 
 /* Optional: style for nav items */
 .sidebar-nav li.nav a {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.75);
 }
 
 a:link {
@@ -159,4 +159,5 @@ a:active {
 
 @font-face {
   font-family: "VT323";
-  src: url("font/VT323.ttf");
+  src: url("./assets/font/VT323.ttf");
+}
