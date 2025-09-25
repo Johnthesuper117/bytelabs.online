@@ -1,0 +1,188 @@
+- name: SODA
+  file: ./assets/sounds/SODA.mp3
+- name: Level Up
+  file: ./assets/sounds/levelUp.mp3
+- name: XBOX720
+  file: ./assets/sounds/XBOX720.mp3
+- name: Chicken Jockey
+  file: ./assets/sounds/chicken-jockey.mp3
+- name: Chicken Jockey+
+  file: ./assets/sounds/chicken-jockey-loud.mp3
+- name: ahhyooaaawhoaaa
+  file: ./assets/sounds/ahhyooaaawhoaaa.mp3
+- name: Batman Ridin'
+  file: ./assets/sounds/batman_ridin.mp3
+- name: Censor Beep
+  file: ./assets/sounds/censor-beep.mp3
+- name: You know the rules
+  file: ./assets/sounds/you-know-the-rules-and-so-do-i-say-goodbye.mp3
+- name: Assault
+  file: ./assets/sounds/assault.mp3
+- name: Defense
+  file: ./assets/sounds/defense.mp3
+- name: Betrayal
+  file: ./assets/sounds/betrayal.mp3
+- name: Yoink
+  file: ./assets/sounds/yoink-halo.mp3
+- name: yippeeeeeeeeeeeeee
+  file: ./assets/sounds/yippeeeeeeeeeeeeee.mp3
+- name: Elite 'Woboba'
+  file: ./assets/sounds/woboba.mp3
+- name: Prowler
+  file: ./assets/sounds/prowler-sfx.mp3
+- name: NO
+  file: ./assets/sounds/engineer_no.mp3
+- name: yeeeeeeeaah
+  file: ./assets/sounds/yeeeeeeeah.mp3
+- name: Epic Fail
+  file: ./assets/sounds/epic-fail.mp3
+- name: We got him
+  file: ./assets/sounds/ladies-and-gentlemen-we-got-him-song.mp3
+- name: Xbox 360
+  file: ./assets/sounds/xbox-360-startup.mp3
+- name: Super Luigi on the Xbox One
+  file: ./assets/sounds/super-luigi-on-the-xbox-one.mp3
+- name: DK Yeah
+  file: ./assets/sounds/dk-yeah.mp3
+- name: Extermination
+  file: ./assets/sounds/extermination.mp3
+- name: Troll Face
+  file: ./assets/sounds/trollface.mp3
+- name: FBI open up
+  file: ./assets/sounds/fbi-open-up.mp3
+- name: Flashbang
+  file: ./assets/sounds/flashbang.mp3
+- name: 5 Minuets Remaining
+  file: ./assets/sounds/five_mins_remaining.mp3
+- name: Galaxy Meme
+  file: ./assets/sounds/galaxy-meme.mp3
+- name: Mustard
+  file: ./assets/sounds/mustard.mp3
+- name: This prison, to hold, ME?
+  file: ./assets/sounds/this-prison-to-hold-me.mp3
+- name: Taco Bell
+  file: ./assets/sounds/taco-bell.mp3
+- name: Hail to the King
+  file: ./assets/sounds/hail_to_the_king.mp3
+- name: HOLD UP
+  file: ./assets/sounds/hold-up.mp3
+- name: Thomas the Thermonuclear Bomb
+  file: ./assets/sounds/thomas-the-tank-engine.mp3
+- name: Meme song
+  file: ./assets/sounds/meme-song.mp3
+- name: Perfection
+  file: ./assets/sounds/perfection.mp3
+- name: Beatboxing Tetris
+  file: ./assets/sounds/beatboxing-tetris.mp3
+- name: RUN
+  file: ./assets/sounds/run.mp3
+- name: Hello, it's-JOHN CENA!
+  file: ./assets/sounds/hello-its-john-cena.mp3
+- name: OOF
+  file: ./assets/sounds/oof.mp3
+- name: GAMEOVER
+  file: ./assets/sounds/gameover.mp3
+- name: Teammate Gained
+  file: ./assets/sounds/teammate-gained.mp3
+- name: Ta-Da!
+  file: ./assets/sounds/ta-da.mp3
+- name: Social Credit DEDUCTED
+  file: ./assets/sounds/social-credit-deducted.mp3
+- name: Game over, YEAH
+  file: ./assets/sounds/game-over-yeah.mp3
+- name: Reinforcements
+  file: ./assets/sounds/reinforcements.mp3
+- name: Road Rage
+  file: ./assets/sounds/road-rage.mp3
+- name: Metal Pipe
+  file: ./assets/sounds/metal-pipe-clang.mp3
+- name: Ay Ay Ay Ay
+  file: ./assets/sounds/ay-ay-ay-ay.mp3
+- name: Kira Laugh
+  file: ./assets/sounds/kira-laugh.mp3
+- name: Double Kill
+  file: ./assets/sounds/halo-double-kill.mp3
+- name: Multiple Kills
+  file: ./assets/sounds/halo-multiple-kills.mp3
+- name: First Strike
+  file: ./assets/sounds/halo-first-strike.mp3
+- name: Untouchable
+  file: ./assets/sounds/halo-untouchable.mp3
+- name: Killjoy
+  file: ./assets/sounds/killjoy.mp3
+- name: Killionaire
+  file: ./assets/sounds/killionaire.mp3
+- name: Invincible
+  file: ./assets/sounds/invincible.mp3
+- name: Juggernaut
+  file: ./assets/sounds/juggernaut.mp3
+- name: Headshot
+  file: ./assets/sounds/headshot.mp3
+- name: Keyboard
+  file: ./assets/sounds/keyboard.mp3
+- name: NANI
+  file: ./assets/sounds/nani.mp3
+- name: No one asked for your opinion
+  file: ./assets/sounds/mario-no-one-asked-for-your-opinion.mp3
+- name: Movie Death
+  file: ./assets/sounds/movieDeath.mp3
+- name: JUDGMENT
+  file: ./assets/sounds/judgment.mp3
+- name: LET IT GO TF2
+  file: ./assets/sounds/let-it-go-tf2.mp3
+- name: Meet the sniper
+  file: ./assets/sounds/meet_the_sniper.mp3
+- name: Memes the DNA of the Soul
+  file: ./assets/sounds/memes-the-dna-of-the-soul.mp3
+- name: Minos Prime theme
+  file: ./assets/sounds/minos-prime-theme.mp3
+- name: fart
+  file: ./assets/sounds/fart.mp3
+- name: SHEESH
+  file: ./assets/sounds/SHEESH.mp3
+- name: KABOOM
+  file: ./assets/sounds/KABOOM.mp3
+- name: Stab Stab Stab
+  file: ./assets/sounds/stabx3.mp3
+- name: Heavy Laugh
+  file: ./assets/sounds/heavy_laugh.mp3
+- name: Heavy OH NO
+  file: ./assets/sounds/heavy_oh_no.mp3
+- name: Heavy No
+  file: ./assets/sounds/heavy_no.mp3
+- name: RATATATA
+  file: ./assets/sounds/heavy_ratata.mp3
+- name: I AM BULLET PROOF
+  file: ./assets/sounds/heavy_i_am_bullet_proof.mp3
+- name: Say Goodbye Kneecaps
+  file: ./assets/sounds/say-goodbye-kneecaps.mp3
+- name: BOINK
+  file: ./assets/sounds/scout-boink.mp3
+- name: Wanananana
+  file: ./assets/sounds/scout-tf2-wananana.mp3
+- name: BONK
+  file: ./assets/sounds/tf2-bonk.mp3
+- name: Im Coming for You
+  file: ./assets/sounds/tf2-heavy-im-coming-for-you.mp3
+- name: OM NOM NOM
+  file: ./assets/sounds/tf2-heavy-om-nom-nom-sound-effect.mp3
+- name: Right Behind You
+  file: ./assets/sounds/tf2-right-behind-you.mp3
+- name: Peekaboo
+  file: ./assets/sounds/tf2-spy-peekaboo-sound-effect.mp3
+- name: You are Dead, not Big Suprise
+  file: ./assets/sounds/you-are-dead-not-big-surprise-sound-effect.mp3
+- name: Wanna See a Magic Trick?
+  file: ./assets/sounds/wanna-see-a-magic-trick-tf2.mp3
+- name: Think Fast
+  file: ./assets/sounds/think-fast.mp3
+- name: Chicken
+  file: ./assets/sounds/test1.mp3
+- name: INCOMING!
+  file: ./assets/sounds/test2.mp3
+- name: Demoman Laugh
+  file: ./assets/sounds/tf2-demoman-laugh.mp3
+- name: Elite Wort
+  file: ./assets/sounds/eliteWort.mp3
+- name: Ah, That'll Put The Fear In Them
+  file: ./assets/sounds/ahThatllPutTheFearInThem.mp3
