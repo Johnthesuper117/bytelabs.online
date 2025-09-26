@@ -57,7 +57,7 @@ downloadBtn.addEventListener('click', () => {
             const a = document.createElement('a');
             a.style.display = 'none';
             a.href = url;
-            a.download = 'tts-audio.wav';
+            a.download = `${textInput.value}.wav`;
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
