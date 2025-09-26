@@ -7,29 +7,13 @@
     const pitch = document.getElementById("pitch").value;
     const speed = document.getElementById("speed").value;
     const voice = document.getElementById("voiceSelect").value;
-    // convert text to wav using text2wav with the above variables and store in a variable
-    async function text2wav(text, amplitude, pitch, speed, voice) {
-        const response = await fetch('https://api.example.com/text2wav', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                text: text,
-                amplitude: amplitude,
-                pitch: pitch,
-                speed: speed,
-                voice: voice
-            })
-        });
-        const data = await response.json();
-        return data.wav; // assuming the API returns a base64 encoded wav file
-    }
-    const wavData = await text2wav(text, amplitude, pitch, speed, voice);
+    const wavData = await text2wav(text, amplitude, pitch, speed, voice); // convert text to wav using text2wav with the above variables and store in a variable, using self-contained node.js module as it has no endpoint
+    console.log(wavData); // log the base64 encoded wav data to the console
+
+    // get language from dropdown menu in tts.html
+    const languageSelect = document.getElementById("languageSelect");
+    const language = languageSelect.value;
     
-
-    const apiKey = process.env.API_KEY;
-
     // speak text when speakBtn is clicked use text to speech synthesis
     const speakBtn = document.getElementById("speakBtn");
     speakBtn.addEventListener("click", () => {
