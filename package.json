@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^17.2.2",
     "text2wav": "^0.0.14"
   }
 }

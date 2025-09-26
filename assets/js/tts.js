@@ -26,7 +26,9 @@
         return data.wav; // assuming the API returns a base64 encoded wav file
     }
     const wavData = await text2wav(text, amplitude, pitch, speed, voice);
+    
 
+    const apiKey = process.env.API_KEY;
 
     // speak text when speakBtn is clicked use text to speech synthesis
     const speakBtn = document.getElementById("speakBtn");
