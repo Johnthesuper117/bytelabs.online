@@ -34,7 +34,7 @@
         //set href to url
         a.href = url;
         //set download attribute to filename
-        a.download = 'tts.wav';
+        a.download = `${text}.wav`;
         //click a element
         a.click();
         //revoke url
