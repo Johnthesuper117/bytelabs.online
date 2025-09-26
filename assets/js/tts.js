@@ -7,67 +7,50 @@
     const pitch = document.getElementById("pitch").value;
     const speed = document.getElementById("speed").value;
     const voice = document.getElementById("voiceSelect").value;
-    // convert text to wav using text2wav with the above variables
-    
-    //download text as wav file when downloadBtn is clicked
-    document.getElementById("downloadBtn").addEventListener("click", async () => {
-        const text2wav = require('text2wav')
-        let out = await text2wav(text, {
-            voice: voice,
-            amplitude: amplitude, 
-            pitch: pitch, 
-            speed: speed, 
-            wordgap: 0, 
-            capital: 0, 
-            lineLength: 0, 
-            encoding: 1, 
-            hasTags: false, 
-            noFinalPause: false, 
-            punct: false
-        })
-        //create blob from out
-        const blob = new Blob([out], {type: 'audio/wav'});
-        //create url from blob
-        const url = URL.createObjectURL(blob);
-        //create a element
-        const a = document.createElement('a');
-        //set href to url
-        a.href = url;
-        //set download attribute to filename
-        a.download = `${text}.wav`;
-        //click a element
-        a.click();
-        //revoke url
-        URL.revokeObjectURL(url);
+    // convert text to wav using text2wav with the above variables and store in a variable
+    async function text2wav(text, amplitude, pitch, speed, voice) {
+        const response = await fetch('https://api.example.com/text2wav', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                text: text,
+                amplitude: amplitude,
+                pitch: pitch,
+                speed: speed,
+                voice: voice
+            })
+        });
+        const data = await response.json();
+        return data.wav; // assuming the API returns a base64 encoded wav file
+    }
+    const wavData = await text2wav(text, amplitude, pitch, speed, voice);
+
+
+    // speak text when speakBtn is clicked use text to speech synthesis
+    const speakBtn = document.getElementById("speakBtn");
+    speakBtn.addEventListener("click", () => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = speechSynthesis.getVoices().find(voice => voice.lang === language);
+        utterance.pitch = pitch;
+        utterance.rate = speed;
+        speechSynthesis.speak(utterance);
     });
 
-    // speak text when speakBtn is clicked
-    document.getElementById("speakBtn").addEventListener("click", async () => {
-        const text2wav = require('text2wav')
-        let out = await text2wav(text, {
-            voice: voice,
-            amplitude: amplitude, 
-            pitch: pitch, 
-            speed: speed, 
-            wordgap: 0, 
-            capital: 0, 
-            lineLength: 0, 
-            encoding: 1, 
-            hasTags: false, 
-            noFinalPause: false, 
-            punct: false
-        })
-        //create blob from out
-        const blob = new Blob([out], {type: 'audio/wav'});
-        //create url from blob
+    // download text as wav file when downloadBtn is clicked, use text2wav with the above variables
+    const downloadBtn = document.getElementById("downloadBtn");
+    downloadBtn.addEventListener("click", async () => {
+        const wavData = await text2wav(text, amplitude, pitch, speed, voice);
+        const blob = new Blob([new Uint8Array(atob(wavData).split("").map(c => c.charCodeAt(0)))], { type: "audio/wav" });
         const url = URL.createObjectURL(blob);
-        //create audio element
-        const audio = new Audio(url);
-        //play audio
-        audio.play();
-        //revoke url after audio is done playing
-        audio.onended = () => {
-            URL.revokeObjectURL(url);
-        }
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "speech.wav";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     });
-})()
+
+
+})();
