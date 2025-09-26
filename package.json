@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "text2wav": "^0.0.14"
+  }
+}

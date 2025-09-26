@@ -1,36 +1,27 @@
-const textInput = document.getElementById('textInput');
-const voiceSelect = document.getElementById('voiceSelect');
-const speakBtn = document.getElementById('speakBtn');
+(async () => {
+    // get text from tts.html object with id "textInput"
+    const textInput = document.getElementById("textInput");
+    const text = textInput.value;
+    // get variables from sliders and dropdown menu in tts.html
+    const amplitude = document.getElementById("amplitude").value;
+    const pitch = document.getElementById("pitch").value;
+    const speed = document.getElementById("speed").value;
+    const voice = document.getElementById("voiceSelect").value;
+    // convert text to wav using text2wav with the above variables
+    
 
-let voices = [];
-const synth = window.speechSynthesis;
-
-//list available voices and populate the select dropdown
-function populateVoiceList() {
-    voices = synth.getVoices();
-    voiceSelect.innerHTML = ''; // Clear previous options
-    voices.forEach((voice, i) => {
-        const option = document.createElement('option');
-        option.textContent = `${voice.name} (${voice.lang})`;
-        option.setAttribute('data-lang', voice.lang);
-        option.setAttribute('data-name', voice.name);
-        voiceSelect.appendChild(option);
-    });
-}
-
-// Populate voices when they are loaded or when the page loads
-if (synth.onvoiceschanged !== undefined) {
-    synth.onvoiceschanged = populateVoiceList;
-} else {
-    populateVoiceList(); // Fallback for browsers that don't fire onvoiceschanged
-}
-
-//Button to speak the text
-speakBtn.addEventListener('click', () => {
-    if (textInput.value !== '') {
-        const utterance = new SpeechSynthesisUtterance(textInput.value);
-        const selectedVoiceName = voiceSelect.selectedOptions[0].getAttribute('data-name');
-        utterance.voice = voices.find(voice => voice.name === selectedVoiceName);
-        synth.speak(utterance);
-    }
-});
+    const text2wav = require('text2wav')
+    let out = await text2wav(text, {
+        voice: 'en', 
+        amplitude: 1.0, 
+        pitch: 100, 
+        speed: 100, 
+        wordgap: 0, 
+        capital: 0, 
+        lineLength: 0, 
+        encoding: 1, 
+        hasTags: false, 
+        noFinalPause: false, 
+        punct: false
+    })
+})()

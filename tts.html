@@ -9,6 +9,13 @@ title: Text to Speech (TtS)
         <select id="voiceSelect"></select>
         <button id="speakBtn">Speak</button>
         <button id="downloadBtn">Download Audio</button>
+        <!-- add sliders and dropdown menu for amplitude, pitch, speed, and voice-->
+        <label for="amplitude">Amplitude:</label>
+        <input type="range" id="amplitude" name="amplitude" min="0" max="2" value="1" step="0.1">
+        <label for="pitch">Pitch:</label>
+        <input type="range" id="pitch" name="pitch" min="50" max="200" value="100" step="10">
+        <label for="speed">Speed:</label>
+        <input type="range" id="speed" name="speed" min="0.5" max="2" value="1" step="0.1">
     </div>
 </div>
 <script  src="./assets/js/tts.js"></script>
