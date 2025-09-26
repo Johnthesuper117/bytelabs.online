@@ -199,7 +199,7 @@
 - name: Johnson Boo! Ha!
   file: ./assets/sounds/johnsonBooHa.mp3
 - name: What is it Good For?
-  file: .assets/sounds/whatIsItGoodForAbsolutelyNothing.mp3
+  file: ./assets/sounds/whatIsItGoodForAbsolutelyNothing.mp3
 - name: What is the Password?
   file: ./assets/sounds/whatIsThePassword.mp3
 - name: Come on Now, is That a Weapon or a fla-*dies*
