@@ -107,7 +107,7 @@ class Rain {
   }
 }
 
-const main = document.querySelector('main');
+const main = document.querySelector('#Matrix');
 for (let i = 0; i < 50; ++i) {
   new Rain({ target: main, row: 50 });
 }
