@@ -21,6 +21,7 @@ plugins:
   - faraday
   - faraday-retry
   - webrick
+  - cvs
 
 permalink: none
 
