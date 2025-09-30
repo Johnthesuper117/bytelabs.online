@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'bundler', '~> 2.7', '>= 2.7.2'
+gem 'bundler', '>= 2.7.2'
 gem 'jekyll', github: 'jekyll/jekyll', ref: 'refs/pull/9248/head'
 gem 'jekyll-include-cache', group: :jekyll_plugins
 gem 'jekyll-feed'

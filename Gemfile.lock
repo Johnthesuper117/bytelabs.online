@@ -224,7 +224,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  bundler (~> 2.7, >= 2.7.2)
+  bundler (>= 2.7.2)
   csv
   faraday (~> 2.7, >= 2.7.11)
   faraday-retry (~> 2.3)
