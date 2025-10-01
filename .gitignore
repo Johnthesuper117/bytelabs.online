@@ -5,6 +5,7 @@ _site/
 .jekyll-metadata
 Gemfile.lock
 **/.ruby-version
+
 # Local Netlify folders
 .netlify
 .env
@@ -13,6 +14,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
 # System files
 .DS_Store
 Thumbs.db
