@@ -1,5 +1,5 @@
 {
-  "name": "my-worker",
+  "name": "bytelabsonline",
   "main": "./assets/js/serverData.js",
   "compatibility_date": "2025-10-01",
   "workers_dev": false,
