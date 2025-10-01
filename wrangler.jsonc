@@ -1,5 +1,5 @@
 {
-  "name": "bytelabs-online",
-  "main": "./assets/js/serverData.js",
+  "name": "bytelabsonline",
+  "main": "./index.js",
   "compatibility_date": "2025-10-01"
 }
