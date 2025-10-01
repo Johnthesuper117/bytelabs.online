@@ -223,7 +223,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (>= 2.7.2)
   csv
-  faraday (~> 2.3)
+  faraday (~> 2.0)
   faraday-retry (~> 2.3)
   jekyll (>= 4.3.1)
   jekyll-coffeescript
