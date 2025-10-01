@@ -3,7 +3,7 @@ GIT
   revision: 6576527da4c1c7414b790519a099d642553b6f39
   ref: refs/pull/9248/head
   specs:
-    jekyll (4.3.1)
+    jekyll (4.4.1)
       addressable (~> 2.4)
       colorator (~> 1.0)
       em-websocket (~> 0.5)
