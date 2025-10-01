@@ -4,7 +4,6 @@ gem 'bundler', '>= 2.7.2'
 gem 'jekyll', '~> 4.4.1'
 gem 'faraday', '~> 2.0.0'
 gem 'faraday-retry', '~> 2.3.2'
-gem 'webrick', '~> 1.7'
 gem 'csv'    
 group :jekyll_plugins do
     gem 'jekyll-include-cache'
@@ -24,3 +23,4 @@ group :jekyll_plugins do
     gem 'jekyll-default-layout'
     gem 'jekyll-titles-from-headings'
 end
+gem "webrick", "~> 1.9"
