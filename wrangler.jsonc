@@ -1,5 +1,5 @@
 {
-  "name": "bytelabsonline",
+  "name": "bytelabs-online",
   "main": "./assets/js/serverData.js",
   "compatibility_date": "2025-10-01",
   "workers_dev": false,
@@ -9,8 +9,8 @@
   },
   "kv_namespaces": [
     {
-      "binding": "<MY_NAMESPACE>",
-      "id": "<KV_ID>"
+      "binding": "diamonds",
+      "id": "8b7a5b4e-9c26-4688-b246-e8a987433d15"
     }
   ],
   "env": {
@@ -22,8 +22,8 @@
       },
       "kv_namespaces": [
         {
-          "binding": "<MY_NAMESPACE>",
-          "id": "<STAGING_KV_ID>"
+          "binding": "diamonds",
+          "id": "8b7a5b4e-9c26-4688-b246-e8a987433d15"
         }
       ]
     }
