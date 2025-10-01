@@ -1,31 +1,5 @@
 {
   "name": "bytelabs-online",
   "main": "./assets/js/serverData.js",
-  "compatibility_date": "2025-10-01",
-  "workers_dev": false,
-  "route": {
-    "pattern": "example.org/*",
-    "zone_name": "example.org"
-  },
-  "kv_namespaces": [
-    {
-      "binding": "diamonds",
-      "id": "8b7a5b4e-9c26-4688-b246-e8a987433d15"
-    }
-  ],
-  "env": {
-    "staging": {
-      "name": "my-worker-staging",
-      "route": {
-        "pattern": "staging.example.org/*",
-        "zone_name": "example.org"
-      },
-      "kv_namespaces": [
-        {
-          "binding": "diamonds",
-          "id": "8b7a5b4e-9c26-4688-b246-e8a987433d15"
-        }
-      ]
-    }
-  }
+  "compatibility_date": "2025-10-01"
 }
