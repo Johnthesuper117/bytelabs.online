@@ -1,7 +1,7 @@
 bundle config set --local without 'development test'
 
 [build]
-  publish = "_site"        # Jekyll’s output folder
+  publish = "_site"
   command = "npm run build && bundle exec jekyll build --trace"
 
 [context.production.environment]
