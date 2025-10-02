@@ -1,5 +1,3 @@
-bundle config set --local without 'development test'
-
 [[plugins]]
   package = "./plugins/netlify-purge-cloudflare-on-deploy"
   package = "netlify-plugin-jekyll-cache"
