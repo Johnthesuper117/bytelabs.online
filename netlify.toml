@@ -5,7 +5,7 @@
 
 [build]
   publish = "_site"
-  command = "npm run build && bundle config set --local without 'development test' && bundle exec jekyll build --trace"
+  command = "npm run build ; bundle config set --local without 'development test' ; bundle exec jekyll build --trace"
 
 [context.production.environment]
   NODE_VERSION = "18"
