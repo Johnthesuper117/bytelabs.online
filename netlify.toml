@@ -1,5 +1,8 @@
 bundle config set --local without 'development test'
 
+[[plugins]]
+package = "./plugins/netlify-purge-cloudflare-on-deploy"
+
 [build]
   publish = "_site"
   command = "npm run build && bundle exec jekyll build --trace"
