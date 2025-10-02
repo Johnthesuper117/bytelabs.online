@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+git_source(:github) { |repo_name| "https://github.com/#{Johnthesuper117}" }
 gem 'bundler', '>= 2.7.2'
 gem 'jekyll', '~> 4.4.1'
 gem 'faraday', '~> 2.0.0'
@@ -24,3 +25,4 @@ group :jekyll_plugins do
     gem 'jekyll-titles-from-headings'
 end
 gem "webrick", "~> 1.9"
+gem "github-pages", group: :jekyll_plugins
