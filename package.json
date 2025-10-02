@@ -6,7 +6,9 @@
   "dependencies": {
     "pg": "^8.11.3",
     "dotenv": "^17.2.3",
-    "text2wav": "^0.0.14"
+    "text2wav": "^0.0.14",
+    "": ""
+
   },
   "scripts": {
     "build": "bundle exec jekyll build",
@@ -14,6 +16,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Johnthesuper117",
+  "license": "MIT"
 }
