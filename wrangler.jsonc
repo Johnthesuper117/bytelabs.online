@@ -1,6 +1,5 @@
 {
   "name": "bytelabsonline",
   "main": "./index.js",
-  "compatibility_date": "2025-10-01",
-  "pages_build_output_dir": ""
+  "compatibility_date": "2025-10-01"
 }
