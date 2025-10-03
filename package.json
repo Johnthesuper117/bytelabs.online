@@ -1,13 +1,12 @@
 {
   "name": "bytelabs.online",
   "version": "1.0.0",
-  "description": "[![Netlify Status](https://api.netlify.com/api/v1/badges/8be53e07-a2bc-4eed-a4e1-cc59d48a17c2/deploy-status)](https://app.netlify.com/projects/bytelabsonline/deploys)",
+  "description": "disc",
   "main": "index.js",
   "dependencies": {
     "pg": "^8.11.3",
     "dotenv": "^17.2.3",
-    "text2wav": "^0.0.14",
-    "": ""
+    "text2wav": "^0.0.14"
 
   },
   "scripts": {
