@@ -2,7 +2,7 @@
   "name": "bytelabs.online",
   "version": "1.0.0",
   "description": "disc",
-  "main": "index.js",
+  "main": "index.html",
   "dependencies": {
     "pg": "^8.11.3",
     "dotenv": "^17.2.3",
