@@ -57,11 +57,21 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
             const wavData = result.wav;
             let out = await text2wav(textInput.value, {
-                amplitude: amplitudeInput.value,
-                pitch: pitchInput.value,
-                speed: speedInput.value,
-                voice: voiceSelect.value
+                amplitude: amplitude,
+                pitch: pitch,
+                speed: speed,
+                voice: voice
             });
+            (async () => {
+                const text2wav = require('text2wav')
+                let out = await text2wav(text)
+                // out is of type Uint8Array
+                const assert = require('assert')
+                assert.equal(out[0], 82) //R
+                assert.equal(out[1], 73) //I
+                assert.equal(out[2], 70) //F
+                assert.equal(out[3], 70) //F
+            })()
             out.download(`${textInput.value}.wav`);
             try {
             // Convert base64 to binary
