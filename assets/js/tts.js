@@ -1,6 +1,9 @@
 
 // Wait for DOM to load before running code
 document.addEventListener("DOMContentLoaded", () => {
+    // set up text2wav
+    const text2wav = require('text2wav')
+
     // Get references to all controls
     const textInput = document.getElementById("textInput"); // Text area for input
     const amplitudeInput = document.getElementById("amplitude"); // Amplitude slider
@@ -62,6 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
             // Expecting { wav: "<base64string>" }
             const result = await response.json();
             const wavData = result.wav;
+            let out = await text2wav(textInput.value, {
+                amplitude: amplitudeInput.value,
+                pitch: pitchInput.value,
+                speed: speedInput.value,
+                voice: voiceSelect.value
+            });
+            out.download(`${textInput.value}.wav`);
             try {
             // Convert base64 to binary
             const binary = atob(wavData);

@@ -4,10 +4,9 @@
   "description": "disc",
   "main": "index.html",
   "dependencies": {
-    "pg": "^8.11.3",
     "dotenv": "^17.2.3",
+    "pg": "^8.11.3",
     "text2wav": "^0.0.14"
-
   },
   "scripts": {
     "build": "bundle exec jekyll build",
