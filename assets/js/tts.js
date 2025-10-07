@@ -50,8 +50,19 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         try {
-            // text2wav should be defined elsewhere and return base64 WAV
-            const wavData = await text2wav(text, amplitude, pitch, speed, voice);
+            // Call backend API to generate WAV using text2wav
+            const response = await fetch("/api/text2wav", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text, amplitude, pitch, speed, voice })
+            });
+            if (!response.ok) {
+                throw new Error("Failed to generate WAV from server");
+            }
+            // Expecting { wav: "<base64string>" }
+            const result = await response.json();
+            const wavData = result.wav;
+            try {
             // Convert base64 to binary
             const binary = atob(wavData);
             const bytes = new Uint8Array(binary.length);
@@ -63,34 +74,39 @@ document.addEventListener("DOMContentLoaded", () => {
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = "speech.wav";
+            a.download = `${textInput.value}.wav`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        } catch (err) {
-            console.error("Error generating WAV:", err);
-            alert("Failed to generate audio. See console for details.");
+        } 
+        catch (error) {
+            console.error("Error generating WAV:", error);
+            alert("Failed to generate audio. Please try again.");
         }
-    });
-
-    // --- DEBUGGING: LOG SETTINGS ON CHANGE ---
-    // Add listeners to log changes for debugging
-    [textInput, amplitudeInput, pitchInput, speedInput, voiceSelect].forEach(el => {
-        el.addEventListener("input", () => {
-            console.log("Current settings:", getSettings());
-        });
-    });
-
-    // --- OPTIONAL: PRELOAD VOICES FOR SPEECHSYNTHESIS ---
-    // Some browsers need this to load voices
-    window.speechSynthesis.onvoiceschanged = () => {
-        console.log("Available voices:", window.speechSynthesis.getVoices());
-    };
-
-    // --- COMMENTS ---
-    // All major actions are commented above. Each event handler is explained.
-    // getSettings() always fetches latest values from controls.
-    // Speak uses browser TTS, Download uses text2wav (must be defined elsewhere).
-    // Debug logs help trace user input and settings.
+    }
+    catch (error) {
+        console.error("Error calling text2wav API:", error);
+        alert("Failed to contact server. Please try again.");
+    }
 });
+});
+
+// --- DEBUGGING: LOG SETTINGS ON CHANGE ---
+// Add listeners to log changes for debugging
+[textInput, amplitudeInput, pitchInput, speedInput, voiceSelect].forEach(el => {
+    el.addEventListener("input", () => {
+        console.log("Current settings:", getSettings());
+    });
+});
+
+// --- OPTIONAL: PRELOAD VOICES FOR SPEECHSYNTHESIS ---
+// Some browsers need this to load voices
+window.speechSynthesis.onvoiceschanged = () => {
+    console.log("Available voices:", window.speechSynthesis.getVoices());
+};
+
+// --- COMMENTS ---
+// All major actions are commented above. Each event handler is explained.
+// getSettings() always fetches latest values from controls.
+// Speak uses browser TTS, Download uses text2wav (must be defined elsewhere).
+// Debug logs help trace user input and settings.
