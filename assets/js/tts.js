@@ -53,15 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         try {
-            // Call backend API to generate WAV using text2wav
-            const response = await fetch("/api/text2wav", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text, amplitude, pitch, speed, voice })
-            });
-            if (!response.ok) {
-                throw new Error("Failed to generate WAV from server");
-            }
             // Expecting { wav: "<base64string>" }
             const result = await response.json();
             const wavData = result.wav;
@@ -82,13 +73,12 @@ document.addEventListener("DOMContentLoaded", () => {
             // Create blob and download
             const blob = new Blob([bytes], { type: "audio/wav" });
             const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = `${textInput.value}.wav`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        } 
+            out.href = url;
+            out.download = `${textInput.value}.wav`;
+            document.body.appendChild(out);
+            out.click();
+            document.body.removeChild(out);
+        }
         catch (error) {
             console.error("Error generating WAV:", error);
             alert("Failed to generate audio. Please try again.");
