@@ -37,6 +37,10 @@ body {
   color: var(--color-text1);
 }
 
+.centered {
+  text-align: center;
+}
+
 .content {
   color: var(--color-text1);
   position: relative;
