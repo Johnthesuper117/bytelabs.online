@@ -88,7 +88,5 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', () => {
         startTime = Date.now();
         draw();
-    });
-    });
+    });    
 });
-
