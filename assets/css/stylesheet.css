@@ -16,9 +16,10 @@ html {
   padding: 0;
   height: 100%;
   z-index: 1;
+  animation: textDistort 1.5s infinite;
 }
 
-h1, ul, p, iframe{
+h1, ul, p, iframe {
   background: rgba(0,0,0,0.5);
   color: var(--color-text1);
   padding: 5px;
@@ -30,7 +31,11 @@ h1, ul, p, iframe{
   opacity: 0;
   animation: 
     revealContent 0.5s ease-out forwards,
-    flicker 1s infinite 3.5s;
+    flicker 2s infinite 3.5s,
+    intensiveFlicker 5s infinite 4s;
+  text-shadow: 
+    0 0 5px var(--color-text1),
+    0 0 10px var(--color-text1);
 }
 
 body {
@@ -134,24 +139,33 @@ a:link {
   color: var(--color-text2);
   background-color: transparent;
   text-decoration: none;
+  animation: flicker 3s infinite;
+  transition: text-shadow 0.2s;
 }
 
 a:visited {
   color: var(--color-text2);
   background-color: transparent;
   text-decoration: none;
+  animation: flicker 3s infinite;
 }
 
 a:hover {
   color: var(--color-text1);
   background-color: transparent;
   text-decoration: underline;
+  text-shadow: 
+    0 0 5px var(--color-text1),
+    0 0 10px var(--color-text1),
+    0 0 15px var(--color-text1);
+  animation: intensiveFlicker 1s infinite;
 }
 
 a:active {
   color: var(--color-text1);
   background-color: transparent;
   text-decoration: underline;
+  animation: intensiveFlicker 0.3s infinite;
 }
 
 .button {
@@ -217,26 +231,82 @@ a:active {
     50%, 100% { opacity: 0; }
 }
 
+/* Main flicker effect */
 @keyframes flicker {
-    0% { opacity: 0.27861; }
-    5% { opacity: 0.34769; }
-    10% { opacity: 0.23604; }
-    15% { opacity: 0.90626; }
-    20% { opacity: 0.18128; }
-    25% { opacity: 0.83891; }
-    30% { opacity: 0.65583; }
-    35% { opacity: 0.67807; }
-    40% { opacity: 0.26559; }
-    45% { opacity: 0.84693; }
-    50% { opacity: 0.96019; }
-    55% { opacity: 0.08594; }
-    60% { opacity: 0.20313; }
-    65% { opacity: 0.71988; }
-    70% { opacity: 0.53455; }
-    75% { opacity: 0.37288; }
-    80% { opacity: 0.71428; }
-    85% { opacity: 0.70419; }
-    90% { opacity: 0.7003; }
-    95% { opacity: 0.36108; }
-    100% { opacity: 0.24387; }
+    0% { opacity: 0.93; }
+    5% { opacity: 0.89; }
+    10% { opacity: 0.97; }
+    15% { opacity: 0.88; }
+    20% { opacity: 0.96; }
+    25% { opacity: 0.92; }
+    30% { opacity: 0.98; }
+    35% { opacity: 0.87; }
+    40% { opacity: 0.94; }
+    45% { opacity: 0.99; }
+    50% { opacity: 0.91; }
+    55% { opacity: 0.95; }
+    60% { opacity: 0.86; }
+    65% { opacity: 0.97; }
+    70% { opacity: 0.90; }
+    75% { opacity: 0.94; }
+    80% { opacity: 0.98; }
+    85% { opacity: 0.89; }
+    90% { opacity: 0.96; }
+    95% { opacity: 0.93; }
+    100% { opacity: 0.95; }
+}
+
+/* Intense flicker for occasional glitches */
+@keyframes intensiveFlicker {
+    0% { opacity: 0.95; }
+    1% { opacity: 0.5; }
+    2% { opacity: 0.9; }
+    3% { opacity: 0.4; }
+    4% { opacity: 1; }
+    5% { opacity: 0.7; }
+    6% { opacity: 0.95; }
+    95% { opacity: 0.93; }
+    96% { opacity: 0.4; }
+    97% { opacity: 0.95; }
+    98% { opacity: 0.3; }
+    100% { opacity: 0.95; }
+}
+
+/* Text distortion effect */
+@keyframes textDistort {
+    0% { 
+        text-shadow: 0.05em 0 0 rgba(0,255,0,0.75),
+                    -0.025em -.05em 0 rgba(0,255,0,0.75),
+                    0.025em .05em 0 rgba(0,255,0,0.75);
+    }
+    14% { 
+        text-shadow: 0.05em 0 0 rgba(0,255,0,0.75),
+                    -0.05em -.025em 0 rgba(0,255,0,0.75),
+                    -0.025em .05em 0 rgba(0,255,0,0.75);
+    }
+    15% { 
+        text-shadow: -0.05em -.025em 0 rgba(0,255,0,0.75),
+                    0.025em 0.025em 0 rgba(0,255,0,0.75),
+                    -0.05em -.05em 0 rgba(0,255,0,0.75);
+    }
+    49% {
+        text-shadow: -0.05em 0 0 rgba(0,255,0,0.75),
+                    0.025em 0.025em 0 rgba(0,255,0,0.75),
+                    -0.025em 0.05em 0 rgba(0,255,0,0.75);
+    }
+    50% {
+        text-shadow: 0.025em 0.05em 0 rgba(0,255,0,0.75),
+                    0.05em 0 0 rgba(0,255,0,0.75),
+                    0 -0.05em 0 rgba(0,255,0,0.75);
+    }
+    99% {
+        text-shadow: 0.025em 0 0 rgba(0,255,0,0.75),
+                    0.05em 0 0 rgba(0,255,0,0.75),
+                    0 -0.05em 0 rgba(0,255,0,0.75);
+    }
+    100% {
+        text-shadow: -0.025em 0 0 rgba(0,255,0,0.75),
+                    -0.025em -0.025em 0 rgba(0,255,0,0.75),
+                    -0.025em -0.05em 0 rgba(0,255,0,0.75);
+    }
 }

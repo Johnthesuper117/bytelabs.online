@@ -2,14 +2,16 @@
 layout: default
 title: Soundboard
 ---
+
+
+{% for sound in site.data.soundboard %}
+  <button class="button" onclick="playSound('{{ sound.file }}')">{{ sound.name }}</button>
+{% endfor %}
+
+<script src="./assets/js/playsound.js"></script>
+
+<br>
+<br>
 <p>
-  
-  {% for sound in site.data.soundboard %}
-    <button class="button" onclick="playSound('{{ sound.file }}')">{{ sound.name }}</button>
-  {% endfor %}
-
-  <script src="./assets/js/playsound.js"></script>
-
-  <br>
   Go to <a href="https://github.com/Johnthesuper117/bytelabs.online/discussions/3">this discussion</a> to suggest new sounds!
 </p>
