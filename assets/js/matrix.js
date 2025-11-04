@@ -5,6 +5,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const context = canvas.getContext('2d');
 
+    // Ensure canvas is a top-layer black overlay during loading
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100vw';
+    canvas.style.height = '100vh';
+    canvas.style.backgroundColor = 'black';
+    canvas.style.zIndex = '9999';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.opacity = '1';
+    canvas.style.transition = 'opacity 1s ease-out';
+
     // Function to handle canvas resizing
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -40,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Drawing function
     const draw = () => {
+        // slow fade effect so characters trail nicely
         context.fillStyle = 'rgba(0, 0, 0, 0.05)';
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = '#0F0';
@@ -54,10 +67,26 @@ document.addEventListener('DOMContentLoaded', function() {
             rainDrops[i]++;
         }
         
-        requestAnimationFrame(draw);
+        animationId = requestAnimationFrame(draw);
     };
 
     // Start the animation when the window loads
-    window.addEventListener('load', draw);
+    window.addEventListener('load', () => {
+        // start drawing immediately on load
+        draw();
+
+        // after 3s, fade out the canvas smoothly and stop animation
+        setTimeout(() => {
+            canvas.style.opacity = '0';
+            // after transition completes, stop and hide canvas
+            setTimeout(() => {
+                // stop animation
+                if (animationId) cancelAnimationFrame(animationId);
+                // hide canvas so it doesn't block interactions
+                canvas.style.display = 'none';
+                canvas.style.zIndex = '-1';
+            }, 1000);
+        }, 3000);
+    });
 });
 
