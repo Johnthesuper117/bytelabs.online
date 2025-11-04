@@ -42,7 +42,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: transparent;
+  background: black;
   color: var(--color-text1);
 }
 
@@ -59,16 +59,14 @@ body {
 
 #Matrix {
   position: fixed;
-  pointer-events: none;      /* allow clicks to pass through */
+  pointer-events: none;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   display: block;
-  background-color: black; /* Or a dark color for the background */
-  z-index: 9999; /* On top during loading */
-  opacity: 1;
-  transition: opacity 1s ease-out;
+  background-color: black;
+  z-index: 9999;
 }
 
 /* Sidebar navigation styles */
