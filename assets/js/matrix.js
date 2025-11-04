@@ -10,10 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.height = window.innerHeight;
         // Recalculate columns when canvas is resized
         columns = Math.floor(canvas.width/fontSize);
-        // Reset raindrops array
+        // Reset raindrops arrays
         rainDrops.length = 0;
+        speeds.length = 0;
+        brightnesses.length = 0;
         for(let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
+            rainDrops[x] = Math.random() * canvas.height;
+            speeds[x] = (Math.random() * 0.5 + 0.5) * baseSpeed;
+            brightnesses[x] = Math.random();
         }
     }
 
@@ -22,13 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const nums = '0123456789';
     const alphabet = katakana + latin + nums;
-    const fontSize = 16;
+    const fontSize = 14;
+    const baseSpeed = 1.5;
     let columns = Math.floor(canvas.width/fontSize);
     const rainDrops = [];
+    const speeds = [];
+    const brightnesses = [];
 
-    // Initialize raindrops
+    // Initialize arrays
     for(let x = 0; x < columns; x++) {
-        rainDrops[x] = 1;
+        rainDrops[x] = Math.random() * canvas.height;
+        speeds[x] = (Math.random() * 0.5 + 0.5) * baseSpeed;
+        brightnesses[x] = Math.random();
     }
 
     // Handle window resize
@@ -37,21 +46,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Drawing function
     const draw = () => {
-        // Subtle fade effect for trailing characters
-        context.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        // Create trailing effect
+        context.fillStyle = 'rgba(0, 0, 0, 0.07)';
         context.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Matrix green characters
-        context.fillStyle = '#0F0';
-        context.font = fontSize + 'px monospace';
-        
+
+        // Draw characters
         for(let i = 0; i < rainDrops.length; i++) {
+            // Vary the brightness for each column
+            const brightness = Math.floor(brightnesses[i] * 155 + 100); // Range 100-255
+            context.fillStyle = `rgba(0, ${brightness}, 0, 0.9)`;
+            context.font = `${fontSize}px monospace`;
+
+            // Draw current character
             const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-            context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
-            if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
-                rainDrops[i] = 0;
+            const x = i * fontSize;
+            const y = rainDrops[i];
+            context.fillText(text, x, y);
+
+            // Draw trailing characters with decreasing opacity
+            for(let j = 1; j <= 15; j++) {
+                const trailY = y - (j * fontSize);
+                if(trailY < 0) continue;
+                const opacity = (15 - j) / 30;
+                context.fillStyle = `rgba(0, ${brightness}, 0, ${opacity})`;
+                const trailChar = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                context.fillText(trailChar, x, trailY);
             }
-            rainDrops[i]++;
+
+            // Update raindrop position
+            rainDrops[i] += speeds[i];
+
+            // Reset when reaching bottom
+            if(rainDrops[i] * fontSize > canvas.height) {
+                rainDrops[i] = 0;
+                speeds[i] = (Math.random() * 0.5 + 0.5) * baseSpeed;
+                brightnesses[i] = Math.random();
+            }
         }
         
         requestAnimationFrame(draw);
