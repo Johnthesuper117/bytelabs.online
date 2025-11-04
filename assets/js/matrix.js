@@ -3,10 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!canvas) return;
     
     const context = canvas.getContext('2d');
-    
-    // Hide page content initially
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 1s ease-in';
 
     // Function to handle canvas resizing
     function resizeCanvas() {
@@ -39,28 +35,17 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    let animationId;
-
     // Drawing function
-    let startTime;
-    const loadDuration = 3000; // 3 seconds loading animation
-    
     const draw = () => {
-        const now = Date.now();
-        const progress = Math.min((now - startTime) / loadDuration, 1);
-        
-        // Clear with darker fade for better character visibility
-        context.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        // Subtle fade effect for trailing characters
+        context.fillStyle = 'rgba(0, 0, 0, 0.05)';
         context.fillRect(0, 0, canvas.width, canvas.height);
         
-        // Bright green matrix characters
-        context.fillStyle = '#00FF00';
+        // Matrix green characters
+        context.fillStyle = '#0F0';
         context.font = fontSize + 'px monospace';
         
-        // Calculate how many columns to show based on progress
-        const activeColumns = Math.floor(columns * progress);
-        
-        for(let i = 0; i < activeColumns; i++) {
+        for(let i = 0; i < rainDrops.length; i++) {
             const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
             context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
             if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
@@ -69,24 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
             rainDrops[i]++;
         }
         
-        if (progress < 1) {
-            animationId = requestAnimationFrame(draw);
-        } else {
-            // Fade in the page content
-            document.body.style.opacity = '1';
-            // Clean up the canvas
-            setTimeout(() => {
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                }
-                canvas.remove(); // Remove canvas completely
-            }, 1000);
-        }
+        requestAnimationFrame(draw);
     };
 
-    // Start the animation when everything is loaded
-    window.addEventListener('load', () => {
-        startTime = Date.now();
-        draw();
-    });    
+    // Start the animation
+    draw();    
 });

@@ -28,11 +28,6 @@ h1, ul, p, iframe {
   max-width: 900px;
   z-index: 1;
   position: relative;
-  opacity: 0;
-  animation: 
-    revealContent 0.5s ease-out forwards,
-    flicker 2s infinite 3.5s,
-    intensiveFlicker 5s infinite 4s;
   text-shadow: 
     0 0 5px var(--color-text1),
     0 0 10px var(--color-text1);
@@ -66,7 +61,7 @@ body {
   height: 100vh;
   display: block;
   background-color: black;
-  z-index: 9999;
+  z-index: 0; /* Behind content */
 }
 
 /* Sidebar navigation styles */
