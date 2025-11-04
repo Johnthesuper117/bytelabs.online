@@ -179,43 +179,6 @@ a:active {
   src: url("/assets/font/VT323.ttf");
 }
 
-/* Loading animations */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes matrixFade {
-  0% {
-    opacity: 1;
-    background-color: black;
-  }
-  75% {
-    opacity: 1;
-    background-color: black;
-  }
-  100% {
-    opacity: 0.3;
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-}
-
-/* Content reveal animation */
-@keyframes revealContent {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 @keyframes blink {
     0%, 49% { opacity: 1; }
     50%, 100% { opacity: 0; }
