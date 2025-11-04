@@ -5,23 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const context = canvas.getContext('2d');
     
-    // Create a wrapper div for the canvas that will handle the fade effect
-    const canvasWrapper = document.createElement('div');
-    Object.assign(canvasWrapper.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        zIndex: '9999',
-        backgroundColor: 'black',
-        transition: 'opacity 1s ease-out',
-        pointerEvents: 'none' // Allow clicking through the matrix effect
-    });
-    
-    // Insert wrapper before canvas and move canvas inside it
-    canvas.parentNode.insertBefore(canvasWrapper, canvas);
-    canvasWrapper.appendChild(canvas);
+    // Hide all content initially
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 1s ease-in';
 
     // Function to handle canvas resizing
     function resizeCanvas() {
@@ -56,14 +42,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let animationId;
 
-    // Drawing function
+    // Drawing function with building effect
+    let startTime = Date.now();
+    const animationDuration = 3000; // 3 seconds
+    
     const draw = () => {
-        context.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / animationDuration, 1);
+        
+        // Clear with fading alpha based on progress
+        context.fillStyle = `rgba(0, 0, 0, ${0.05 + (0.95 * (1-progress))})`;
         context.fillRect(0, 0, canvas.width, canvas.height);
+        
         context.fillStyle = '#0F0';
         context.font = fontSize + 'px monospace';
         
-        for(let i = 0; i < rainDrops.length; i++) {
+        // Calculate how many columns should be active based on progress
+        const activeColumns = Math.floor(columns * progress);
+        
+        for(let i = 0; i < activeColumns; i++) {
             const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
             context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
             if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
@@ -72,22 +69,41 @@ document.addEventListener('DOMContentLoaded', function() {
             rainDrops[i]++;
         }
         
-        animationId = requestAnimationFrame(draw);
+        if (progress < 1) {
+            animationId = requestAnimationFrame(draw);
+        } else {
+            // Fade in the page content
+            document.body.style.opacity = '1';
+            
+            // Continue with a more subtle background effect
+            const backgroundDraw = () => {
+                context.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                context.fillStyle = 'rgba(0, 255, 0, 0.15)';
+                context.font = fontSize + 'px monospace';
+                
+                for(let i = 0; i < rainDrops.length; i++) {
+                    if (Math.random() > 0.98) {
+                        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                        context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+                    }
+                    if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                        rainDrops[i] = 0;
+                    }
+                    rainDrops[i]++;
+                }
+                
+                animationId = requestAnimationFrame(backgroundDraw);
+            };
+            
+            backgroundDraw();
+        }
     };
 
-    // Start the animation
-    draw();
-
-    // After page is loaded and 3 seconds have passed, fade out
+    // Wait for all content to load before starting the animation
     window.addEventListener('load', () => {
-        setTimeout(() => {
-            canvasWrapper.style.opacity = '0';
-            // After the fade completes, remove the canvas and stop the animation
-            setTimeout(() => {
-                canvasWrapper.remove();
-                cancelAnimationFrame(animationId);
-            }, 1000);
-        }, 3000);
+        startTime = Date.now();
+        draw();
     });
 });
 
