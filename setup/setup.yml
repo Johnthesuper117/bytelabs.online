@@ -1,0 +1,14 @@
+# Install required packages
+  tasks:
+    - name: Install dependencies
+      apt:
+        name:
+          - git
+          - python3
+          - python3-pip
+        state: present
+        update_cache: yes
+
+# run soundboard setup script
+    - name: Run Soundboard setup script
+      command: python3 soundboardSetup.py
