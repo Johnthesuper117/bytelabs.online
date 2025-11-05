@@ -2,7 +2,6 @@
 const terminal = document.getElementById('terminal');
 let currentScreen = 'boot';
 let selectedMenuIndex = 0;
-let currentGame = null;
 
 /* ===== FULLSCREEN FUNCTIONALITY ===== */
 document.getElementById('fullscreenBtn').addEventListener('click', () => {
@@ -82,8 +81,6 @@ function showMainMenu() {
     
     addLine(ascii);
     addLine('');
-    addLine('SELECT A GAME:');
-    addLine('');
 
     startTerminal();
 }
@@ -134,12 +131,6 @@ function startTerminal() {
     }
     
     // Initial text
-    displayText('╔══════════════════════════════════════╗');
-    displayText('║            TERMINAL INPUT            ║');
-    displayText('╚══════════════════════════════════════╝');
-    displayText('');
-    displayText('Your quest: Find the legendary crown!');
-    displayText('Type HELP for commands.');
     displayText('');
     
     input.addEventListener('keypress', (e) => {
@@ -150,15 +141,6 @@ function startTerminal() {
     });
     
     input.focus();
-
-
-
-/* ===== KEYBOARD NAVIGATION ===== */
-document.addEventListener('keydown', (e) => {
-    if (currentScreen === 'menu' && e.key >= '1' && e.key <= '5') {
-        selectGame(parseInt(e.key) - 1);
-    }
-});
 
 /* ===== START APPLICATION ===== */
 window.addEventListener('load', () => {
