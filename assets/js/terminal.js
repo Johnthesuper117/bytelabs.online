@@ -66,6 +66,7 @@ async function bootSequence() {
     await typeText('System ready.', 30);
     addLine('');
     setTimeout(showMainMenu, 500);
+    showMainMenu();
 }
 
 /* ===== MAIN MENU ===== */
@@ -83,8 +84,8 @@ function showMainMenu() {
     addLine('');
     addLine('SELECT A GAME:');
     addLine('');
-        
-    addLine('Use mouse to select or press 1-5 on keyboard');
+
+    startTerminal();
 }
 
 /* ===== TEXT INPUT ===== */
@@ -162,5 +163,4 @@ document.addEventListener('keydown', (e) => {
 /* ===== START APPLICATION ===== */
 window.addEventListener('load', () => {
     bootSequence();
-    startTerminal();
 });
