@@ -5,6 +5,7 @@ _site/
 .jekyll-metadata
 Gemfile.lock
 **/.ruby-version
+package-lock.json
 
 # Local Netlify folders
 .netlify

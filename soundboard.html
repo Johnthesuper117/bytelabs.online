@@ -2,7 +2,7 @@
 layout: default
 title: Soundboard
 ---
-
+<h1>Soundboard</h1>
 
 {% for sound in site.data.soundboard %}
   <button class="button" onclick="playSound('{{ sound.file }}')">{{ sound.name }}</button>
@@ -12,6 +12,3 @@ title: Soundboard
 
 <br>
 <br>
-<p>
-  Go to <a href="https://github.com/Johnthesuper117/bytelabs.online/discussions/3">this discussion</a> to suggest new sounds!
-</p>

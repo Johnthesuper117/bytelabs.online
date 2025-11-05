@@ -26,6 +26,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Run soundboard setup script
+        run: bash ./soundboardSetup.sh 
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
