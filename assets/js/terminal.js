@@ -60,8 +60,7 @@ function addLine(text) {
 /* ===== BOOT SEQUENCE ===== */
 async function bootSequence() {
     clearTerminal();
-    await typeText('RETRO TERMINAL v1.0', 50);
-    await typeText('Copyright (c) 1985 RetroSoft Systems', 30);
+    await typeText('TERMINAL', 50);
     addLine('');
     await typeText('Initializing memory... OK', 20);
     await typeText('Loading game archive... OK', 20);
@@ -77,8 +76,12 @@ async function bootSequence() {
 function showMainMenu() {
     currentScreen = 'menu';
     clearTerminal();
-    
-    const ascii = `\n╔═══════════════════════════════════════════╗\n║                 TERMINAL                  ║\n╚═══════════════════════════════════════════╝\n`;
+
+    const ascii = `
+    ╔═══════════════════════════════════════════╗\n
+    ║                 TERMINAL                  ║\n
+    ╚═══════════════════════════════════════════╝\n
+    `;
     
     addLine(ascii);
     addLine('');
