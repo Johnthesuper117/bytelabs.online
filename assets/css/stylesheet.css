@@ -31,7 +31,7 @@ html {
   background: #0a0a0a;
   z-index: 0;
   background-size: 100% 2px, 3px 100%;
-  pointer-events: none;
+  pointer-events: auto;  /* Changed from none to auto */
   animation: flicker 0.15s infinite;
 }
 
