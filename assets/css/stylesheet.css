@@ -81,12 +81,10 @@ body {
 .sidebar-nav ul {
   list-style: none;
   max-width: 200px;
-  z-index: 3;
 }
 
 .sidebar-nav li {
   position: relative;
-  z-index: 3;
 }
 
 .sidebar-nav a {
@@ -149,8 +147,8 @@ a:visited {
 }
 
 a:hover {
-  color: var(--color-text1);
-  background-color: transparent;
+  color: black;
+  background-color: var(--color-text1);
   text-decoration: underline;
   text-shadow: 
     0 0 5px var(--color-text1),
@@ -159,8 +157,8 @@ a:hover {
 }
 
 a:active {
-  color: var(--color-text1);
-  background-color: transparent;
+  color: black;
+  background-color: var(--color-text1);
   text-decoration: underline;
 }
 
