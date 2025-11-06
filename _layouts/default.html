@@ -12,18 +12,16 @@
   {% seo %}
 </head>
 <body>
-  <canvas id="Matrix"></canvas>
-  {% include header.html %}
-  <h1>{{ page.title }}</h1>
-  {% include navbar.html %}
-  <div class="content">
-    <p>
-      {{ content }}
-    </p>
+  <div class="background">
+      {% include header.html %}
+    <h1>{{ page.title }}</h1>
+    {% include navbar.html %}
+    <div class="content">
+      <p>
+        {{ content }}
+      </p>
+    </div>
+    {% include footer.html %}
   </div>
-  {% include footer.html %}
-  <!--
-  <script src="./assets/js/matrix.js"></script>
-  -->
 </body>
 </html>
