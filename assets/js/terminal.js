@@ -4,13 +4,16 @@ let currentScreen = 'boot';
 let selectedMenuIndex = 0;
 
 /* ===== FULLSCREEN FUNCTIONALITY ===== */
-document.getElementById('fullscreenBtn').addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-    } else {
-        document.exitFullscreen();
-    }
-});
+const fsBtn = document.getElementById('fullscreenBtn');
+if (fsBtn) {
+    fsBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    });
+}
 
 /* ===== PREVENT ARROW KEY SCROLLING ===== */
 window.addEventListener('keydown', (e) => {
@@ -21,7 +24,7 @@ window.addEventListener('keydown', (e) => {
 
 /* ===== UTILITY FUNCTIONS ===== */
 function clearTerminal() {
-    terminal.innerHTML = '';
+    if (terminal) terminal.innerHTML = '';
 }
 
 function typeText(text, delay = 30) {
@@ -29,13 +32,13 @@ function typeText(text, delay = 30) {
         let i = 0;
         const line = document.createElement('div');
         line.className = 'line';
-        terminal.appendChild(line);
+        if (terminal) terminal.appendChild(line);
         
         const interval = setInterval(() => {
             if (i < text.length) {
                 line.textContent += text[i];
                 i++;
-                terminal.scrollTop = terminal.scrollHeight;
+                if (terminal) terminal.scrollTop = terminal.scrollHeight;
             } else {
                 clearInterval(interval);
                 resolve();
@@ -48,8 +51,10 @@ function addLine(text) {
     const line = document.createElement('div');
     line.className = 'line';
     line.textContent = text;
-    terminal.appendChild(line);
-    terminal.scrollTop = terminal.scrollHeight;
+    if (terminal) {
+        terminal.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
+    }
 }
 
 /* ===== BOOT SEQUENCE ===== */
@@ -64,7 +69,8 @@ async function bootSequence() {
     addLine('');
     await typeText('System ready.', 30);
     addLine('');
-    showMainMenu();
+    // show main menu after a short delay
+    setTimeout(showMainMenu, 500);
 }
 
 /* ===== MAIN MENU ===== */
@@ -72,35 +78,37 @@ function showMainMenu() {
     currentScreen = 'menu';
     clearTerminal();
     
-    const ascii = `
-╔═══════════════════════════════════════════╗
-║                 TERMINAL                  ║
-╚═══════════════════════════════════════════╝
-    `;
+    const ascii = `\n╔═══════════════════════════════════════════╗\n║                 TERMINAL                  ║\n╚═══════════════════════════════════════════╝\n`;
     
     addLine(ascii);
     addLine('');
-
+    
     startTerminal();
 }
 
 /* ===== TEXT INPUT ===== */
 function startTerminal() {
     clearTerminal();
-    
+
+    // container for the output and input
     const container = document.createElement('div');
     container.className = 'text-input';
-    
+
     const output = document.createElement('div');
     output.id = 'textOutput';
-    
+    output.style.minHeight = '200px';
+
     const input = document.createElement('input');
     input.type = 'text';
     input.className = 'text-input';
     input.placeholder = 'Enter command...';
     input.id = 'textInput';
-    
-    
+
+    // append output and input to container, then to terminal
+    container.appendChild(output);
+    container.appendChild(input);
+    if (terminal) terminal.appendChild(container);
+
     function displayText(text) {
         const line = document.createElement('div');
         line.className = 'line';
@@ -108,38 +116,41 @@ function startTerminal() {
         output.appendChild(line);
         output.scrollTop = output.scrollHeight;
     }
-    
+
     function processCommand(cmd) {
-        cmd = cmd.toLowerCase().trim();
+        cmd = (cmd || '').toLowerCase().trim();
+        if (!cmd) return;
         displayText('> ' + cmd);
-        displayText('');
-        
+
         if (cmd === '1') {
-            displayText('1');
-            
+            displayText('You pressed 1.');
         } else if (cmd.startsWith('echo ')) {
-            const echo = cmd.split(' ')[1];
+            // echo rest of the string after the command
+            const echo = cmd.slice(5);
             displayText(echo);
+        } else if (cmd === 'help') {
+            displayText('Available commands: HELP, ECHO <text>, 1');
         } else {
             displayText('Unknown command. Type HELP for commands.');
         }
-        
+
         displayText('');
-        
-        }
     }
-    
+
     // Initial text
-    displayText('');
-    
+    displayText('Welcome. Type HELP for commands.');
+
     input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && input.value.trim()) {
-            processCommand(input.value);
-            input.value = '';
+        if (e.key === 'Enter') {
+            if (input.value.trim()) {
+                processCommand(input.value);
+                input.value = '';
+            }
         }
     });
-    
+
     input.focus();
+}
 
 /* ===== START APPLICATION ===== */
 window.addEventListener('load', () => {
