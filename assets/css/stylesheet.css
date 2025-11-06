@@ -8,7 +8,7 @@
 html {
   font-family: 'VT323', monospace;
   text-shadow: 0 0 5px rgb(from #66ff66 calc(r + 40) calc(g + 40) b);  
-  font-size: 48px;
+  font-size: 32px;
   font-weight: 300;
   font-style: normal;
   color: var(--color-text1);
