@@ -16,7 +16,6 @@ html {
   padding: 0;
   height: 100%;
   z-index: 1;
-  animation: textDistort 1.5s infinite;
 }
 
 h1, ul, p, iframe {
@@ -122,15 +121,12 @@ a:link {
   color: var(--color-text2);
   background-color: transparent;
   text-decoration: none;
-  animation: flicker 3s infinite;
-  transition: text-shadow 0.2s;
 }
 
 a:visited {
   color: var(--color-text2);
   background-color: transparent;
   text-decoration: none;
-  animation: flicker 3s infinite;
 }
 
 a:hover {
@@ -141,14 +137,12 @@ a:hover {
     0 0 5px var(--color-text1),
     0 0 10px var(--color-text1),
     0 0 15px var(--color-text1);
-  animation: intensiveFlicker 1s infinite;
 }
 
 a:active {
   color: var(--color-text1);
   background-color: transparent;
   text-decoration: underline;
-  animation: intensiveFlicker 0.3s infinite;
 }
 
 .button {

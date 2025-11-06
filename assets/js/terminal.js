@@ -64,7 +64,6 @@ async function bootSequence() {
     addLine('');
     await typeText('System ready.', 30);
     addLine('');
-    setTimeout(showMainMenu, 500);
     showMainMenu();
 }
 
