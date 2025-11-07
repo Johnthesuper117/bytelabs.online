@@ -48,7 +48,6 @@ h1, ul, p, iframe {
 
 body {
   min-height: 100vh;
-  background: transparent;
   color: var(--color-text1);
 }
 
@@ -59,7 +58,7 @@ body {
 .content {
   color: var(--color-text1);
   position: relative;
-  z-index: 2; /* This is critical! */
+  z-index: 2; 
 }
 
 #Matrix {
@@ -71,7 +70,7 @@ body {
   height: 100vh;
   display: block;
   background-color: black;
-  z-index: 0; /* Behind content */
+  z-index: 0;
 }
 
 /* Sidebar navigation styles */
@@ -95,7 +94,7 @@ body {
 
 .sidebar-nav a.active {
   font-weight: bold;
-  background: rgba(0,0,0,0.75);
+  background: rgb(0,0,0);
 }
 
 /* Dropdown styles */
@@ -108,10 +107,10 @@ body {
   position: absolute;
   left: 0;
   top: 100%;
-  background: rgba(0,0,0,0.75);
+  background: rgb(0,0,0);
   min-width: 200px;
   z-index: 10000; /* Raised to ensure menus appear above other content */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 8px rgb(0,0,0);
 }
 
 .dropdown-menu.show {
