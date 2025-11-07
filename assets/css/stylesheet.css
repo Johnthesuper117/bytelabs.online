@@ -109,8 +109,7 @@ body {
   top: 100%;
   background: rgb(0,0,0);
   min-width: 200px;
-  z-index: 10000; /* Raised to ensure menus appear above other content */
-  box-shadow: 0 4px 8px rgb(0,0,0);
+  z-index: 10000;
 }
 
 .dropdown-menu.show {
@@ -171,10 +170,6 @@ a:hover {
   color: black;
   background-color: var(--color-text1);
   text-decoration: underline;
-  text-shadow: 
-    0 0 5px var(--color-text1),
-    0 0 10px var(--color-text1),
-    0 0 15px var(--color-text1);
 }
 
 a:active {
