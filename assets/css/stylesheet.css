@@ -112,7 +112,7 @@ body {
   top: 100%;
   background: rgba(0,0,0,0.75);
   min-width: 200px;
-  z-index: 5;
+  z-index: 4;
   box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
@@ -132,9 +132,14 @@ body {
   background-color: var(--color-text1);
 }
 
+.dropdown-menu ul{
+  z-index: 5;
+}
+
 /* Optional: style for nav items */
-.sidebar-nav li.nav a {
-  background: rgba(0,0,0,0.75);
+.sidebar-nav li.nav a:hover{
+  color: black;
+  background-color: var(--color-text1);
 }
 
 a:link {
@@ -144,7 +149,7 @@ a:link {
 }
 
 a:visited {
-  color: var(--color-text2);
+  color: var(--color-text1);
   background-color: transparent;
   text-decoration: none;
 }
