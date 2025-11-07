@@ -83,14 +83,14 @@ body {
 
 .sidebar-nav li {
   position: relative;
-  z-index: 3;
+  z-index: 4;
 }
 
 .sidebar-nav a {
   display: block;
   color: var(--color-text1);
   text-decoration: none;
-  z-index: 3;
+  z-index: 4;
 }
 
 .sidebar-nav a.active {
@@ -192,7 +192,7 @@ body {
 }
 
 .dropdown-menu ul{
-  z-index: 5;
+  z-index: 3;
 }
 
 /* Optional: style for nav items */
