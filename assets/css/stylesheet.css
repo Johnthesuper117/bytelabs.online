@@ -111,14 +111,7 @@ body {
   background: rgba(0,0,0,0.75);
   min-width: 200px;
   z-index: 10000; /* Raised to ensure menus appear above other content */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-  border-radius: 6px;
-  padding: 6px 0;
-  transition: transform 150ms ease, opacity 150ms ease;
-  transform-origin: top left;
-  opacity: 0;
-  transform: translateY(-6px) scale(.98);
-  pointer-events: none; /* disabled until shown to avoid accidental clicks */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
 .dropdown-menu.show {
@@ -134,44 +127,6 @@ body {
   pointer-events: auto;
 }
 
-.dropdown-toggle {
-  padding: 8px 12px;
-  display: inline-block;
-}
-
-.dropdown-menu li a {
-  padding: 10px 14px;
-  display: block;
-  color: var(--color-text1);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.dropdown-menu li a:hover,
-.dropdown-menu li a:focus {
-  background: var(--color-text1);
-  color: #0a0a0a;
-  text-shadow: none;
-}
-
-/* make nav list more clearly separated and increase hit area */
-.sidebar-nav ul {
-  list-style: none;
-  max-width: 220px;
-  z-index: 3;
-  padding: 8px;
-}
-
-.sidebar-nav a {
-  padding: 8px 12px;
-  border-radius: 4px;
-}
-
-/* Ensure the sidebar and dropdowns can overflow and sit above other stacking contexts.
-   Many elements on the page (h1, ul, p, iframe) set position:relative and z-index,
-   which can create stacking contexts and clip absolutely-positioned children.
-   Force the nav and its dropdowns into a higher stacking context and allow
-   overflow so submenus aren't clipped or hidden behind other elements. */
 .sidebar-nav,
 .sidebar-nav .dropdown {
   position: relative; /* establishes positioning for dropdowns */
