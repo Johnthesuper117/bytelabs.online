@@ -41,8 +41,6 @@ h1, ul, p, iframe {
   box-shadow: 0 0 10px #000;
   margin-left: 10px;
   max-width: 900px;
-  z-index: 2;
-  position: relative;
   text-shadow: 
     0 0 5px var(--color-text1),
     0 0 10px var(--color-text1);
@@ -112,12 +110,24 @@ body {
   top: 100%;
   background: rgba(0,0,0,0.75);
   min-width: 200px;
-  z-index: 4;
+  z-index: 10000; /* Raised to ensure menus appear above other content */
   box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
 .dropdown-menu.show {
   display: block;
+}
+
+/* Ensure the sidebar and dropdowns can overflow and sit above other stacking contexts.
+   Many elements on the page (h1, ul, p, iframe) set position:relative and z-index,
+   which can create stacking contexts and clip absolutely-positioned children.
+   Force the nav and its dropdowns into a higher stacking context and allow
+   overflow so submenus aren't clipped or hidden behind other elements. */
+.sidebar-nav,
+.sidebar-nav .dropdown {
+  position: relative; /* establishes positioning for dropdowns */
+  overflow: visible;  /* allow dropdowns to extend outside the nav box */
+  z-index: 10001;     /* high z-index so the whole nav sits above most page content */
 }
 
 .dropdown-menu li a {
