@@ -5,8 +5,7 @@
   "main": "index.html",
   "dependencies": {
     "dotenv": "^17.2.3",
-    "pg": "^8.11.3",
-    "text2wav": "^0.0.14"
+    "pg": "^8.11.3"
   },
   "scripts": {
     "build": "bundle exec jekyll build",
