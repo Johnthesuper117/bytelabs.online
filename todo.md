@@ -1,0 +1,3 @@
+- Matrix loaded, ASCII art rick roll dance animated w/ bit-crunched song  
+- Random person's password generator (probably)  
+- Easter eggs for each page

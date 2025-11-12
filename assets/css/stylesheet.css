@@ -89,7 +89,6 @@ body {
   display: block;
   color: var(--color-text1);
   text-decoration: none;
-  z-index: 4;
 }
 
 .sidebar-nav a.active {
@@ -108,7 +107,7 @@ body {
   top: 100%;
   background: rgb(0,0,0);
   min-width: 200px;
-  z-index: 4;
+  z-index: 5;
 }
 
 .dropdown-menu.show {
@@ -135,6 +134,7 @@ body {
   color: var(--color-text1);
   text-decoration: none;
   background: rgba(0,0,0,0.75);
+  z-index: 6;
 }
 
 .dropdown-menu li a:hover {
@@ -142,11 +142,6 @@ body {
   background-color: var(--color-text1);
 }
 
-.dropdown-menu ul{
-  z-index: 5;
-}
-
-/* Optional: style for nav items */
 .sidebar-nav li.nav a:hover{
   color: black;
   background-color: var(--color-text1);
