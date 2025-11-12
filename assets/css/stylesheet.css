@@ -143,6 +143,10 @@ body {
   z-index: 5;
 }
 
+.dropdown-menu ul {
+  z-index: 1000;
+}
+
 .sidebar-nav li.nav a:hover{
   color: black;
   background-color: var(--color-text1);
