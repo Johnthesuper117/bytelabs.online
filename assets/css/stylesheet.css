@@ -82,7 +82,7 @@ body {
 
 .sidebar-nav li {
   position: relative;
-  z-index: 4;
+  z-index: 3;
 }
 
 .sidebar-nav a {
@@ -107,20 +107,20 @@ body {
   top: 100%;
   background: rgb(0,0,0);
   min-width: 200px;
-  z-index: 5;
+  z-index: 4;
 }
 
 .dropdown-menu.show {
   display: block;
 }
 
-/* show dropdown on hover and when focused (keyboard users) */
 .dropdown:hover > .dropdown-menu,
 .dropdown:focus-within > .dropdown-menu {
   display: block;
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
+  z-index: 5;
 }
 
 .sidebar-nav,
@@ -134,12 +134,13 @@ body {
   color: var(--color-text1);
   text-decoration: none;
   background: rgba(0,0,0,0.75);
-  z-index: 6;
+  z-index: 5;
 }
 
 .dropdown-menu li a:hover {
   color: black;
   background-color: var(--color-text1);
+  z-index: 5;
 }
 
 .sidebar-nav li.nav a:hover{
