@@ -103,7 +103,7 @@ body {
 
 .dropdown-menu {
   display: none;
-  position: absolute;
+  position: relative;
   left: 0;
   top: 100%;
   background: rgb(0,0,0);
@@ -142,10 +142,6 @@ body {
   color: black;
   background-color: var(--color-text1);
   z-index: 5;
-}
-
-.dropdown-menu ul {
-  z-index: 1000;
 }
 
 .sidebar-nav li.nav a:hover{
