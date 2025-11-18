@@ -20,11 +20,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build soundboard site
+      - name: Build soundboard site 
         run: |
-          sudo apt-get update
-          sudo apt-get install -y python3 python3-pip git
-          python3 bin/soundList.py
+          chmod +x ./bin/soundboardSetup.sh
+          ./bin/soundboardSetup.sh
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
