@@ -20,14 +20,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build soundboard site 
-        run: |
-          chmod +x ./bin/soundboardSetup.sh
-          ./bin/soundboardSetup.sh
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Build soundboard site 
+        run: |
+          chmod +x ./bin/soundboardSetup.sh
+          ./bin/soundboardSetup.sh
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
