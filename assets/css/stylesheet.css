@@ -98,6 +98,7 @@ body {
 
 .dropdown-toggle {
   cursor: pointer;
+  z-index: 4;
 }
 
 .dropdown-menu {
@@ -107,7 +108,7 @@ body {
   top: 100%;
   background: rgb(0,0,0);
   min-width: 200px;
-  z-index: 4;
+  z-index: 5;
 }
 
 .dropdown-menu.show {

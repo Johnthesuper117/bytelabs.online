@@ -6,22 +6,13 @@ _site/
 Gemfile.lock
 **/.ruby-version
 package-lock.json
-
-# Local Netlify folders
-.netlify
+.vscode/
 .env
 .env.*
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# System files
-.DS_Store
-Thumbs.db
-
-# Netlify build files
-.netlify/
 
 # Ruby Bundler
 .bundle/
