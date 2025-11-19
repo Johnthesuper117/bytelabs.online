@@ -41,9 +41,6 @@ h1, ul, p, iframe {
   box-shadow: 0 0 10px #000;
   margin-left: 10px;
   max-width: 900px;
-  text-shadow: 
-    0 0 5px var(--color-text1),
-    0 0 10px var(--color-text1);
 }
 
 body {
