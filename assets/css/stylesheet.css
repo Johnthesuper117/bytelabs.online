@@ -43,13 +43,13 @@ h1, ul, p, iframe {
   max-width: 900px;
 }
 
+.centered {
+  text-align: center;
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text1);
-}
-
-.centered {
-  text-align: center;
 }
 
 .content {
