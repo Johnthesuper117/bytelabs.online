@@ -1,6 +1,15 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 body {
     width: 100%; 
-    max-width: 100%; 
+    max-width: 70%; 
     font-family: monospace; 
     border: 1px dashed green; 
     margin: 0;

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{Johnthesuper117}" }
-gem 'bundler', '>= 2.7.2'
+gem 'bundler', '>= 4.0.0'
 gem 'jekyll', '~> 4.4.1'
 gem 'faraday', '~> 2.0.0'
 gem 'faraday-retry', '~> 2.3.2'
