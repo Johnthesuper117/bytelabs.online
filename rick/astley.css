@@ -1,0 +1,9 @@
+body {
+    width: 100%; 
+    max-width: 100%; 
+    font-family: monospace; 
+    border: 1px dashed green; 
+    margin: 0;
+    color: green;
+    background-color: black;
+}
