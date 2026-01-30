@@ -1,7 +1,40 @@
+"use client";
+
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useEffect } from 'react';
 
 export default function GuidePage() {
+  useEffect(() => {
+    // Add the hidden button after the content is rendered
+    const button = document.createElement('button');
+    button.style.cssText = `
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      opacity: 0;
+      z-index: 9999;
+    `;
+    button.textContent = '🔑'; // Key emoji
+    button.onclick = () => {
+      window.location.href = '/hidden/lore/secrets/cloaker.html';
+    };
+    
+    // Add the button to the body
+    document.body.appendChild(button);
+    
+    // Clean up on unmount
+    return () => {
+      document.body.removeChild(button);
+    };
+  }, []);
+
   return (
     <>
       <script defer src="/assets/js/dynamicTitle.js"></script>
