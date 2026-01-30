@@ -1,13 +1,26 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Added useEffect import
 import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 
-(function() {const signalUnsavedChanges = (event: any) => {event.preventDefault();event.returnValue = '';};window.addEventListener('beforeunload', signalUnsavedChanges);})();
-
 export default function CloakerPage() {
   const [url, setUrl] = useState('');
+
+  // FIX: This useEffect replaces the code from Line 7
+  useEffect(() => {
+    const signalUnsavedChanges = (event: any) => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+
+    window.addEventListener('beforeunload', signalUnsavedChanges);
+
+    // Cleanup: Remove the listener when the user leaves the page to prevent memory leaks
+    return () => {
+      window.removeEventListener('beforeunload', signalUnsavedChanges);
+    };
+  }, []);
 
   const openWebsite = () => {
     const trimmedUrl = url.trim();
@@ -34,6 +47,10 @@ export default function CloakerPage() {
 
   return (
     <>
+      {/* Note: In Next.js, it is usually better to use the <Script> component 
+        imported from 'next/script' instead of a standard <script> tag, 
+        but this will likely work for now.
+      */}
       <script defer src="/assets/js/dynamicTitle.js"></script>
       <h1>Website Cloaker</h1>
       <Navbar />
