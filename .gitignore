@@ -17,3 +17,6 @@ yarn-error.log*
 # Ruby Bundler
 .bundle/
 vendor/bundle/
+
+.next/
+out/
