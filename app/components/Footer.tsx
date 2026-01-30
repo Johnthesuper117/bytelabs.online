@@ -1,0 +1,14 @@
+export default function Footer() {
+  return (
+    <footer>
+      <p>
+        © 2025 ByteLabs. All rights reserved.
+        <br />
+        Site by Johnthesuper117.
+        <br />
+        Send suggestions/comments/questions/etc to me via google forms:
+        <a href="https://forms.gle/LAgGJ36C3mTxAyMK8">Request/Suggestion Form</a>
+      </p>
+    </footer>
+  );
+}

@@ -9,11 +9,11 @@ html {
   font-family: 'VT323', monospace;
   text-shadow: 0 0 5px rgb(from #33ff33 calc(r + 40) calc(g + 40) b);
   background: black;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 300;
   font-style: normal;
   color: var(--color-text1);
-  margin: 10px;
+  margin: 0;
   padding: 0;
   height: 100%;
   z-index: 1;
@@ -73,47 +73,52 @@ body {
 /* Sidebar navigation styles */
 .sidebar-nav ul {
   list-style: none;
-  max-width: 200px;
+  max-width: 120px;
   z-index: 3;
+  padding: 0;
+  margin: 0;
 }
 
 .sidebar-nav li {
   position: relative;
   z-index: 3;
+  padding: 3px 0;
 }
 
 .sidebar-nav a {
   display: block;
   color: var(--color-text1);
   text-decoration: none;
+  padding: 6px 10px;
+  font-size: 16px;
 }
 
 .sidebar-nav a.active {
   font-weight: bold;
   background: rgb(0,0,0);
+  border-left: 3px solid var(--color-text1);
 }
 
 .dropdown-toggle {
   cursor: pointer;
   z-index: 4;
+  padding: 6px 10px;
+  font-size: 16px;
 }
 
 .dropdown-menu {
   display: none;
-  position: relative;
+  position: absolute;
   left: 0;
   top: 100%;
   background: rgb(0,0,0);
-  min-width: 200px;
+  min-width: 150px;
   z-index: 5;
+  border: 1px solid var(--color-text1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
-.dropdown-menu.show {
-  display: block;
-}
-
-.dropdown:hover > .dropdown-menu,
-.dropdown:focus-within > .dropdown-menu {
+.dropdown:focus > .dropdown-menu {
   display: block;
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -128,22 +133,25 @@ body {
 }
 
 .dropdown-menu li a {
-  padding: 10px 10px;
+  padding: 6px 8px;
   color: var(--color-text1);
   text-decoration: none;
   background: rgba(0,0,0,0.75);
   z-index: 5;
+  font-size: 14px;
 }
 
 .dropdown-menu li a:hover {
   color: black;
   background-color: var(--color-text1);
+  padding: 6px 8px;
   z-index: 5;
 }
 
 .sidebar-nav li.nav a:hover{
   color: black;
   background-color: var(--color-text1);
+  padding: 6px 10px;
 }
 
 a:link {
@@ -174,9 +182,9 @@ a:active {
   background-color: var(--color-text2);
   color: var(--color-background1);
   border: none;
-  padding: 15px 30px;
-  margin: 10px;
-  font-size: 18px;
+  padding: 12px 24px;
+  margin: 5px;
+  font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
   z-index: 2;
@@ -188,7 +196,9 @@ a:active {
 
 @font-face {
   font-family: "VT323";
-  src: url("/assets/font/VT323.ttf");
+  src: url("/assets/font/VT323.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @keyframes blink {
