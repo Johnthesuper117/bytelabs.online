@@ -1,4 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js"
+  "/bookmarklets/page": "app/bookmarklets/page.js",
+  "/guide/page": "app/guide/page.js",
+  "/matrix/page": "app/matrix/page.js",
+  "/page": "app/page.js",
+  "/passwordGen/page": "app/passwordGen/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/rick/roll/page": "app/rick/roll/page.js",
+  "/soundboard/page": "app/soundboard/page.js"
 }

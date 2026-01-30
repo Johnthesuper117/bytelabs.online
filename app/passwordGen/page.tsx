@@ -98,6 +98,8 @@ export default function PasswordGenPage() {
     function updateStrengthMeter(password: string, length: number, hasUpper: boolean, hasNumber: boolean, hasSymbol: boolean) {
       let score = 0;
 
+      if(!strengthFillEl || !strengthTextEl) return;
+
       if (length > 5) score++;
       if (length > 10) score++;
       if (hasUpper) score++;
