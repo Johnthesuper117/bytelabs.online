@@ -1,6 +1,7 @@
 'use client';
 
 import Navbar from '../components/Navbar';
+import handleCheckChance from '../components/Navbar';
 import Footer from '../components/Footer';
 import { bookmarklets } from '../data/bookmarklets';
 
@@ -19,7 +20,7 @@ export default function BookmarkletsPage() {
         <ul>
           {bookmarklets.map((bookmarklet, index) => (
             <li key={index}>
-              <a href={bookmarklet.link} onClick={(e) => { e.preventDefault(); handleCheckChance(bookmarklet.link); }}>{bookmarklet.text}</a>
+              <a href={bookmarklet.link} onClick={(e) => { e.preventDefault(); handleCheckChance(); }}>{bookmarklet.text}</a>
             </li>
           ))}
         </ul>

@@ -207,6 +207,7 @@ a:active {
 }
 
 /* Main flicker effect */
+/* Enhanced CRT flicker with more authentic scanline effect */
 @keyframes flicker {
     0% { opacity: 0.93; }
     5% { opacity: 0.89; }
@@ -229,6 +230,133 @@ a:active {
     90% { opacity: 0.96; }
     95% { opacity: 0.93; }
     100% { opacity: 0.95; }
+}
+
+/* Enhanced CRT scanline effect */
+@keyframes scanlines {
+    0% { 
+        background-position: 0 0, 0 0, 0 0;
+        background-size: 100% 2px, 3px 100%, 100% 1px;
+    }
+    25% { 
+        background-position: 0 2px, 0 1px, 0 3px;
+        background-size: 100% 3px, 3px 101%, 100% 2px;
+    }
+    50% { 
+        background-position: 0 4px, 0 3px, 0 6px;
+        background-size: 100% 4px, 3px 102%, 100% 3px;
+    }
+    75% { 
+        background-position: 0 6px, 0 5px, 0 9px;
+        background-size: 100% 5px, 3px 103%, 100% 4px;
+    }
+    100% { 
+        background-position: 0 8px, 0 7px, 0 12px;
+        background-size: 100% 6px, 3px 104%, 100% 5px;
+    }
+}
+
+/* Enhanced text distortion with more complex effects */
+@keyframes textDistort {
+    0% { 
+        text-shadow: 0.05em 0 0 rgba(0,255,0,0.75),
+                    -0.025em -.05em 0 rgba(0,255,0,0.75),
+                    0.025em .05em 0 rgba(0,255,0,0.75);
+    }
+    14% { 
+        text-shadow: 0.05em 0 0 rgba(0,255,0,0.75),
+                    -0.05em -.025em 0 rgba(0,255,0,0.75),
+                    -0.025em .05em 0 rgba(0,255,0,0.75);
+    }
+    15% { 
+        text-shadow: -0.05em -.025em 0 rgba(0,255,0,0.75),
+                    0.025em 0.025em 0 rgba(0,255,0,0.75),
+                    -0.05em -.05em 0 rgba(0,255,0,0.75);
+    }
+    49% {
+        text-shadow: -0.05em 0 0 rgba(0,255,0,0.75),
+                    0.025em 0.025em 0 rgba(0,255,0,0.75),
+                    -0.025em 0.05em 0 rgba(0,255,0,0.75);
+    }
+    50% {
+        text-shadow: 0.025em 0.05em 0 rgba(0,255,0,0.75),
+                    0.05em 0 0 rgba(0,255,0,0.75),
+                    0 -0.05em 0 rgba(0,255,0,0.75);
+    }
+    99% {
+        text-shadow: 0.025em 0 0 rgba(0,255,0,0.75),
+                    0.05em 0 0 rgba(0,255,0,0.75),
+                    0 -0.05em 0 rgba(0,255,0,0.75);
+    }
+    100% {
+        text-shadow: -0.025em 0 0 rgba(0,255,0,0.75),
+                    -0.025em -0.025em 0 rgba(0,255,0,0.75),
+                    -0.025em -0.05em 0 rgba(0,255,0,0.75);
+    }
+    
+    /* Additional distortion phases */
+    25% { 
+        text-shadow: 0.1em 0.1em 0 rgba(0,255,0,0.6),
+                    -0.1em -0.1em 0 rgba(0,255,0,0.6),
+                    0.05em 0.05em 0 rgba(0,255,0,0.6);
+    }
+    75% { 
+        text-shadow: -0.1em 0.1em 0 rgba(0,255,0,0.6),
+                    0.1em -0.1em 0 rgba(0,255,0,0.6),
+                    -0.05em 0.05em 0 rgba(0,255,0,0.6);
+    }
+}
+
+/* Glitch effect for occasional screen corruption */
+@keyframes glitch {
+    0%, 100% { 
+        transform: translate(0);
+        filter: hue-rotate(0deg);
+    }
+    20% { 
+        transform: translate(-2px, 2px);
+        filter: hue-rotate(90deg);
+    }
+    40% { 
+        transform: translate(-2px, -2px);
+        filter: hue-rotate(180deg);
+    }
+    60% { 
+        transform: translate(2px, 2px);
+        filter: hue-rotate(270deg);
+    }
+    80% { 
+        transform: translate(2px, -2px);
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Terminal boot sequence animation */
+@keyframes terminalBoot {
+    0% { 
+        opacity: 0;
+        transform: scale(0.8) translateY(50px);
+    }
+    50% { 
+        opacity: 0.5;
+        transform: scale(1.1) translateY(-20px);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Loading cursor animation */
+@keyframes loadingCursor {
+    0%, 49% { 
+        background: #33ff33;
+        box-shadow: 0 0 10px #33ff33;
+    }
+    50%, 100% { 
+        background: #00cc00;
+        box-shadow: 0 0 20px #00cc00;
+    }
 }
 
 /* Intense flicker for occasional glitches */
