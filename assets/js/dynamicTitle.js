@@ -1,9 +1,9 @@
 window.onload = function () {
   const favicon = document.getElementById('favicon')
   const pageTitle = document.title
-  const attentionMessage = 'Come back'
+  const attentionMessage = 'Come back pls 🙏'
 
-  document.addEventListener('visibilitychange', function (e) {
+  document.addEventListener('visibilitychange', function () {
     const isPageActive = !document.hidden
     toggle(isPageActive)
   })
@@ -11,10 +11,10 @@ window.onload = function () {
   function toggle(isPageActive) {
     if (isPageActive) {
       document.title = pageTitle
-      favicon.href = './assets/images/favicon.png'
+      favicon.href = './favicon.ico'
     } else {
       document.title = attentionMessage
-      favicon.href = './assets/images/'
+      favicon.href = './assets/images/favicon.ico'
     }
   }
 }
