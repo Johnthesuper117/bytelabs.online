@@ -5,7 +5,7 @@
   "main": "index.html",
   "dependencies": {
     "dotenv": "^17.2.3",
-    "pg": "^8.17.1"
+    "pg": "^8.17.2"
   },
   "scripts": {
     "build": "bundle exec jekyll build",
