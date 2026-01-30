@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 
+(function() {const signalUnsavedChanges = (event: any) => {event.preventDefault();event.returnValue = '';};window.addEventListener('beforeunload', signalUnsavedChanges);})();
+
 export default function CloakerPage() {
   const [url, setUrl] = useState('');
 
