@@ -1,1 +1,474 @@
-[]
+[
+  {
+    "name": "oneMoreWordOracle",
+    "file": "/assets/sounds/oneMoreWordOracle.mp3"
+  },
+  {
+    "name": "fbi-open-up",
+    "file": "/assets/sounds/fbi-open-up.mp3"
+  },
+  {
+    "name": "trollface",
+    "file": "/assets/sounds/trollface.mp3"
+  },
+  {
+    "name": "tf2-demoman-laugh",
+    "file": "/assets/sounds/tf2-demoman-laugh.mp3"
+  },
+  {
+    "name": "SHEESH",
+    "file": "/assets/sounds/SHEESH.mp3"
+  },
+  {
+    "name": "movieDeath",
+    "file": "/assets/sounds/movieDeath.mp3"
+  },
+  {
+    "name": "reinforcements",
+    "file": "/assets/sounds/reinforcements.mp3"
+  },
+  {
+    "name": "time-skip",
+    "file": "/assets/sounds/time-skip.mp3"
+  },
+  {
+    "name": "dk-yeah",
+    "file": "/assets/sounds/dk-yeah.mp3"
+  },
+  {
+    "name": "prowler-sfx",
+    "file": "/assets/sounds/prowler-sfx.mp3"
+  },
+  {
+    "name": "tf2-right-behind-you",
+    "file": "/assets/sounds/tf2-right-behind-you.mp3"
+  },
+  {
+    "name": "requiem",
+    "file": "/assets/sounds/requiem.mp3"
+  },
+  {
+    "name": "kira-laugh",
+    "file": "/assets/sounds/kira-laugh.mp3"
+  },
+  {
+    "name": "chicken-jockey-loud",
+    "file": "/assets/sounds/chicken-jockey-loud.mp3"
+  },
+  {
+    "name": "heavy_i_am_bullet_proof",
+    "file": "/assets/sounds/heavy_i_am_bullet_proof.mp3"
+  },
+  {
+    "name": "halo-skill-issue",
+    "file": "/assets/sounds/halo-skill-issue.mp3"
+  },
+  {
+    "name": "halo-untouchable",
+    "file": "/assets/sounds/halo-untouchable.mp3"
+  },
+  {
+    "name": "engineer_no",
+    "file": "/assets/sounds/engineer_no.mp3"
+  },
+  {
+    "name": "teamate_gained",
+    "file": "/assets/sounds/teamate_gained.mp3"
+  },
+  {
+    "name": "beatboxingTetris",
+    "file": "/assets/sounds/beatboxingTetris.mp3"
+  },
+  {
+    "name": "you-are-dead-not-big-surprise-sound-effect",
+    "file": "/assets/sounds/you-are-dead-not-big-surprise-sound-effect.mp3"
+  },
+  {
+    "name": "whatIsItGoodForAbsolutelyNothing",
+    "file": "/assets/sounds/whatIsItGoodForAbsolutelyNothing.mp3"
+  },
+  {
+    "name": "say-goodbye-kneecaps",
+    "file": "/assets/sounds/say-goodbye-kneecaps.mp3"
+  },
+  {
+    "name": "halo-first-strike",
+    "file": "/assets/sounds/halo-first-strike.mp3"
+  },
+  {
+    "name": "minos-prime-theme",
+    "file": "/assets/sounds/minos-prime-theme.mp3"
+  },
+  {
+    "name": "meet_the_sniper",
+    "file": "/assets/sounds/meet_the_sniper.mp3"
+  },
+  {
+    "name": "memes-the-dna-of-the-soul",
+    "file": "/assets/sounds/memes-the-dna-of-the-soul.mp3"
+  },
+  {
+    "name": "killjoy",
+    "file": "/assets/sounds/killjoy.mp3"
+  },
+  {
+    "name": "XBOX720",
+    "file": "/assets/sounds/XBOX720.mp3"
+  },
+  {
+    "name": "ta-da",
+    "file": "/assets/sounds/ta-da.mp3"
+  },
+  {
+    "name": "test2",
+    "file": "/assets/sounds/test2.mp3"
+  },
+  {
+    "name": "defense",
+    "file": "/assets/sounds/defense.mp3"
+  },
+  {
+    "name": "yoink-halo",
+    "file": "/assets/sounds/yoink-halo.mp3"
+  },
+  {
+    "name": "xbox-360-startup",
+    "file": "/assets/sounds/xbox-360-startup.mp3"
+  },
+  {
+    "name": "headshot",
+    "file": "/assets/sounds/headshot.mp3"
+  },
+  {
+    "name": "whatIsThePassword",
+    "file": "/assets/sounds/whatIsThePassword.mp3"
+  },
+  {
+    "name": "woboba",
+    "file": "/assets/sounds/woboba.mp3"
+  },
+  {
+    "name": "halo-multiple-kills",
+    "file": "/assets/sounds/halo-multiple-kills.mp3"
+  },
+  {
+    "name": "payday-2-sound-cloaker-scream",
+    "file": "/assets/sounds/payday-2-sound-cloaker-scream.mp3"
+  },
+  {
+    "name": "batmamRidin",
+    "file": "/assets/sounds/batmamRidin.mp3"
+  },
+  {
+    "name": "taco-bell",
+    "file": "/assets/sounds/taco-bell.mp3"
+  },
+  {
+    "name": "galaxy-meme",
+    "file": "/assets/sounds/galaxy-meme.mp3"
+  },
+  {
+    "name": "grass-grows-birds-fly-sun-shines-and-brother-i-hurt-people",
+    "file": "/assets/sounds/grass-grows-birds-fly-sun-shines-and-brother-i-hurt-people.mp3"
+  },
+  {
+    "name": "pillarmanTheme",
+    "file": "/assets/sounds/pillarmanTheme.mp3"
+  },
+  {
+    "name": "let-it-go-tf2",
+    "file": "/assets/sounds/let-it-go-tf2.mp3"
+  },
+  {
+    "name": "timeSkip",
+    "file": "/assets/sounds/timeSkip.wav"
+  },
+  {
+    "name": "imacowardlyfool",
+    "file": "/assets/sounds/imacowardlyfool.mp3"
+  },
+  {
+    "name": "Epitaph",
+    "file": "/assets/sounds/Epitaph.wav"
+  },
+  {
+    "name": "scout-tf2-wananana",
+    "file": "/assets/sounds/scout-tf2-wananana.mp3"
+  },
+  {
+    "name": "SKIP",
+    "file": "/assets/sounds/SKIP.mp3"
+  },
+  {
+    "name": "pleaseStopBeingHuman",
+    "file": "/assets/sounds/pleaseStopBeingHuman.mp3"
+  },
+  {
+    "name": "marineLaugh",
+    "file": "/assets/sounds/marineLaugh.mp3"
+  },
+  {
+    "name": "cloaker-full-difficulty-tweak",
+    "file": "/assets/sounds/cloaker-full-difficulty-tweak.mp3"
+  },
+  {
+    "name": "test1",
+    "file": "/assets/sounds/test1.mp3"
+  },
+  {
+    "name": "hahahaGetInLine",
+    "file": "/assets/sounds/hahahaGetInLine.mp3"
+  },
+  {
+    "name": "comeOnNowIsThatAWeaponOrA",
+    "file": "/assets/sounds/comeOnNowIsThatAWeaponOrA.mp3"
+  },
+  {
+    "name": "hello-its-john-cena",
+    "file": "/assets/sounds/hello-its-john-cena.mp3"
+  },
+  {
+    "name": "thomas-the-tank-engine",
+    "file": "/assets/sounds/thomas-the-tank-engine.mp3"
+  },
+  {
+    "name": "johnsonBooHa",
+    "file": "/assets/sounds/johnsonBooHa.mp3"
+  },
+  {
+    "name": "run",
+    "file": "/assets/sounds/run.mp3"
+  },
+  {
+    "name": "five_mins_remaining",
+    "file": "/assets/sounds/five_mins_remaining.mp3"
+  },
+  {
+    "name": "KABOOM",
+    "file": "/assets/sounds/KABOOM.mp3"
+  },
+  {
+    "name": "game-over-yeah",
+    "file": "/assets/sounds/game-over-yeah.mp3"
+  },
+  {
+    "name": "tf2-bonk",
+    "file": "/assets/sounds/tf2-bonk.mp3"
+  },
+  {
+    "name": "stabx3",
+    "file": "/assets/sounds/stabx3.mp3"
+  },
+  {
+    "name": "ahhyooaaawhoaaa",
+    "file": "/assets/sounds/ahhyooaaawhoaaa.mp3"
+  },
+  {
+    "name": "extermination",
+    "file": "/assets/sounds/extermination.mp3"
+  },
+  {
+    "name": "MIT-LICENSE",
+    "file": "/assets/sounds/MIT-LICENSE"
+  },
+  {
+    "name": "wanna-see-a-magic-trick-tf2",
+    "file": "/assets/sounds/wanna-see-a-magic-trick-tf2.mp3"
+  },
+  {
+    "name": "halo-double-kill",
+    "file": "/assets/sounds/halo-double-kill.mp3"
+  },
+  {
+    "name": "juggernaut",
+    "file": "/assets/sounds/juggernaut.mp3"
+  },
+  {
+    "name": "social-credit-deducted",
+    "file": "/assets/sounds/social-credit-deducted.mp3"
+  },
+  {
+    "name": "halo-touch-grass",
+    "file": "/assets/sounds/halo-touch-grass.mp3"
+  },
+  {
+    "name": "you-know-the-rules-and-so-do-i-say-goodbye",
+    "file": "/assets/sounds/you-know-the-rules-and-so-do-i-say-goodbye.mp3"
+  },
+  {
+    "name": "tf2-heavy-im-coming-for-you",
+    "file": "/assets/sounds/tf2-heavy-im-coming-for-you.mp3"
+  },
+  {
+    "name": "flashbang",
+    "file": "/assets/sounds/flashbang.mp3"
+  },
+  {
+    "name": "invincible",
+    "file": "/assets/sounds/invincible.mp3"
+  },
+  {
+    "name": "oof",
+    "file": "/assets/sounds/oof.mp3"
+  },
+  {
+    "name": "perfection",
+    "file": "/assets/sounds/perfection.mp3"
+  },
+  {
+    "name": "road-rage",
+    "file": "/assets/sounds/road-rage.mp3"
+  },
+  {
+    "name": "marineGrenade",
+    "file": "/assets/sounds/marineGrenade.mp3"
+  },
+  {
+    "name": "hail_to_the_king",
+    "file": "/assets/sounds/hail_to_the_king.mp3"
+  },
+  {
+    "name": "mario-no-one-asked-for-your-opinion",
+    "file": "/assets/sounds/mario-no-one-asked-for-your-opinion.mp3"
+  },
+  {
+    "name": "levelUp",
+    "file": "/assets/sounds/levelUp.mp3"
+  },
+  {
+    "name": "ive-taken-a-grievous-wound",
+    "file": "/assets/sounds/ive-taken-a-grievous-wound.mp3"
+  },
+  {
+    "name": "yippeeeeeeeeeeeeee",
+    "file": "/assets/sounds/yippeeeeeeeeeeeeee.mp3"
+  },
+  {
+    "name": "judgment",
+    "file": "/assets/sounds/judgment.mp3"
+  },
+  {
+    "name": "gameover",
+    "file": "/assets/sounds/gameover.mp3"
+  },
+  {
+    "name": "super-luigi-on-the-xbox-one",
+    "file": "/assets/sounds/super-luigi-on-the-xbox-one.mp3"
+  },
+  {
+    "name": "killionaire",
+    "file": "/assets/sounds/killionaire.mp3"
+  },
+  {
+    "name": "metal-pipe-clang",
+    "file": "/assets/sounds/metal-pipe-clang.mp3"
+  },
+  {
+    "name": "heavy_no",
+    "file": "/assets/sounds/heavy_no.mp3"
+  },
+  {
+    "name": "iAmAGenius",
+    "file": "/assets/sounds/iAmAGenius.mp3"
+  },
+  {
+    "name": "eliteWort",
+    "file": "/assets/sounds/eliteWort.mp3"
+  },
+  {
+    "name": "ahThatllPutTheFearInThem",
+    "file": "/assets/sounds/ahThatllPutTheFearInThem.mp3"
+  },
+  {
+    "name": "scout-boink",
+    "file": "/assets/sounds/scout-boink.mp3"
+  },
+  {
+    "name": "hold-up",
+    "file": "/assets/sounds/hold-up.mp3"
+  },
+  {
+    "name": "keyboard",
+    "file": "/assets/sounds/keyboard.mp3"
+  },
+  {
+    "name": "epic-fail",
+    "file": "/assets/sounds/epic-fail.mp3"
+  },
+  {
+    "name": "chicken-jockey",
+    "file": "/assets/sounds/chicken-jockey.mp3"
+  },
+  {
+    "name": "SODA",
+    "file": "/assets/sounds/SODA.mp3"
+  },
+  {
+    "name": "emotionalDamage",
+    "file": "/assets/sounds/emotionalDamage.mp3"
+  },
+  {
+    "name": "heavy_oh_no",
+    "file": "/assets/sounds/heavy_oh_no.mp3"
+  },
+  {
+    "name": "fart",
+    "file": "/assets/sounds/fart.mp3"
+  },
+  {
+    "name": "meme-song",
+    "file": "/assets/sounds/meme-song.mp3"
+  },
+  {
+    "name": "assault",
+    "file": "/assets/sounds/assault.mp3"
+  },
+  {
+    "name": "heavy_ratata",
+    "file": "/assets/sounds/heavy_ratata.mp3"
+  },
+  {
+    "name": "betrayal",
+    "file": "/assets/sounds/betrayal.mp3"
+  },
+  {
+    "name": "this-prison-to-hold-me",
+    "file": "/assets/sounds/this-prison-to-hold-me.mp3"
+  },
+  {
+    "name": "tf2-heavy-om-nom-nom-sound-effect",
+    "file": "/assets/sounds/tf2-heavy-om-nom-nom-sound-effect.mp3"
+  },
+  {
+    "name": "nani",
+    "file": "/assets/sounds/nani.mp3"
+  },
+  {
+    "name": "censorBeep",
+    "file": "/assets/sounds/censorBeep.mp3"
+  },
+  {
+    "name": "ENDSKIP",
+    "file": "/assets/sounds/ENDSKIP.wav"
+  },
+  {
+    "name": "tf2-spy-peekaboo-sound-effect",
+    "file": "/assets/sounds/tf2-spy-peekaboo-sound-effect.mp3"
+  },
+  {
+    "name": "mustard",
+    "file": "/assets/sounds/mustard.mp3"
+  },
+  {
+    "name": "ladies-and-gentlemen-we-got-him-song",
+    "file": "/assets/sounds/ladies-and-gentlemen-we-got-him-song.mp3"
+  },
+  {
+    "name": "think-fast",
+    "file": "/assets/sounds/think-fast.mp3"
+  },
+  {
+    "name": "heavy_laugh",
+    "file": "/assets/sounds/heavy_laugh.mp3"
+  }
+]
