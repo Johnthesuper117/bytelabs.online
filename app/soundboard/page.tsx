@@ -1,16 +1,28 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { sounds } from '../data/soundboard';
 
 export default function SoundboardPage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [sounds, setSounds] = useState<{name: string; file: string}[]>([]);
 
   useEffect(() => {
     // Initialize audio element
     audioRef.current = new Audio();
+
+    // fetch the generated JSON
+    (async () => {
+      try {
+        const res = await fetch('/soundboard.json');
+        if (!res.ok) return;
+        const data = await res.json();
+        setSounds(data);
+      } catch (e) {
+        // silent fail
+      }
+    })();
   }, []);
 
   const playSound = (file: string) => {
@@ -27,9 +39,9 @@ export default function SoundboardPage() {
       <Navbar />
       <div className="content">
         {sounds.map((sound, index) => (
-          <button 
-            key={index} 
-            className="button" 
+          <button
+            key={index}
+            className="button"
             onClick={() => playSound(sound.file)}
           >
             {sound.name}

@@ -11,4 +11,6 @@
 
 # run soundboard setup script
     - name: Run Soundboard setup script
-      command: python3 soundboardSetup.py
+      command: bash soundboardSetup.sh
+      args:
+        chdir: /workspaces/bytelabs.online

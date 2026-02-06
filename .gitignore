@@ -89,3 +89,6 @@ jspm_packages/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Allow soundboard.json to be committed so it's available immediately
+!/public/soundboard.json
