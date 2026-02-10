@@ -49,6 +49,9 @@ export default function Navbar() {
                 <li>
                   <Link href="/matrix">Matrix</Link>
                 </li>
+                <li>
+                  <Link href="/hackertyper">Hacker Typer</Link>
+                </li>
               </ul>
             )}
           </li>
