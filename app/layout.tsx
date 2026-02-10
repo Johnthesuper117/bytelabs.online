@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Navbar from '@/app/components/Navbar';
 import DynamicTitle from '@/app/components/DynamicTitle';
@@ -6,10 +6,14 @@ import DynamicTitle from '@/app/components/DynamicTitle';
 export const metadata: Metadata = {
   title: 'Bytelabs.online',
   description: 'Projects, programs, games, and more!',
-  viewport: 'width=device-width, initial-scale=1',
   icons: {
     icon: '/favicon.ico',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
