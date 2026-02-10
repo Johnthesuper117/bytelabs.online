@@ -46,4 +46,4 @@ if __name__ == "__main__":
         get_files_as_json(sys.argv[1])
     else:
         # default: look in ./assets/sounds/
-        get_files_as_json("./assets/sounds/")
+        get_files_as_json("./public/assets/sounds/")
