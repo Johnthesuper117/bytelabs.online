@@ -1,56 +1,10 @@
-'use client';
+import Soundboard from '@/app/components/Soundboard';
 
-import { useEffect, useRef, useState } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+export const metadata = {
+  title: 'Soundboard - Bytelabs.online',
+  description: 'Interactive soundboard',
+};
 
 export default function SoundboardPage() {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [sounds, setSounds] = useState<{name: string; file: string}[]>([]);
-
-  useEffect(() => {
-    // Initialize audio element
-    audioRef.current = new Audio();
-
-    // fetch the generated JSON
-    (async () => {
-      try {
-        const res = await fetch('/soundboard.json');
-        if (!res.ok) return;
-        const data = await res.json();
-        setSounds(data);
-      } catch (e) {
-        // silent fail
-      }
-    })();
-  }, []);
-
-  const playSound = (file: string) => {
-    if (audioRef.current) {
-      audioRef.current.src = file;
-      audioRef.current.play();
-    }
-  };
-
-  return (
-    <>
-      <script defer src="/assets/js/dynamicTitle.js"></script>
-      <h1>Soundboard</h1>
-      <Navbar />
-      <div className="content">
-        {sounds.map((sound, index) => (
-          <button
-            key={index}
-            className="button"
-            onClick={() => playSound(sound.file)}
-          >
-            {sound.name}
-          </button>
-        ))}
-        <br />
-        <br />
-      </div>
-      <Footer />
-    </>
-  );
+  return <Soundboard />;
 }

@@ -1,8 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
 :root {
-  --color-background1: rgb(0, 0, 0);
-  --color-text1: #33ff33;
-  --color-text2: rgb(0, 200, 0);
-  --green: #33ff33;
+  --color-black: #000000;
+  --color-green: #00FF41;
+  --color-yellow: #FFD300;
+  --color-red: #FF3131;
+  --color-dark-green: #003300;
+  --color-border: #00FF41;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-black);
+  color: var(--color-green);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  letter-spacing: 0.3px;
+}
+
+body {
+  position: relative;
+}
+
+/* Terminal-style text glow effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 65, 0.03),
+    rgba(0, 255, 65, 0.03) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  z-index: -1;
+}
+
+a {
+  color: var(--color-green);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+  letter-spacing: 0.3px;
+}
+
+a:hover {
+  color: var(--color-yellow);
+  text-shadow: 0 0 10px var(--color-yellow);
+  border-bottom-color: var(--color-yellow);
+}
+
+button {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  text-shadow: 0 0 10px var(--color-yellow);
+}
+
+/* Utility classes */
+.terminal-glow {
+  text-shadow: 0 0 10px var(--color-green), 0 0 20px var(--color-green);
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-green);
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--color-green);
+  padding-bottom: 15px;
+  text-shadow: 0 0 10px var(--color-green);
+  letter-spacing: 1px;
+}
+
+.container {
+  max-width: 3200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 html {
@@ -12,7 +104,7 @@ html {
   font-size: 24px;
   font-weight: 300;
   font-style: normal;
-  color: var(--color-text1);
+  color: var(--color-green);
   margin: 10px;
   padding: 0;
   height: 100%;
@@ -36,7 +128,7 @@ html {
 }
 
 h1, ul, p, iframe {
-  color: var(--color-text1);
+  color: var(--color-green);
   padding: 5px;
   box-shadow: 0 0 10px #000;
   margin-left: 10px;
@@ -49,11 +141,11 @@ h1, ul, p, iframe {
 
 body {
   min-height: 100vh;
-  color: var(--color-text1);
+  color: var(--color-green);
 }
 
 .content {
-  color: var(--color-text1);
+  color: var(--color-green);
   position: relative;
   z-index: 2;
 }
@@ -84,7 +176,7 @@ body {
 
 .sidebar-nav a {
   display: block;
-  color: var(--color-text1);
+  color: var(--color-green);
   text-decoration: none;
   transition: all 0.3s ease;
   padding: 10px 15px;
@@ -94,7 +186,7 @@ body {
 
 .sidebar-nav a:hover {
   color: black;
-  background-color: var(--color-text1);
+  background-color: var(--color-green);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(51, 255, 51, 0.3);
 }
@@ -106,7 +198,7 @@ body {
 
 .dropdown-menu li a {
   padding: 10px 15px;
-  color: var(--color-text1);
+  color: var(--color-green);
   text-decoration: none;
   background: rgba(0,0,0,0.75);
   transition: all 0.3s ease;
@@ -116,7 +208,7 @@ body {
 
 .dropdown-menu li a:hover {
   color: black;
-  background-color: var(--color-text1);
+  background-color: var(--color-green);
   transform: translateX(5px);
   box-shadow: 4px 0 8px rgba(51, 255, 51, 0.3);
 }
@@ -162,7 +254,7 @@ body {
 
 .dropdown-toggle:hover {
   color: black;
-  background-color: var(--color-text1);
+  background-color: var(--color-green);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(51, 255, 51, 0.3);
 }
@@ -202,32 +294,32 @@ body {
 }
 
 a:link {
-  color: var(--color-text1);
+  color: var(--color-green);
   background-color: black;
   text-decoration: none;
 }
 
 a:visited {
-  color: var(--color-text1);
+  color: var(--color-green);
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
   color: black;
-  background-color: var(--color-text1);
+  background-color: var(--color-green);
   text-decoration: underline;
 }
 
 a:active {
   color: black;
-  background-color: var(--color-text1);
+  background-color: var(--color-green);
   text-decoration: underline;
 }
 
 .button {
-  background-color: var(--color-text2);
-  color: var(--color-background1);
+  background-color: var(--color-green);
+  color: var(--color-black);
   border: none;
   padding: 15px 30px;
   margin: 10px;
@@ -238,7 +330,7 @@ a:active {
 }
 
 .button:hover {
-  background-color: var(--color-text1);
+  background-color: var(--color-green);
 }
 
 @font-face {
@@ -329,4 +421,168 @@ a:active {
                     -0.025em -0.025em 0 rgba(0,255,0,0.75),
                     -0.025em -0.05em 0 rgba(0,255,0,0.75);
     }
+}
+
+/* Improved guide and profile page styles */
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-green);
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--color-green);
+  padding-bottom: 10px;
+  text-shadow: 0 0 10px var(--color-green);
+  letter-spacing: 1px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-green);
+  margin-top: 25px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 8px var(--color-green);
+  letter-spacing: 0.5px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-green);
+  margin-top: 15px;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+h5 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-yellow);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 8px var(--color-yellow);
+  letter-spacing: 0.5px;
+}
+
+/* Enhanced list styles */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  margin-left: 0;
+  margin-bottom: 8px;
+  padding-left: 0;
+}
+
+/* Better content spacing */
+.content {
+  padding: 20px 30px;
+  margin-top: 120px;
+  line-height: 1.8;
+}
+
+.content > p {
+  margin-bottom: 20px;
+  max-width: 950px;
+}
+
+.content > h3 + p,
+.content > h2 + p {
+  margin-top: 15px;
+}
+
+/* Profile page centered section */
+.centered {
+  text-align: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.centered h1 {
+  margin-bottom: 30px;
+  font-size: 36px;
+  text-shadow: 0 0 15px var(--color-green);
+}
+
+.centered h5 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  display: inline-block;
+  width: 100%;
+}
+
+.centered p {
+  max-width: 800px;
+  margin: 0 auto 15px auto;
+  line-height: 1.8;
+}
+
+/* Badge and image styling */
+.centered img {
+  max-width: 100%;
+  height: auto;
+  margin: 15px 0;
+  display: inline-block;
+  border: 2px solid var(--color-green);
+  padding: 5px;
+  border-radius: 4px;
+}
+
+/* Better link spacing in guide */
+.content a {
+  display: inline-block;
+  margin: 5px 0;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.content a:hover {
+  border-bottom-color: var(--color-yellow);
+  background-color: rgba(255, 211, 0, 0.05);
+  padding: 5px 10px;
+}
+
+/* Better br tag handling */
+br {
+  line-height: 1.5;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .content {
+    padding: 15px 20px;
+    margin-top: 100px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-top: 30px;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  h5 {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+
+  .centered {
+    padding: 15px;
+  }
+
+  .centered h1 {
+    font-size: 28px;
+  }
+
+  .centered img {
+    max-width: 90%;
+  }
 }

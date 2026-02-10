@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'; // Added useEffect import
 import Navbar from '../../../../components/Navbar';
-import Footer from '../../../../components/Footer';
 
 export default function CloakerPage() {
   const [url, setUrl] = useState('');
@@ -47,12 +46,8 @@ export default function CloakerPage() {
 
   return (
     <>
-      {/* Note: In Next.js, it is usually better to use the <Script> component 
-        imported from 'next/script' instead of a standard <script> tag, 
-        but this will likely work for now.
-      */}
       <script defer src="/assets/js/dynamicTitle.js"></script>
-      <h1>Website Cloaker</h1>
+      <h1>&gt; WEBSITE CLOAKER</h1>
       <Navbar />
       <div className="content">
         <p>
@@ -66,11 +61,19 @@ export default function CloakerPage() {
             id="urlInput" 
             value={url}
             onChange={(e) => setUrl(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && openWebsite()}
+            placeholder="https://example.com"
             style={{
-              padding: '8px',
+              padding: '10px',
               marginLeft: '8px',
+              marginRight: '8px',
               borderRadius: '4px',
-              border: '1px solid #ccc'
+              border: '2px solid #00FF41',
+              backgroundColor: '#000000',
+              color: '#00FF41',
+              fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+              fontSize: '14px',
+              width: '300px',
             }}
           />
           <br />
@@ -79,21 +82,36 @@ export default function CloakerPage() {
             onClick={openWebsite}
             style={{
               padding: '10px 20px',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
+              backgroundColor: '#000000',
+              color: '#00FF41',
+              border: '2px solid #00FF41',
               borderRadius: '4px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+              fontWeight: '700',
+              transition: 'all 0.2s ease',
+              textShadow: '0 0 10px #00FF41'
+            }}
+            onMouseEnter={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = '#003300';
+              (e.target as HTMLButtonElement).style.borderColor = '#FFD300';
+              (e.target as HTMLButtonElement).style.color = '#FFD300';
+              (e.target as HTMLButtonElement).style.textShadow = '0 0 10px #FFD300';
+            }}
+            onMouseLeave={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = '#000000';
+              (e.target as HTMLButtonElement).style.borderColor = '#00FF41';
+              (e.target as HTMLButtonElement).style.color = '#00FF41';
+              (e.target as HTMLButtonElement).style.textShadow = '0 0 10px #00FF41';
             }}
           >
-            Open Website
+            OPEN WEBSITE
           </button>
           <br />
           <br />
           Note that not all links will work, since some block embedded iframes.
         </p>
       </div>
-      <Footer />
     </>
   );
 }

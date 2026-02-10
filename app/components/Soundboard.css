@@ -1,0 +1,118 @@
+.soundboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.soundboard-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #00FF41;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #00FF41;
+  padding-bottom: 20px;
+  text-shadow: 0 0 10px #00FF41;
+}
+
+.soundboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.sound-button {
+  background-color: #000000;
+  border: 2px solid #00FF41;
+  color: #00FF41;
+  padding: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100px;
+  justify-content: center;
+  text-align: center;
+}
+
+.sound-button:hover {
+  background-color: #003300;
+  border-color: #FFD300;
+  color: #FFD300;
+  text-shadow: 0 0 10px #FFD300;
+  box-shadow: 0 0 20px rgba(255, 211, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.sound-button:active {
+  background-color: #FF3131;
+  border-color: #FF3131;
+  color: #000000;
+  text-shadow: none;
+  transform: scale(0.98);
+}
+
+.button-text {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.loading,
+.error,
+.no-sounds {
+  font-size: 18px;
+  padding: 40px;
+  border: 2px solid #00FF41;
+  background-color: #003300;
+  color: #00FF41;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: 0 0 10px #00FF41;
+}
+
+.error {
+  border-color: #FF3131;
+  background-color: #330000;
+  color: #FF3131;
+  text-shadow: 0 0 10px #FF3131;
+}
+
+.no-sounds {
+  border-color: #FFD300;
+  background-color: #333300;
+  color: #FFD300;
+  text-shadow: 0 0 10px #FFD300;
+}
+
+small {
+  display: block;
+  font-size: 12px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .soundboard-title {
+    font-size: 24px;
+  }
+
+  .soundboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .sound-button {
+    padding: 15px;
+    min-height: 80px;
+    font-size: 12px;
+  }
+
+  .button-text {
+    font-size: 14px;
+  }
+}

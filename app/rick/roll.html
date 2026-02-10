@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Never Gonna Give You Up</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+      color: #00FF41;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    canvas {
+      border: 3px solid #00FF41;
+      box-shadow: 0 0 20px #00FF41;
+      max-width: 90vw;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="rickCanvas"></canvas>
+  <audio id="rickAudio" src="/assets/sounds/bitRick.wav" autoplay loop></audio>
+  
+  <script src="/frames.js"></script>
+  <script>
+    const canvas = document.getElementById('rickCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 800;
+    canvas.height = 600;
+
+    let frameIndex = 0;
+
+    const animate = () => {
+      if (typeof frames !== 'undefined' && frames.length > 0) {
+        const frame = frames[frameIndex % frames.length];
+        
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#00FF41';
+        ctx.font = '12px monospace';
+        const lines = frame.split('\n');
+        lines.forEach((line, i) => {
+          ctx.fillText(line, 10, 20 + i * 15);
+        });
+
+        frameIndex++;
+      }
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    document.getElementById('rickAudio').play().catch(err => {
+      console.error('Audio playback failed:', err);
+    });
+  </script>
+</body>
+</html>

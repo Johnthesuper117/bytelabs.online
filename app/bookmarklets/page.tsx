@@ -2,7 +2,6 @@
 
 import Navbar from '../components/Navbar';
 import handleCheckChance from '../components/Navbar';
-import Footer from '../components/Footer';
 import { bookmarklets } from '../data/bookmarklets';
 
 export default function BookmarkletsPage() {
@@ -25,7 +24,6 @@ export default function BookmarkletsPage() {
           ))}
         </ul>
       </div>
-      <Footer />
     </>
   );
 }

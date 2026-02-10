@@ -1,7 +1,6 @@
 "use client";
 
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { useEffect } from 'react';
 
 export default function GuidePage() {
@@ -23,7 +22,7 @@ export default function GuidePage() {
     `;
     button.textContent = '🔑'; // Key emoji
     button.onclick = () => {
-      window.location.href = '/hidden/lore/secrets/cloaker.html';
+      window.location.href = '/hidden/lore/secrets/cloaker';
     };
     
     // Add the button to the body
@@ -94,7 +93,6 @@ export default function GuidePage() {
           <br />
         </ul>
       </div>
-      <Footer />
     </>
   );
 }
