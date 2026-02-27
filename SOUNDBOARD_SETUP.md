@@ -4,12 +4,15 @@
 
 1. Place your audio files in `./assets/sounds/`
 2. Run the generator:
+
    ```bash
    python3 ./bin/soundList.py "./assets/sounds/"
    ```
+
    This creates `public/soundboard.json` with all sound files.
 
 3. Start the dev server:
+
    ```bash
    npm run dev
    ```

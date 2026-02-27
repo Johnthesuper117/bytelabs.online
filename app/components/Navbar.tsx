@@ -25,6 +25,37 @@ export default function Navbar() {
             </Link>
           </li>
 
+                    <li className="nav-item dropdown">
+            <button
+              type="button"
+              className="nav-link dropdown-toggle"
+              onClick={toggleDropdown}
+              aria-expanded={isDropdownOpen}
+              aria-haspopup="true"
+            >
+              Training ▼
+            </button>
+            {isDropdownOpen && (
+              <ul className="dropdown-menu">
+                <li>
+                  <Link href="/CPSTracker">Clicks Per Second Tracker</Link>
+                </li>
+                <li>
+                  <Link href="/AimTrainer">Aim Trainer</Link>
+                </li>
+                <li>
+                  <Link href="/RTTrainer">Reaction Time Trainer</Link>
+                </li>
+                <li>
+                  <Link href="/QTETrainer">Quick Time Event Trainer</Link>
+                </li>
+                <li>
+                  <Link href="/CITrainer">Command Input Trainer</Link>
+                </li>
+              </ul>
+            )}
+          </li>
+
           <li className="nav-item dropdown">
             <button
               type="button"

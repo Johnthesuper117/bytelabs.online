@@ -41,13 +41,14 @@ export default function GuidePage() {
       <Navbar />
       <div className="content">
         <h3>Step 1: Where to start?</h3>
-        The first thing you need to do is decide what you want to achive with you code. Do you want to calculate math problems? Search for specific data in a list? Program hardware? Make a website? Create a video game to entertain? Once you decide this, you need to figure out which coding language is best for the job while keeping in mind what resourses you have.
+        The first thing you need to do is decide what you want to achieve with your code. Do you want to calculate math problems? Search for specific data in a list? Program hardware? Make a website? Create a video game to entertain? Once you decide this, you need to figure out which coding language is best for the job while keeping in mind what resources you have.
 
         <h3>Step 2: Training Arc</h3>
-        Learn the basics of the coding language(s) you chose. There are plenty of websites and videos you can use to learn the language. Note, while there are books you can use, they more expensive than videos and are not updated like official docs or other websites.
+        Learn the basics of the coding language(s) you chose. There are plenty of websites and videos you can use to learn the language. Note, while there are books you can use, they are more expensive than videos and are not updated like official docs or other websites.
 
         <h3>Step 3: Practicing make progress</h3>
-        Keep practicing by making small projects with different goals so as to build your skill variety and efficiency. Make sure to be consistent and practice at least a little as often as your able.
+        Keep practicing by making small projects with different goals so as to build your skill variety and efficiency. Make sure to be consistent and practice at least a little as often as you're able.
+
         <br />
         <br />
 
