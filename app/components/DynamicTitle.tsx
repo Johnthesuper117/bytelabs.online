@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 export default function DynamicTitle() {
   useEffect(() => {
     const pageTitle = document.title;
-    const attentionMessage = 'Come back pls 🙏';
+    const attentionMessage = 'GET OVER HERE!';
 
     const handleVisibilityChange = () => {
       const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
