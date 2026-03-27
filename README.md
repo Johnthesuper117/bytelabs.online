@@ -7,6 +7,8 @@
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/Johnthesuper117/bytelabs.online?style=for-the-badge)
 
+![Visual Overview](./assets/images/BytelabsOnline-visual-overview.png)
+
 This is my website, where I put projects/programs/games and more by me!  
 
 Send Requests/Suggetions [here:](https://forms.gle/LAgGJ36C3mTxAyMK8)
