@@ -269,7 +269,7 @@ export default function RTTrainer() {
               </div>
             )}
 
-            {state === 'clicked' && reactionTime !== null && reactionTime !== null && reactionTime !== null && (
+            {state === 'clicked' && reactionTime !== null && (
               <div style={{ textAlign: 'center' }}>
                 {reactionTime === -1 ? (
                   <>

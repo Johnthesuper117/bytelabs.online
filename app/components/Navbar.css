@@ -92,6 +92,14 @@
   cursor: pointer;
 }
 
+/* Active page indicator */
+.nav-link-active {
+  color: #FFD300 !important;
+  border-color: #FFD300 !important;
+  text-shadow: 0 0 10px #FFD300 !important;
+  background-color: rgba(255, 211, 0, 0.05) !important;
+}
+
 /* Visually indicate when dropdown is open using aria-expanded */
 .dropdown-toggle[aria-expanded="true"] {
   color: #FFD300;
@@ -189,7 +197,7 @@ a {
   }
 
   .nav-menu.active {
-    max-height: 400px;
+    max-height: 500px;
   }
 
   .nav-item {
@@ -220,5 +228,17 @@ a {
 
   .hamburger {
     display: flex;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
 }

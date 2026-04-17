@@ -6,7 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: 'Bytelabs.online',
-  description: 'Projects, programs, games, and more!',
+  description: 'Projects, programs, games, and more! A portfolio by Johnthesuper117.',
   icons: {
     icon: '/favicon.ico',
   },

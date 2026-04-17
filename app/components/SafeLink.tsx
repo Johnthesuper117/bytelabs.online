@@ -11,7 +11,7 @@ interface SafeLinkProps {
 }
 
 export default function SafeLink({ href, children, className, ...props }: SafeLinkProps) {
-  const rareUrl = typeof window !== 'undefined' ? window.location.origin + '/rick/roll.html' : '/rick/roll.html';
+  const rareUrl = typeof window !== 'undefined' ? window.location.origin + '/rick' : '/rick';
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const randomNumber = Math.floor(Math.random() * 100) + 1;
