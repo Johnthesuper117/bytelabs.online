@@ -24,6 +24,10 @@ export default function CPSTracker() {
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const maxCpsRef = useRef(0);
   const cooldownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [personalBestCps, setPersonalBestCps] = useState<number | null>(() => {
+    if (typeof window === 'undefined') return null;
+    try { const s = localStorage.getItem('cpstracker_best'); return s ? Number(s) : null; } catch { return null; }
+  });
 
   const startSession = () => {
     setSessionActive(true);
@@ -83,6 +87,16 @@ export default function CPSTracker() {
             setStats(finalStats);
             setHistory((prev) => [finalStats, ...prev]);
             setTotalClicks((prev) => prev + clickCountRef.current);
+
+            // Persist personal best CPS
+            setPersonalBestCps((pb) => {
+              const newCps = finalStats.cps;
+              if (pb === null || newCps > pb) {
+                try { localStorage.setItem('cpstracker_best', String(newCps)); } catch (_) {}
+                return newCps;
+              }
+              return pb;
+            });
             
             if (timerIntervalRef.current) {
               clearInterval(timerIntervalRef.current);
@@ -232,6 +246,11 @@ export default function CPSTracker() {
                 : '0.00'} CPS
             </div>
             <p style={{ fontSize: '14px' }}>Current Speed</p>
+            {personalBestCps !== null && (
+              <p style={{ fontSize: '12px', marginTop: '14px', color: '#FFD300', opacity: 0.8 }}>
+                🏆 Best: {personalBestCps.toFixed(2)} CPS
+              </p>
+            )}
           </div>
         </div>
 

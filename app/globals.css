@@ -92,23 +92,34 @@ button:hover {
 }
 
 .container {
-  max-width: 3200px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 html {
-  font-family: 'VT323', monospace;
-  text-shadow: 0 0 5px rgb(from #33ff33 calc(r + 40) calc(g + 40) b);
-  background: black;
-  font-size: 24px;
-  font-weight: 300;
-  font-style: normal;
-  color: var(--color-green);
-  margin: 10px;
-  padding: 0;
-  height: 100%;
   z-index: 1;
+}
+
+/* Project card for homepage grid */
+.project-card {
+  display: block;
+  padding: 20px;
+  border: 2px solid #00FF41;
+  border-radius: 4px;
+  background: rgba(0, 20, 0, 0.5);
+  color: #00FF41;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(0,255,65,0.1);
+}
+
+.project-card:hover {
+  border-color: #FFD300;
+  color: #FFD300;
+  box-shadow: 0 0 20px rgba(255,211,0,0.3);
+  background: rgba(0, 30, 0, 0.7);
+  text-decoration: none;
 }
 
 .background {
@@ -127,16 +138,30 @@ html {
   animation: flicker 0.15s infinite;
 }
 
-h1, ul, p, iframe {
+iframe {
   color: var(--color-green);
-  padding: 5px;
-  box-shadow: 0 0 10px #000;
-  margin-left: 10px;
-  max-width: 900px;
 }
 
 .centered {
   text-align: center;
+}
+
+.not-found-home-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 2px solid #00FF41;
+  color: #00FF41;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.not-found-home-btn:hover {
+  background: #00FF41;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0,255,65,0.4);
 }
 
 body {
@@ -295,7 +320,7 @@ body {
 
 a:link {
   color: var(--color-green);
-  background-color: black;
+  background-color: transparent;
   text-decoration: none;
 }
 

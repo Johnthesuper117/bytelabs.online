@@ -13,7 +13,6 @@ export default function RickRoll() {
   useEffect(() => {
     const loadFrames = async () => {
       try {
-        console.log('Fetching frames.js...');
         const response = await fetch('/frames.js');
         
         if (!response.ok) {
@@ -21,21 +20,15 @@ export default function RickRoll() {
         }
         
         const text = await response.text();
-        console.log('Frames.js content length:', text.length);
         
         if (!text || text.trim().length === 0) {
           throw new Error('frames.js is empty');
         }
 
-        // Parse the frames array from the JavaScript
-        console.log('Parsing frames...');
-        
         try {
           // Create a function that executes the script and returns frames
           const result = new Function('return (function() { ' + text + '; return typeof frames !== "undefined" ? frames : []; })()');
           const loadedFrames = result();
-          
-          console.log('Loaded frames count:', loadedFrames.length);
           
           if (!Array.isArray(loadedFrames) || loadedFrames.length === 0) {
             throw new Error('No frames array found or array is empty');
@@ -72,12 +65,9 @@ export default function RickRoll() {
 
   useEffect(() => {
     if (frames.length === 0 || !preRef.current) {
-      console.log('Frames not ready:', frames.length);
       return;
     }
 
-    console.log('Starting animation with', frames.length, 'frames');
-    
     let frameIndex = 0;
     let animationId: number;
     const fps = 12;

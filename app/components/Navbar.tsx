@@ -2,13 +2,22 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import './Navbar.css';
 
 export default function Navbar() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isTrainingOpen, setIsTrainingOpen] = useState(false);
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const pathname = usePathname();
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const isActive = (href: string) => pathname === href;
+
+  const toggleMobile = () => {
+    setIsMobileOpen(!isMobileOpen);
+    // Close dropdowns when toggling mobile menu
+    setIsTrainingOpen(false);
+    setIsProjectsOpen(false);
   };
 
   return (
@@ -18,39 +27,39 @@ export default function Navbar() {
           &gt; BYTELABS.ONLINE
         </Link>
 
-        <ul className="nav-menu">
+        <ul className={`nav-menu${isMobileOpen ? ' active' : ''}`}>
           <li className="nav-item">
-            <Link href="/" className="nav-link">
+            <Link href="/" className={`nav-link${isActive('/') ? ' nav-link-active' : ''}`}>
               HOME
             </Link>
           </li>
 
-                    <li className="nav-item dropdown">
+          <li className="nav-item dropdown">
             <button
               type="button"
               className="nav-link dropdown-toggle"
-              onClick={toggleDropdown}
-              aria-expanded={isDropdownOpen}
+              onClick={() => { setIsTrainingOpen(!isTrainingOpen); setIsProjectsOpen(false); }}
+              aria-expanded={isTrainingOpen}
               aria-haspopup="true"
             >
-              Training ▼
+              TRAINING ▼
             </button>
-            {isDropdownOpen && (
+            {isTrainingOpen && (
               <ul className="dropdown-menu">
                 <li>
-                  <Link href="/CPSTracker">Clicks Per Second Tracker</Link>
+                  <Link href="/CPSTracker" title="Test how fast you can click">Clicks Per Second Tracker</Link>
                 </li>
                 <li>
-                  <Link href="/AimTrainer">Aim Trainer</Link>
+                  <Link href="/AimTrainer" title="Practice your mouse accuracy">Aim Trainer</Link>
                 </li>
                 <li>
-                  <Link href="/RTTrainer">Reaction Time Trainer</Link>
+                  <Link href="/RTTrainer" title="Measure and improve your reaction speed">Reaction Time Trainer</Link>
                 </li>
                 <li>
-                  <Link href="/QTETrainer">Quick Time Event Trainer</Link>
+                  <Link href="/QTETrainer" title="Practice hitting timed button prompts">Quick Time Event Trainer</Link>
                 </li>
                 <li>
-                  <Link href="/CITrainer">Command Input Trainer</Link>
+                  <Link href="/CITrainer" title="Practice fighting-game style command inputs">Command Input Trainer</Link>
                 </li>
               </ul>
             )}
@@ -60,13 +69,13 @@ export default function Navbar() {
             <button
               type="button"
               className="nav-link dropdown-toggle"
-              onClick={toggleDropdown}
-              aria-expanded={isDropdownOpen}
+              onClick={() => { setIsProjectsOpen(!isProjectsOpen); setIsTrainingOpen(false); }}
+              aria-expanded={isProjectsOpen}
               aria-haspopup="true"
             >
               PROJECTS ▼
             </button>
-            {isDropdownOpen && (
+            {isProjectsOpen && (
               <ul className="dropdown-menu">
                 <li>
                   <Link href="/soundboard">SoundBoard</Link>
@@ -88,23 +97,23 @@ export default function Navbar() {
           </li>
 
           <li className="nav-item">
-            <Link href="/guide" className="nav-link">
+            <Link href="/guide" className={`nav-link${isActive('/guide') ? ' nav-link-active' : ''}`}>
               GUIDE
             </Link>
           </li>
 
           <li className="nav-item">
-            <Link href="/profile" className="nav-link">
+            <Link href="/profile" className={`nav-link${isActive('/profile') ? ' nav-link-active' : ''}`}>
               ABOUT ME
             </Link>
           </li>
-
         </ul>
 
         <button
-          className="hamburger"
-          onClick={toggleDropdown}
+          className={`hamburger${isMobileOpen ? ' active' : ''}`}
+          onClick={toggleMobile}
           aria-label="Toggle navigation"
+          aria-expanded={isMobileOpen}
         >
           <span></span>
           <span></span>
