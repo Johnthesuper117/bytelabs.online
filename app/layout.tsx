@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Navbar from '@/app/components/Navbar';
+import Footer from '@/app/components/Footer';
 import DynamicTitle from '@/app/components/DynamicTitle';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
         <main style={{ paddingTop: '120px' }} className="min-h-screen">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

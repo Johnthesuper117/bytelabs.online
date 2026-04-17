@@ -19,6 +19,15 @@ export default function RTTrainer() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
 
+  // Load personal best from localStorage
+  const [personalBest, setPersonalBest] = useState<number | null>(() => {
+    if (typeof window === 'undefined') return null;
+    try {
+      const saved = localStorage.getItem('rttrainer_best');
+      return saved ? Number(saved) : null;
+    } catch { return null; }
+  });
+
   const startTrial = () => {
     setState('waiting');
     setReactionTime(null);
@@ -93,6 +102,16 @@ export default function RTTrainer() {
         const worst = Math.max(...all);
 
         setStats({ avg, best, worst, count: all.length });
+
+        // Persist personal best
+        setPersonalBest((pb) => {
+          if (pb === null || time < pb) {
+            try { localStorage.setItem('rttrainer_best', String(time)); } catch (_) {}
+            return time;
+          }
+          return pb;
+        });
+
         return newHistory;
       });
 
@@ -385,6 +404,19 @@ export default function RTTrainer() {
                   {stats.count}
                 </p>
               </div>
+              {personalBest !== null && (
+                <div>
+                  <p style={{ fontSize: '12px', opacity: 0.7, marginBottom: '5px' }}>PERSONAL BEST</p>
+                  <p style={{
+                    fontSize: '24px',
+                    fontWeight: 700,
+                    color: '#FFD300',
+                    textShadow: '0 0 10px #FFD300',
+                  }}>
+                    🏆 {personalBest}ms
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 

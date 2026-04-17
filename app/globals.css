@@ -121,6 +121,8 @@ html {
   background: rgba(0, 30, 0, 0.7);
   text-decoration: none;
 }
+
+.background {
   display: block;
   position: relative;
   width: 100%;
@@ -142,6 +144,24 @@ iframe {
 
 .centered {
   text-align: center;
+}
+
+.not-found-home-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 2px solid #00FF41;
+  color: #00FF41;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.not-found-home-btn:hover {
+  background: #00FF41;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0,255,65,0.4);
 }
 
 body {

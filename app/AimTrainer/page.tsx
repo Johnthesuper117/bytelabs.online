@@ -34,6 +34,13 @@ export default function AimTrainer() {
   const gameTimerRef = useRef<NodeJS.Timeout | null>(null);
   const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
   const [selectedDuration, setSelectedDuration] = useState(60);
+  const [bestScore, setBestScore] = useState<{ hits: number; accuracy: number } | null>(() => {
+    if (typeof window === 'undefined') return null;
+    try {
+      const saved = localStorage.getItem('aimtrainer_best');
+      return saved ? JSON.parse(saved) : null;
+    } catch { return null; }
+  });
 
   const getDifficultySettings = (diff: typeof difficulty) => {
     switch (diff) {
@@ -92,6 +99,18 @@ export default function AimTrainer() {
       if (timeLeft === 0) {
         setGameActive(false);
         if (gameTimerRef.current) clearInterval(gameTimerRef.current);
+        // Save best score to localStorage
+        setStats((prev) => {
+          const current = { hits: prev.hits, accuracy: prev.accuracy };
+          setBestScore((old) => {
+            if (!old || current.hits > old.hits) {
+              try { localStorage.setItem('aimtrainer_best', JSON.stringify(current)); } catch (_) {}
+              return current;
+            }
+            return old;
+          });
+          return prev;
+        });
       }
     }, 1000);
   };
@@ -337,6 +356,64 @@ export default function AimTrainer() {
               </div>
             </div>
           </div>
+
+          {/* Restart / Best Score */}
+          {!gameActive && stats.totalShots > 0 && (
+            <div style={{
+              background: 'rgba(0, 20, 0, 0.6)',
+              border: '2px solid #FFD300',
+              padding: '16px',
+              borderRadius: '4px',
+              boxShadow: '0 0 20px rgba(255,211,0,0.2)',
+              textAlign: 'center',
+            }}>
+              <p style={{ fontSize: '13px', color: '#FFD300', fontWeight: 700, marginBottom: '10px' }}>GAME OVER</p>
+              {bestScore && (
+                <p style={{ fontSize: '11px', opacity: 0.7, marginBottom: '10px' }}>
+                  🏆 Best: {bestScore.hits} hits ({(bestScore.accuracy * 100).toFixed(0)}%)
+                </p>
+              )}
+              <button
+                onClick={() => startGame()}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  background: '#00FF41',
+                  border: 'none',
+                  color: '#000',
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontWeight: 700,
+                  fontSize: '13px',
+                  cursor: 'pointer',
+                }}
+              >
+                ▶ RESTART
+              </button>
+            </div>
+          )}
+
+          {/* Instructions */}
+          {!gameActive && stats.totalShots === 0 && (
+            <div style={{
+              background: 'rgba(0, 20, 0, 0.6)',
+              border: '1px solid rgba(0,255,65,0.3)',
+              padding: '16px',
+              borderRadius: '4px',
+              fontSize: '11px',
+              opacity: 0.8,
+              lineHeight: '1.8',
+            }}>
+              <p style={{ color: '#FFD300', fontWeight: 700, marginBottom: '8px' }}>&gt; HOW TO PLAY</p>
+              <p>1. Choose difficulty &amp; duration</p>
+              <p>2. Click the canvas to start</p>
+              <p>3. Click targets as fast as you can!</p>
+              {bestScore && (
+                <p style={{ marginTop: '10px', color: '#00FF41' }}>
+                  🏆 Best: {bestScore.hits} hits
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
