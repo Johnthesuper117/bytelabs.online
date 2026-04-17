@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 
 const COLORS = ['#00FF41', '#FFD300', '#FF3131', '#00FFFF', '#FF00FF'];
 
@@ -94,10 +95,13 @@ export default function MatrixPage() {
   const handleClear = () => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    if (ctx && canvas) ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if (ctx && canvas) {
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
   };
 
-  const controlBar: React.CSSProperties = {
+  const controlBar: CSSProperties = {
     position: 'fixed',
     top: '110px',
     right: '20px',
@@ -115,7 +119,7 @@ export default function MatrixPage() {
     minWidth: '160px',
   };
 
-  const btn: React.CSSProperties = {
+  const btn: CSSProperties = {
     padding: '8px',
     background: 'transparent',
     border: '1px solid #00FF41',

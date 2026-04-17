@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import type { CSSProperties } from 'react';
 
 const LOWER = 'abcdefghijklmnopqrstuvwxyz';
 const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -98,6 +99,7 @@ export default function PasswordGenPage() {
   const [excludeAmbiguous, setExcludeAmbiguous] = useState(false);
   const [requireEach, setRequireEach] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
 
   const strength = password
     ? getStrength(password, length, uppercase, numbers, symbols)
@@ -113,11 +115,15 @@ export default function PasswordGenPage() {
     if (!password) return;
     navigator.clipboard.writeText(password).then(() => {
       setCopied(true);
+      setCopyError(false);
       setTimeout(() => setCopied(false), 2000);
+    }).catch(() => {
+      setCopyError(true);
+      setTimeout(() => setCopyError(false), 3000);
     });
   };
 
-  const panelStyle: React.CSSProperties = {
+  const panelStyle: CSSProperties = {
     background: 'rgba(0, 20, 0, 0.6)',
     border: '2px solid #00FF41',
     padding: '20px',
@@ -126,7 +132,7 @@ export default function PasswordGenPage() {
     marginBottom: '20px',
   };
 
-  const labelStyle: React.CSSProperties = {
+  const labelStyle: CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -136,7 +142,7 @@ export default function PasswordGenPage() {
     fontFamily: "'JetBrains Mono', monospace",
   };
 
-  const checkStyle: React.CSSProperties = {
+  const checkStyle: CSSProperties = {
     width: '18px',
     height: '18px',
     accentColor: '#00FF41',
@@ -186,9 +192,9 @@ export default function PasswordGenPage() {
               onClick={copyToClipboard}
               title="Copy to clipboard"
               style={{
-                background: copied ? '#00FF41' : 'transparent',
-                border: '1px solid #00FF41',
-                color: copied ? '#000' : '#00FF41',
+                background: copyError ? 'rgba(255,49,49,0.2)' : copied ? '#00FF41' : 'transparent',
+                border: `1px solid ${copyError ? '#FF3131' : '#00FF41'}`,
+                color: copyError ? '#FF3131' : copied ? '#000' : '#00FF41',
                 padding: '8px 12px',
                 cursor: 'pointer',
                 fontFamily: "'JetBrains Mono', monospace",
@@ -197,7 +203,7 @@ export default function PasswordGenPage() {
                 whiteSpace: 'nowrap',
               }}
             >
-              {copied ? '✓ COPIED' : '📋 COPY'}
+              {copyError ? '✗ FAILED' : copied ? '✓ COPIED' : '📋 COPY'}
             </button>
           )}
         </div>
