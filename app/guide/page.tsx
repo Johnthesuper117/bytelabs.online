@@ -1,6 +1,52 @@
 "use client";
 
+import { useState, useRef, useEffect } from 'react';
+import prompts from '../data/cloaker-prompts.json';
+
+type Prompt = { prompt: string; password: string };
+
 export default function GuidePage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentPrompt, setCurrentPrompt] = useState<Prompt | null>(null);
+  const [inputValue, setInputValue] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  function openModal() {
+    const random = prompts[Math.floor(Math.random() * prompts.length)];
+    setCurrentPrompt(random);
+    setInputValue('');
+    setModalOpen(true);
+  }
+
+  useEffect(() => {
+    if (modalOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [modalOpen]);
+
+  function handleSubmit() {
+    if (!currentPrompt) return;
+    if (inputValue.trim().toLowerCase() === currentPrompt.password.toLowerCase()) {
+      setModalOpen(false);
+      const tab = window.open('about:blank', '_blank');
+      if (tab) {
+        tab.document.write(
+          '<!DOCTYPE html><html><head><title>New Tab</title><style>*{margin:0;padding:0;overflow:hidden}html,body{width:100%;height:100%}iframe{width:100%;height:100%;border:none;display:block}</style></head>' +
+          '<body><iframe src="https://johnthesuper117.github.io/cloaker/" allowfullscreen></iframe></body></html>'
+        );
+        tab.document.close();
+      }
+    } else {
+      setModalOpen(false);
+      window.location.href = '/';
+    }
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter') handleSubmit();
+    if (e.key === 'Escape') setModalOpen(false);
+  }
+
   return (
     <>
       {/* Hidden Easter egg button */}
@@ -18,12 +64,101 @@ export default function GuidePage() {
           opacity: 0,
           zIndex: 9999,
         }}
-        onClick={() => { window.location.href = '/hidden/lore/secrets/cloaker'; }}
+        onClick={openModal}
         aria-hidden="true"
         tabIndex={-1}
       >
-        🔑
       </button>
+
+      {/* Cloaker prompt modal */}
+      {modalOpen && currentPrompt && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'rgba(0,0,0,0.85)',
+            zIndex: 10000,
+          }}
+          onClick={(e) => { if (e.target === e.currentTarget) setModalOpen(false); }}
+        >
+          <div
+            style={{
+              background: '#000',
+              border: '2px solid #00FF41',
+              borderRadius: '6px',
+              padding: '32px 36px',
+              maxWidth: '480px',
+              width: '90%',
+              boxShadow: '0 0 30px rgba(0,255,65,0.4)',
+              fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+              color: '#00FF41',
+            }}
+          >
+            <p style={{ fontSize: '13px', marginBottom: '24px', lineHeight: '1.8', textShadow: '0 0 8px #00FF41' }}>
+              {currentPrompt.prompt}
+            </p>
+            <input
+              ref={inputRef}
+              type="text"
+              maxLength={15}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+              style={{
+                width: '100%',
+                background: '#000',
+                border: '1px solid #00FF41',
+                borderRadius: '3px',
+                color: '#00FF41',
+                fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                fontSize: '15px',
+                padding: '10px 12px',
+                outline: 'none',
+                boxShadow: '0 0 8px rgba(0,255,65,0.3)',
+                letterSpacing: '1px',
+              }}
+            />
+            <div style={{ marginTop: '18px', display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => setModalOpen(false)}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid #00FF41',
+                  color: '#00FF41',
+                  padding: '8px 18px',
+                  fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                  fontSize: '13px',
+                  cursor: 'pointer',
+                  borderRadius: '3px',
+                }}
+              >
+                cancel
+              </button>
+              <button
+                onClick={handleSubmit}
+                style={{
+                  background: '#00FF41',
+                  border: '1px solid #00FF41',
+                  color: '#000',
+                  padding: '8px 18px',
+                  fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  borderRadius: '3px',
+                }}
+              >
+                enter
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
 
       <div className="content">
         <h2>&gt; HOW TO LEARN HOW TO CODE</h2>
