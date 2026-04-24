@@ -32,7 +32,7 @@ export default function GuidePage() {
       if (tab) {
         tab.document.write(
           '<!DOCTYPE html><html><head><title>New Tab</title><style>*{margin:0;padding:0;overflow:hidden}html,body{width:100%;height:100%}iframe{width:100%;height:100%;border:none;display:block}</style></head>' +
-          '<body><iframe src="https://johnthesuper117.github.io/cloaker/" allowfullscreen></iframe></body></html>'
+          '<body><iframe src="https://johnthesuper117.github.io/persona/" allowfullscreen></iframe></body></html>'
         );
         tab.document.close();
       }
