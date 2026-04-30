@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import SafeLink from './components/SafeLink';
 
 const PROJECTS = [
   { href: '/CPSTracker',   label: 'CPS Tracker',            desc: 'Measure your clicks per second.' },
@@ -39,7 +39,7 @@ export default function Home() {
           gap: '20px',
         }}>
           {PROJECTS.map((p) => (
-            <Link
+            <SafeLink
               key={p.href}
               href={p.href}
               className="project-card"
@@ -48,7 +48,7 @@ export default function Home() {
                 &gt; {p.label}
               </p>
               <p style={{ fontSize: '13px', opacity: 0.8, margin: 0 }}>{p.desc}</p>
-            </Link>
+            </SafeLink>
           ))}
         </div>
       </section>

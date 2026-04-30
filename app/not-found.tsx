@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import SafeLink from './components/SafeLink';
 
 export default function NotFound() {
   return (
@@ -48,9 +48,9 @@ export default function NotFound() {
 bash: 404: No such file or directory`}
       </pre>
       <div>
-        <Link href="/" className="not-found-home-btn">
+        <SafeLink href="/" className="not-found-home-btn">
           &gt; GO HOME
-        </Link>
+        </SafeLink>
       </div>
     </div>
   );

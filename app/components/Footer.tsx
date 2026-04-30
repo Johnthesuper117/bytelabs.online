@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import SafeLink from './SafeLink';
 
 export default function Footer() {
   return (
@@ -32,11 +32,11 @@ export default function Footer() {
             &gt; TRAINING
           </p>
           <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li><Link href="/CPSTracker">CPS Tracker</Link></li>
-            <li><Link href="/AimTrainer">Aim Trainer</Link></li>
-            <li><Link href="/RTTrainer">Reaction Time Trainer</Link></li>
-            <li><Link href="/QTETrainer">QTE Trainer</Link></li>
-            <li><Link href="/CITrainer">Command Input Trainer</Link></li>
+            <li><SafeLink href="/CPSTracker">CPS Tracker</SafeLink></li>
+            <li><SafeLink href="/AimTrainer">Aim Trainer</SafeLink></li>
+            <li><SafeLink href="/RTTrainer">Reaction Time Trainer</SafeLink></li>
+            <li><SafeLink href="/QTETrainer">QTE Trainer</SafeLink></li>
+            <li><SafeLink href="/CITrainer">Command Input Trainer</SafeLink></li>
           </ul>
         </div>
 
@@ -45,11 +45,11 @@ export default function Footer() {
             &gt; PROJECTS
           </p>
           <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li><Link href="/soundboard">Soundboard</Link></li>
-            <li><Link href="/bookmarklets">Bookmarklets</Link></li>
-            <li><Link href="/passwordGen">Password Generator</Link></li>
-            <li><Link href="/matrix">Matrix</Link></li>
-            <li><Link href="/hackertyper">Hacker Typer</Link></li>
+            <li><SafeLink href="/soundboard">Soundboard</SafeLink></li>
+            <li><SafeLink href="/bookmarklets">Bookmarklets</SafeLink></li>
+            <li><SafeLink href="/passwordGen">Password Generator</SafeLink></li>
+            <li><SafeLink href="/matrix">Matrix</SafeLink></li>
+            <li><SafeLink href="/hackertyper">Hacker Typer</SafeLink></li>
           </ul>
         </div>
 
@@ -58,8 +58,8 @@ export default function Footer() {
             &gt; LINKS
           </p>
           <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li><Link href="/guide">Guide</Link></li>
-            <li><Link href="/profile">About Me</Link></li>
+            <li><SafeLink href="/guide">Guide</SafeLink></li>
+            <li><SafeLink href="/profile">About Me</SafeLink></li>
             <li>
               <a href="https://github.com/Johnthesuper117/bytelabs.online" target="_blank" rel="noopener noreferrer">
                 GitHub

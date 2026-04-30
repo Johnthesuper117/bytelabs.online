@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import SafeLink from './SafeLink';
 import { usePathname } from 'next/navigation';
 import './Navbar.css';
 
@@ -23,15 +23,15 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link href="/" className="navbar-logo">
+        <SafeLink href="/" className="navbar-logo">
           &gt; BYTELABS.ONLINE
-        </Link>
+        </SafeLink>
 
         <ul className={`nav-menu${isMobileOpen ? ' active' : ''}`}>
           <li className="nav-item">
-            <Link href="/" className={`nav-link${isActive('/') ? ' nav-link-active' : ''}`}>
+            <SafeLink href="/" className={`nav-link${isActive('/') ? ' nav-link-active' : ''}`}>
               HOME
-            </Link>
+            </SafeLink>
           </li>
 
           <li className="nav-item dropdown">
@@ -47,19 +47,19 @@ export default function Navbar() {
             {isTrainingOpen && (
               <ul className="dropdown-menu">
                 <li>
-                  <Link href="/CPSTracker" title="Test how fast you can click">Clicks Per Second Tracker</Link>
+                  <SafeLink href="/CPSTracker" title="Test how fast you can click">Clicks Per Second Tracker</SafeLink>
                 </li>
                 <li>
-                  <Link href="/AimTrainer" title="Practice your mouse accuracy">Aim Trainer</Link>
+                  <SafeLink href="/AimTrainer" title="Practice your mouse accuracy">Aim Trainer</SafeLink>
                 </li>
                 <li>
-                  <Link href="/RTTrainer" title="Measure and improve your reaction speed">Reaction Time Trainer</Link>
+                  <SafeLink href="/RTTrainer" title="Measure and improve your reaction speed">Reaction Time Trainer</SafeLink>
                 </li>
                 <li>
-                  <Link href="/QTETrainer" title="Practice hitting timed button prompts">Quick Time Event Trainer</Link>
+                  <SafeLink href="/QTETrainer" title="Practice hitting timed button prompts">Quick Time Event Trainer</SafeLink>
                 </li>
                 <li>
-                  <Link href="/CITrainer" title="Practice fighting-game style command inputs">Command Input Trainer</Link>
+                  <SafeLink href="/CITrainer" title="Practice fighting-game style command inputs">Command Input Trainer</SafeLink>
                 </li>
               </ul>
             )}
@@ -78,34 +78,34 @@ export default function Navbar() {
             {isProjectsOpen && (
               <ul className="dropdown-menu">
                 <li>
-                  <Link href="/soundboard">SoundBoard</Link>
+                  <SafeLink href="/soundboard">SoundBoard</SafeLink>
                 </li>
                 <li>
-                  <Link href="/bookmarklets">Bookmarklets</Link>
+                  <SafeLink href="/bookmarklets">Bookmarklets</SafeLink>
                 </li>
                 <li>
-                  <Link href="/passwordGen">Password Generator</Link>
+                  <SafeLink href="/passwordGen">Password Generator</SafeLink>
                 </li>
                 <li>
-                  <Link href="/matrix">Matrix</Link>
+                  <SafeLink href="/matrix">Matrix</SafeLink>
                 </li>
                 <li>
-                  <Link href="/hackertyper">Hacker Typer</Link>
+                  <SafeLink href="/hackertyper">Hacker Typer</SafeLink>
                 </li>
               </ul>
             )}
           </li>
 
           <li className="nav-item">
-            <Link href="/guide" className={`nav-link${isActive('/guide') ? ' nav-link-active' : ''}`}>
+            <SafeLink href="/guide" className={`nav-link${isActive('/guide') ? ' nav-link-active' : ''}`}>
               GUIDE
-            </Link>
+            </SafeLink>
           </li>
 
           <li className="nav-item">
-            <Link href="/profile" className={`nav-link${isActive('/profile') ? ' nav-link-active' : ''}`}>
+            <SafeLink href="/profile" className={`nav-link${isActive('/profile') ? ' nav-link-active' : ''}`}>
               ABOUT ME
-            </Link>
+            </SafeLink>
           </li>
         </ul>
 
