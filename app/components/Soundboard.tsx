@@ -140,9 +140,9 @@ export default function Soundboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
-  const [playingFile, setPlayingFile] = useState<string | null>(null);
+  const [playingFiles, setPlayingFiles] = useState<string[]>([]);
+  const [allowOverlap, setAllowOverlap] = useState(false);
   const audioRef = useRef<Map<string, HTMLAudioElement>>(new Map());
-  const currentAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     const fetchSounds = async () => {
@@ -181,17 +181,26 @@ export default function Soundboard() {
     fetchSounds();
   }, []);
 
-  const stopCurrent = () => {
-    if (currentAudioRef.current) {
-      currentAudioRef.current.pause();
-      currentAudioRef.current.currentTime = 0;
-    }
-    setPlayingFile(null);
+  const stopAllSounds = () => {
+    audioRef.current.forEach((audio) => {
+      audio.pause();
+      audio.currentTime = 0;
+    });
+    setPlayingFiles([]);
   };
 
+  useEffect(() => {
+    return () => {
+      audioRef.current.forEach((audio) => {
+        audio.pause();
+      });
+    };
+  }, []);
+
   const playSound = async (filename: string) => {
-    // Stop anything currently playing
-    stopCurrent();
+    if (!allowOverlap) {
+      stopAllSounds();
+    }
 
     try {
       const candidates: string[] = [];
@@ -220,14 +229,15 @@ export default function Soundboard() {
       }
 
       audio.currentTime = 0;
-      setPlayingFile(filename);
-      currentAudioRef.current = audio;
+      setPlayingFiles((prev) => (prev.includes(filename) ? prev : [...prev, filename]));
 
-      audio.onended = () => setPlayingFile(null);
+      audio.onended = () => {
+        setPlayingFiles((prev) => prev.filter((playing) => playing !== filename));
+      };
       await audio.play();
     } catch (err) {
       setError('Error playing sound');
-      setPlayingFile(null);
+      setPlayingFiles((prev) => prev.filter((playing) => playing !== filename));
     }
   };
 
@@ -281,11 +291,20 @@ export default function Soundboard() {
           onChange={(e) => setSearch(e.target.value)}
           aria-label="Search sounds"
         />
-        {playingFile && (
-          <button className="soundboard-stop-btn" onClick={stopCurrent}>
+        {playingFiles.length > 0 && (
+          <button className="soundboard-stop-btn" onClick={stopAllSounds}>
             ⏹ STOP
           </button>
         )}
+        <label className="soundboard-overlap-toggle">
+          <input
+            type="checkbox"
+            checked={allowOverlap}
+            onChange={(e) => setAllowOverlap(e.target.checked)}
+            aria-label="Allow overlapping sounds"
+          />
+          overlap sounds
+        </label>
         <span className="soundboard-count">
           {filtered.length} / {sounds.length} sounds
         </span>
@@ -296,7 +315,7 @@ export default function Soundboard() {
       ) : (
         <div className="soundboard-grid">
           {filtered.map((sound) => {
-            const isPlaying = playingFile === sound.filename;
+            const isPlaying = playingFiles.includes(sound.filename);
             return (
               <button
                 key={sound.filename}

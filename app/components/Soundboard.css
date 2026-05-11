@@ -52,6 +52,31 @@
   box-shadow: 0 0 10px rgba(255,49,49,0.3);
 }
 
+.soundboard-overlap-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 2px solid #00FF41;
+  background: rgba(0, 20, 0, 0.45);
+  color: #00FF41;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.soundboard-overlap-toggle input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: #FFD300;
+  cursor: pointer;
+}
+
 .soundboard-count {
   font-size: 12px;
   opacity: 0.6;
