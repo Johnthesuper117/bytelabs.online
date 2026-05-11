@@ -9,12 +9,20 @@ export default function GuidePage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentPrompt, setCurrentPrompt] = useState<Prompt | null>(null);
   const [inputValue, setInputValue] = useState('');
+  const [passwordCorrect, setPasswordCorrect] = useState(false);
+  const [cloakerConfig, setCloakerConfig] = useState({
+    url: '',
+    title: '',
+    favicon: ''
+  });
   const inputRef = useRef<HTMLInputElement>(null);
 
   function openModal() {
     const random = prompts[Math.floor(Math.random() * prompts.length)];
     setCurrentPrompt(random);
     setInputValue('');
+    setPasswordCorrect(false);
+    setCloakerConfig({ url: '', title: '', favicon: '' });
     setModalOpen(true);
   }
 
@@ -26,24 +34,56 @@ export default function GuidePage() {
 
   function handleSubmit() {
     if (!currentPrompt) return;
+    
     if (inputValue.trim().toLowerCase() === currentPrompt.password.toLowerCase()) {
-      setModalOpen(false);
-      const tab = window.open('about:blank', '_blank');
-      if (tab) {
-        tab.document.write(
-          '<!DOCTYPE html><html><head><title>New Tab</title><style>*{margin:0;padding:0;overflow:hidden}html,body{width:100%;height:100%}iframe{width:100%;height:100%;border:none;display:block}</style></head>' +
-          '<body><iframe src="https://johnthesuper117.github.io/persona/" allowfullscreen></iframe></body></html>'
-        );
-        tab.document.close();
-      }
+      setPasswordCorrect(true);
+      // Clear the password input
+      setInputValue('');
     } else {
       setModalOpen(false);
       window.location.href = '/';
     }
   }
 
+  function handleOpenCloaker() {
+    if (!cloakerConfig.url.trim()) {
+      alert('Please enter a website URL');
+      return;
+    }
+    
+    // Prepare the URL for the GitHub Pages cloaker
+    const params = new URLSearchParams();
+    params.append('url', cloakerConfig.url.trim());
+    
+    if (cloakerConfig.title.trim()) {
+      params.append('title', cloakerConfig.title.trim());
+    }
+    
+    if (cloakerConfig.favicon.trim()) {
+      params.append('favicon', cloakerConfig.favicon.trim());
+    }
+    
+    // Replace with your actual GitHub Pages URL
+    const cloakerUrl = `https://johnthesuper117.github.io/persona/?${params.toString()}`;
+    
+    // Open in a new tab
+    window.open(cloakerUrl, '_blank');
+    
+    // Close modal and reset
+    setModalOpen(false);
+    setPasswordCorrect(false);
+    setInputValue('');
+    setCloakerConfig({ url: '', title: '', favicon: '' });
+  }
+
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter') handleSubmit();
+    if (e.key === 'Enter') {
+      if (!passwordCorrect) {
+        handleSubmit();
+      } else {
+        handleOpenCloaker();
+      }
+    }
     if (e.key === 'Escape') setModalOpen(false);
   }
 
@@ -82,7 +122,13 @@ export default function GuidePage() {
             backgroundColor: 'rgba(0,0,0,0.85)',
             zIndex: 10000,
           }}
-          onClick={(e) => { if (e.target === e.currentTarget) setModalOpen(false); }}
+          onClick={(e) => { 
+            if (e.target === e.currentTarget) {
+              setModalOpen(false);
+              setPasswordCorrect(false);
+              setCloakerConfig({ url: '', title: '', favicon: '' });
+            }
+          }}
         >
           <div
             style={{
@@ -97,67 +143,203 @@ export default function GuidePage() {
               color: '#00FF41',
             }}
           >
-            <p style={{ fontSize: '13px', marginBottom: '24px', lineHeight: '1.8', textShadow: '0 0 8px #00FF41' }}>
-              {currentPrompt.prompt}
-            </p>
-            <input
-              ref={inputRef}
-              type="text"
-              maxLength={15}
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
-              style={{
-                width: '100%',
-                background: '#000',
-                border: '1px solid #00FF41',
-                borderRadius: '3px',
-                color: '#00FF41',
-                fontFamily: "'JetBrains Mono', 'Courier New', monospace",
-                fontSize: '15px',
-                padding: '10px 12px',
-                outline: 'none',
-                boxShadow: '0 0 8px rgba(0,255,65,0.3)',
-                letterSpacing: '1px',
-              }}
-            />
-            <div style={{ marginTop: '18px', display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-              <button
-                onClick={() => setModalOpen(false)}
-                style={{
-                  background: 'transparent',
-                  border: '1px solid #00FF41',
-                  color: '#00FF41',
-                  padding: '8px 18px',
-                  fontFamily: "'JetBrains Mono', 'Courier New', monospace",
-                  fontSize: '13px',
-                  cursor: 'pointer',
-                  borderRadius: '3px',
-                }}
-              >
-                cancel
-              </button>
-              <button
-                onClick={handleSubmit}
-                style={{
-                  background: '#00FF41',
-                  border: '1px solid #00FF41',
-                  color: '#000',
-                  padding: '8px 18px',
-                  fontFamily: "'JetBrains Mono', 'Courier New', monospace",
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  borderRadius: '3px',
-                }}
-              >
-                enter
-              </button>
+            {!passwordCorrect ? (
+              // Password prompt
+              <>
+                <p style={{ fontSize: '13px', marginBottom: '24px', lineHeight: '1.8', textShadow: '0 0 8px #00FF41' }}>
+                  {currentPrompt.prompt}
+                </p>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  maxLength={15}
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+                  style={{
+                    width: '100%',
+                    background: '#000',
+                    border: '1px solid #00FF41',
+                    borderRadius: '3px',
+                    color: '#00FF41',
+                    fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                    fontSize: '15px',
+                    padding: '10px 12px',
+                    outline: 'none',
+                    boxShadow: '0 0 8px rgba(0,255,65,0.3)',
+                    letterSpacing: '1px',
+                  }}
+                />
+              </>
+            ) : (
+              // Configuration form after correct password
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <h3 style={{ margin: 0, fontSize: '16px', textAlign: 'center', textShadow: '0 0 8px #00FF41' }}>
+                  Configure Cloaker
+                </h3>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div>
+                    <label style={{ fontSize: '12px', display: 'block', marginBottom: '6px' }}>
+                      Website URL *
+                    </label>
+                    <input
+                      type="text"
+                      value={cloakerConfig.url}
+                      onChange={(e) => setCloakerConfig({...cloakerConfig, url: e.target.value})}
+                      placeholder="example.com"
+                      style={{
+                        width: '100%',
+                        background: '#000',
+                        border: '1px solid #00FF41',
+                        borderRadius: '3px',
+                        color: '#00FF41',
+                        fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                        fontSize: '13px',
+                        padding: '8px 10px',
+                        outline: 'none',
+                        boxShadow: '0 0 5px rgba(0,255,65,0.2)',
+                      }}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label style={{ fontSize: '12px', display: 'block', marginBottom: '6px' }}>
+                      Tab Title
+                    </label>
+                    <input
+                      type="text"
+                      value={cloakerConfig.title}
+                      onChange={(e) => setCloakerConfig({...cloakerConfig, title: e.target.value})}
+                      placeholder="e.g., Google Drive"
+                      style={{
+                        width: '100%',
+                        background: '#000',
+                        border: '1px solid #00FF41',
+                        borderRadius: '3px',
+                        color: '#00FF41',
+                        fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                        fontSize: '13px',
+                        padding: '8px 10px',
+                        outline: 'none',
+                        boxShadow: '0 0 5px rgba(0,255,65,0.2)',
+                      }}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label style={{ fontSize: '12px', display: 'block', marginBottom: '6px' }}>
+                      Favicon URL
+                    </label>
+                    <input
+                      type="text"
+                      value={cloakerConfig.favicon}
+                      onChange={(e) => setCloakerConfig({...cloakerConfig, favicon: e.target.value})}
+                      placeholder="https://example.com/favicon.ico"
+                      style={{
+                        width: '100%',
+                        background: '#000',
+                        border: '1px solid #00FF41',
+                        borderRadius: '3px',
+                        color: '#00FF41',
+                        fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                        fontSize: '13px',
+                        padding: '8px 10px',
+                        outline: 'none',
+                        boxShadow: '0 0 5px rgba(0,255,65,0.2)',
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div style={{ marginTop: '24px', display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+              {!passwordCorrect ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setModalOpen(false);
+                      setPasswordCorrect(false);
+                      setCloakerConfig({ url: '', title: '', favicon: '' });
+                    }}
+                    style={{
+                      background: 'transparent',
+                      border: '1px solid #00FF41',
+                      color: '#00FF41',
+                      padding: '8px 18px',
+                      fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                      fontSize: '13px',
+                      cursor: 'pointer',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    cancel
+                  </button>
+                  <button
+                    onClick={handleSubmit}
+                    style={{
+                      background: '#00FF41',
+                      border: '1px solid #00FF41',
+                      color: '#000',
+                      padding: '8px 18px',
+                      fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    enter
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      setPasswordCorrect(false);
+                      setInputValue('');
+                      setCloakerConfig({ url: '', title: '', favicon: '' });
+                    }}
+                    style={{
+                      background: 'transparent',
+                      border: '1px solid #00FF41',
+                      color: '#00FF41',
+                      padding: '8px 18px',
+                      fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                      fontSize: '13px',
+                      cursor: 'pointer',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    back
+                  </button>
+                  <button
+                    onClick={handleOpenCloaker}
+                    style={{
+                      background: '#00FF41',
+                      border: '1px solid #00FF41',
+                      color: '#000',
+                      padding: '8px 18px',
+                      fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      borderRadius: '3px',
+                      opacity: cloakerConfig.url.trim() ? 1 : 0.6,
+                    }}
+                    disabled={!cloakerConfig.url.trim()}
+                  >
+                    launch
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
       )}
+
 
 
       <div className="content">
