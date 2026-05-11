@@ -63,11 +63,18 @@ export default function GuidePage() {
       params.append('favicon', cloakerConfig.favicon.trim());
     }
     
-    // Replace with your actual GitHub Pages URL
-    const cloakerUrl = `https://johnthesuper117.github.io/persona/?${params.toString()}`;
-    
+
     // Open in a new tab
-    window.open(cloakerUrl, '_blank');
+    const tab = window.open('about:blank', '_blank');
+        const cloakerUrl = `https://johnthesuper117.github.io/persona/?${params.toString()}`;
+
+    if (tab) {
+      tab.document.write(
+      '<!DOCTYPE html><html><head><title>New Tab</title><style>*{margin:0;padding:0;overflow:hidden}html,body{width:100%;height:100%}iframe{width:100%;height:100%;border:none;display:block}</style></head>' +
+          `<body><iframe src="${cloakerUrl}" allowfullscreen></iframe></body></html>`);
+
+      tab.document.close();
+    }
     
     // Close modal and reset
     setModalOpen(false);
