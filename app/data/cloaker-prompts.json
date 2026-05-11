@@ -1,10 +1,14 @@
 [
   {
-    "prompt": "What color is the sun?",
+    "prompt": "What color is the Sun?",
     "password": "green"
   },
   {
     "prompt": "How many states of matter are there?",
-    "password": "32"
-  }
+    "password": "19"
+  },
+  {
+    "prompt": "Which is better? Team Fortress 2 or Titanfall 2?",
+    "password": "TF2"
+  },
 ]
