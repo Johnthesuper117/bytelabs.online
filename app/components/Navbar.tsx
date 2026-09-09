@@ -103,6 +103,12 @@ export default function Navbar() {
           </li>
 
           <li className="nav-item">
+            <SafeLink href="/portfolio" className={`nav-link${isActive('/portfolio') ? ' nav-link-active' : ''}`}>
+              PORTFOLIO
+            </SafeLink>
+          </li>
+
+          <li className="nav-item">
             <SafeLink href="/profile" className={`nav-link${isActive('/profile') ? ' nav-link-active' : ''}`}>
               ABOUT ME
             </SafeLink>
